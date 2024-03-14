@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/14 17:09:36 by omfelk           ###   ########.fr       */
+/*   Created: 2023/10/18 08:50:04 by omfelk            #+#    #+#             */
+/*   Updated: 2023/10/18 08:56:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-#endif
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!f)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}
