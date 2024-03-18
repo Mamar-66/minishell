@@ -2,7 +2,7 @@ NAME	=	minishell
 
 CC	=	gcc
 
-CFLAGS	= -Wall -Werror -Wextra -lreadline
+CFLAGS	= -Wall -Werror -Wextra -lreadline -g
 
 SRC_PATH	=	srcs/
 OBJ_PATH	=	objs/
@@ -10,7 +10,9 @@ LIBFT_PATH	=	./includes/libft/
 
 LIBFT_FILE		=	libft.a
 
-SRC	=			main.c \
+SRC	=	main.c \
+\
+		get_pwd/get_pwd.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -28,6 +30,7 @@ $(OBJ_PATH)%.o:	$(SRC_PATH)%.c
 
 $(OBJ_PATH):
 			mkdir $(OBJ_PATH)
+			mkdir $(OBJ_PATH)/get_pwd
 
 libft:
 	@echo "\033[0;33m\nCOMPILING LIBFT $(LIBFT_PATH)\n"

@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   get_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/18 14:28:08 by omfelk           ###   ########.fr       */
+/*   Created: 2024/03/18 14:01:26 by omfelk            #+#    #+#             */
+/*   Updated: 2024/03/18 15:21:11 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/minishell.h"
 
-# include "libft/libft.h"
-# include <unistd.h>
-#include <stdlib.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 
-/*
-	get_pwd/get_pwd.c
-*/
-char	*return_pwd(void);
 
-#endif
+char	*return_pwd(void)
+{
+	char	*all_pwd;
+	char	*return_pwd;
+	// char	*av;
+	char	*ap;
+	int		i;
+
+	i = 0;
+	all_pwd = getenv("PWD");
+	while (all_pwd[i])
+		i++;
+	while (all_pwd[i] != '/')
+		i--;
+	i++;
+	ap = ft_strdup(" : ");
+	return_pwd = ft_strdup(all_pwd + i);
+	return_pwd = ft_strjoin(return_pwd, ap);
+	free(ap);
+	// free(all_pwd);
+	return (return_pwd);
+}
