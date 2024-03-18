@@ -6,20 +6,17 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/14 17:39:03 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/18 12:17:23 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
-	char *age;
-	char *nom;
-
-	nom = readline("entre ton nom : ");
-	age = readline("entre ton age : ");
-
-	printf ("ok %s tu as %s ans ", nom, age);
+	(void)argc;
+	(void)argv;
+	(void)env;
+	printf("hello word\n");
 	return (1);
 }
