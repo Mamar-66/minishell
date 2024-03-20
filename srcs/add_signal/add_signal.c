@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/20 12:55:59 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/20 15:50:37 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 void	gest_signal(int numsignal)
 {
 	if (numsignal == SIGINT)
-		printf("^C\n");
+	{
+		printf("^T\n");
+	}
 }
 
 void	add_signal(void)
