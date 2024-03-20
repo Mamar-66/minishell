@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_pwd.c                                          :+:      :+:    :+:   */
+/*   add_signal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 14:01:26 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/20 11:37:38 by omfelk           ###   ########.fr       */
+/*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
+/*   Updated: 2024/03/20 12:55:59 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include <signal.h>
 
-char	*return_pwd(void)
+void	gest_signal(int numsignal)
 {
-	char	*all_pwd;
-	char	*return_pwd;
-	// char	*av;
-	char	*ap;
-	int		i;
+	if (numsignal == SIGINT)
+		printf("^C\n");
+}
 
-	i = 0;
-	all_pwd = getenv("PWD");
-	while (all_pwd[i])
-		i++;
-	while (all_pwd[i] != '/')
-		i--;
-	i++;
-	ap = ft_strdup(" : ");
-	return_pwd = ft_strdup(all_pwd + i);
-	return_pwd = ft_strjoin(return_pwd, ap);
-	free(ap);
-	// free(all_pwd);
-	return (return_pwd);
+void	add_signal(void)
+{
+	struct sigaction	action;
+
+	ft_bzero(&action, sizeof(action));
+	action.sa_handler = &gest_signal;
+	sigaction(SIGINT, &action, NULL);
 }

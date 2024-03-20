@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/18 16:27:26 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/20 12:02:35 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	(void)env;
+	add_signal();
 	char	*prompt;
 	prompt = return_pwd();
 	readline(prompt);

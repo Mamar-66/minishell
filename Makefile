@@ -12,7 +12,9 @@ LIBFT_FILE		=	libft.a
 
 SRC	=	main.c \
 \
-		get_pwd/get_pwd.c
+		add_signal/add_signal.c \
+\
+		get_pwd/get_pwd.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -30,6 +32,7 @@ $(OBJ_PATH)%.o:	$(SRC_PATH)%.c
 
 $(OBJ_PATH):
 			mkdir $(OBJ_PATH)
+			mkdir $(OBJ_PATH)/add_signal
 			mkdir $(OBJ_PATH)/get_pwd
 
 libft:
