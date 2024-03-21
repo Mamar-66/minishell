@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/20 15:50:37 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/21 15:02:21 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 
 void	gest_signal(int numsignal)
 {
-	if (numsignal == SIGINT)
+	if (waitpid(-1, NULL, WNOHANG) == -1)
 	{
-		printf("^T\n");
+		if (numsignal == SIGINT)
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
 }
 
