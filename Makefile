@@ -15,6 +15,8 @@ SRC	=	main.c \
 		add_signal/add_signal.c \
 \
 		get_pwd/get_pwd.c \
+\
+		prompt/get_prompt.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -34,6 +36,7 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)
 			mkdir $(OBJ_PATH)/add_signal
 			mkdir $(OBJ_PATH)/get_pwd
+			mkdir $(OBJ_PATH)/prompt
 
 libft:
 	@echo "\033[0;33m\nCOMPILING LIBFT $(LIBFT_PATH)\n"
