@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/22 10:57:11 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/25 10:17:35 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 /*
 	add_signal/add_signal.c
 */
-void	add_signal(void);
+char	*add_signal_plus_return_result_prompt(void);
 /*
 	get_pwd/get_pwd.c
 */
