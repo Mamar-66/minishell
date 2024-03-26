@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/25 18:00:38 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/26 11:56:35 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	gest_signal(int numsignal)
 	}
 }
 
-char	*add_signal_plus_return_result_prompt(void)
+char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 {
-	struct sigaction	action;
+	(void)lst_data;
+	struct sigaction action;
 	char				*resul_prompt;
 
 	ft_bzero(&action, sizeof(action));
