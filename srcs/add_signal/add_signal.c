@@ -6,22 +6,18 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 14:15:53 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/26 15:33:17 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include <signal.h>
 
-void	gest_signal(int numsignal)
+static void	gest_signal(int numsignal)
 {
 	if (waitpid(-1, NULL, WNOHANG) == -1)
 	{
-		if (numsignal == SIGTERM)
-		{
-			printf("exit\n");
-		}
-		else if (numsignal == SIGINT)
+		if (numsignal == SIGINT)
 		{
 			printf("\n");
 			rl_on_new_line();
@@ -35,10 +31,16 @@ void	gest_signal(int numsignal)
 	}
 }
 
+static void	gest_ctrl_d(t_data *lst_data)
+{
+	printf("exit\n");
+	lst_data->status = 0;
+	exit (1);
+}
+
 char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 {
-	(void)lst_data;
-	struct sigaction action;
+	struct sigaction	action;
 	char				*resul_prompt;
 
 	ft_bzero(&action, sizeof(action));
@@ -47,13 +49,13 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 		perror("SIGINT");
 	if (sigaction(SIGQUIT, &action, NULL) == -1)
 		perror("SIGQUIT");
-	if (sigaction(SIGTERM, &action, NULL) == -1)
-		perror("SIGTERM");
 	resul_prompt = get_result_prompt();
+	if (resul_prompt == NULL)
+		gest_ctrl_d(lst_data);
 	return (resul_prompt);
 }
 
-	//sigemptyset(&action.sa_mask);
+	// sigemptyset(&action.sa_mask);
+	// sigaddset(&action.sa_mask, SIGQUIT);
 	//sigaddset(&action.sa_mask, SIGINT);
-	//sigaddset(&action.sa_mask, SIGQUIT);
 	//sigaddset(&action.sa_mask, SIGTERM);

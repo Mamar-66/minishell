@@ -19,7 +19,6 @@ char	*get_result_prompt(void)
 
 	prompt = return_pwd();
 	result_prompt = readline(prompt);
-	
 	free(prompt);
 	return (result_prompt);
 }

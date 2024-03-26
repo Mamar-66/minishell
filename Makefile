@@ -17,6 +17,9 @@ SRC	=	main.c \
 		get_pwd/get_pwd.c \
 \
 		prompt/get_prompt.c \
+		prompt/gest_readline_recover.c \
+\
+		utiles/recover_word.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -37,6 +40,7 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/add_signal
 			mkdir $(OBJ_PATH)/get_pwd
 			mkdir $(OBJ_PATH)/prompt
+			mkdir $(OBJ_PATH)/utiles
 
 libft:
 	@echo "\033[0;33m\nCOMPILING LIBFT $(LIBFT_PATH)\n"

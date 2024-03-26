@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:16:56 by omfelk           ###   ########.fr       */
+/*   Created: 2024/03/26 15:56:21 by omfelk            #+#    #+#             */
+/*   Updated: 2024/03/26 15:56:24 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int	main(int argc, char **argv, char **env)
-{
-	t_data	lst_data;
-	char	*readlin_recover;
-	(void)argc;
-	(void)argv;
-	(void)env;
-	while (1)
-	{
-		readlin_recover = add_signal_plus_return_result_prompt(&lst_data);
-		gest_readline_recover(readlin_recover);
-	}
-	return (1);
-}
+#include "../../includes/minishell.h"
