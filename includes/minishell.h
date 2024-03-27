@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:40:02 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/27 12:25:32 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ typedef struct s_data
 // static void	gest_ctrl_D(t_data *lst_data);
 
 char	*add_signal_plus_return_result_prompt(t_data *lst_data);
+
+/*
+	builtins
+*/
+void	ft_echo(char *str);
 /*
 	get_pwd
 */
