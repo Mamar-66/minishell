@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:08:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:23:33 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/27 15:51:12 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static char	*first_word(char *str, int *start)
 
 	i = *start;
 	j = 0;
-	while ((str[i] == 32 || str[i] == 9 || str[i] == 10 || str[i] == 13) && str[i])
+	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
+			|| str[i] == 13) && str[i])
 		i++;
 	while (str[i] > 32 && str[i] < 127 && str[i])
 	{

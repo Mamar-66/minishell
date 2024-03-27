@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/27 12:25:32 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/27 15:44:31 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*return_pwd(void);
 	prompt
 */
 char	*get_result_prompt(void);
+// static bool	built_or_cmd(char str);
 bool	gest_readline_recover(char *str);
 /*
 	utiles

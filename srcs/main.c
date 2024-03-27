@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 17:16:56 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/27 15:49:16 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data	lst_data;
 	char	*readlin_recover;
+
 	(void)argc;
 	(void)argv;
 	(void)env;
@@ -23,6 +24,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		readlin_recover = add_signal_plus_return_result_prompt(&lst_data);
 		gest_readline_recover(readlin_recover);
+		free(readlin_recover);
 	}
 	return (1);
 }

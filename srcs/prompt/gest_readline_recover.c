@@ -6,11 +6,25 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/27 12:55:14 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/27 16:12:54 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+/*
+	return 1 if built otherwise return 0 is cmd
+*/
+static bool	built_or_cmd(char *str)
+{
+	char	*text;
+
+	text = recover_word(str, 1);
+	if (ft_strncmp(text, "echo", 4) == 0)
+		ft_echo(str);
+	else
+		return (0);
+	return (1);
+}
 
 bool	gest_readline_recover(char *str)
 {
@@ -19,17 +33,16 @@ bool	gest_readline_recover(char *str)
 	if (*str)
 	{
 		text = recover_word(str, 1);
-		if (ft_strncmp(text, "echo", 4) == 0)
-			ft_echo(str);
+		built_or_cmd(str);
 		if (!text)
 			printf("%s\n", "null");
-		else
-			printf("%s\n", text);
+		// else
+		// 	printf("%s\n", text);
+		add_history(str);
 		free(text);
 	}
 	return (false);
 }
-
 
 	// else if (ft_strncmp(text, "cd", 2) == 0)
 	// else if (ft_strncmp(text, "pwd", 3) == 0)
