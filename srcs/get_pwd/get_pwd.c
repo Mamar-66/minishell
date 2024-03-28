@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:01:26 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/21 22:55:40 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/28 15:01:39 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*return_pwd(void)
 	return_pwd = ft_strdup("\033[1;32m  (\033[0m\033[1;34m");
 	tab_prompt[0] = getenv("LOGNAME");
 	tab_prompt[1] = "\033[0m\033[1;32m)-[\033[0m";
-	tab_prompt[2] = getenv("PWD");
+	tab_prompt[2] = getenv("PWD") + 10;
 	tab_prompt[3] = "\033[1;32m] \033[0m";
 	while (i < 4)
 		return_pwd = ft_strjoin(return_pwd, tab_prompt[i++]);

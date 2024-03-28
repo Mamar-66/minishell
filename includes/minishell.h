@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/27 15:44:31 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/28 14:28:33 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,6 @@ bool	gest_readline_recover(char *str);
 */
 // static char	*first_word(char *str, int *start);
 char	*recover_word(char	*str, unsigned int word_location);
+int		recover_word_plus_return_position(char	*str,
+	unsigned int word_location);
 #endif

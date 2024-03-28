@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/27 16:12:54 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/28 14:22:10 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ static bool	built_or_cmd(char *str)
 
 bool	gest_readline_recover(char *str)
 {
+	// a enlever
 	char	*text;
 
 	if (*str)
 	{
+		// a enlever
 		text = recover_word(str, 1);
 		built_or_cmd(str);
 		if (!text)

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:08:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/27 15:51:12 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/28 14:34:18 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static char	*first_word(char *str, int *start)
 	return (return_word);
 }
 
+/*
+	return word 
+*/
 char	*recover_word(char	*str, unsigned int word_location)
 {
 	char			*return_word;
@@ -55,4 +58,29 @@ char	*recover_word(char	*str, unsigned int word_location)
 		nb++;
 	}
 	return (return_word);
+}
+
+/*
+	move the pointeur; 
+*/
+int		recover_word_plus_return_position(char	*str,
+	unsigned int word_location)
+{
+	char			*return_word;
+	unsigned int	nb;
+	int				i;
+
+	i = 0;
+	nb = 0;
+	return_word = NULL;
+	if (word_location == 0 || str[i] == '\0')
+		return (-1);
+	while (str[i] && nb < word_location)
+	{
+		if (return_word)
+			free(return_word);
+		return_word = first_word(str, &i);
+		nb++;
+	}
+	return (i);
 }
