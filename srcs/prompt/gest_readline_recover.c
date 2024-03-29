@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/28 14:22:10 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/29 15:00:17 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,28 @@ static bool	built_or_cmd(char *str)
 
 bool	gest_readline_recover(char *str)
 {
-	// a enlever
+/* 	a enlever */
 	char	*text;
 
 	if (*str)
 	{
-		// a enlever
+/* 		a enlever */
 		text = recover_word(str, 1);
 		built_or_cmd(str);
 		if (!text)
 			printf("%s\n", "null");
-		// else
-		// 	printf("%s\n", text);
+/* 		else
+			printf("%s\n", text); */
 		add_history(str);
 		free(text);
 	}
 	return (false);
 }
-
-	// else if (ft_strncmp(text, "cd", 2) == 0)
-	// else if (ft_strncmp(text, "pwd", 3) == 0)
-	// else if (ft_strncmp(text, "export", 6) == 0)
-	// else if (ft_strncmp(text, "unset", 5) == 0)
-	// else if (ft_strncmp(text, "env", 3) == 0)
-	// else if (ft_strncmp(text, "exit", 4) == 0)
+/* 
+	else if (ft_strncmp(text, "cd", 2) == 0)
+	else if (ft_strncmp(text, "pwd", 3) == 0)
+	else if (ft_strncmp(text, "export", 6) == 0)
+	else if (ft_strncmp(text, "unset", 5) == 0)
+	else if (ft_strncmp(text, "env", 3) == 0)
+	else if (ft_strncmp(text, "exit", 4) == 0)
+ */

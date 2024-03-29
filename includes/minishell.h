@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/28 14:28:33 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/29 15:08:53 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,28 @@ typedef struct s_data
 char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 
 /*
-	builtins
+			builtins
 */
 void	ft_echo(char *str);
 /*
-	get_pwd
+			get_next_line
+*/
+char	*get_next_line(int fd);
+/*
+			get_pwd
 */
 char	*return_pwd(void);
 /*
-	prompt
+			prompt
 */
 char	*get_result_prompt(void);
 // static bool	built_or_cmd(char str);
 bool	gest_readline_recover(char *str);
 /*
-	utiles
+			utiles
 */
 // static char	*first_word(char *str, int *start);
 char	*recover_word(char	*str, unsigned int word_location);
 int		recover_word_plus_return_position(char	*str,
-	unsigned int word_location);
+			unsigned int word_location);
 #endif

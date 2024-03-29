@@ -16,6 +16,9 @@ SRC	=	main.c \
 \
 		builtins/echo.c \
 \
+		get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c \
+\
 		get_pwd/get_pwd.c \
 \
 		prompt/get_prompt.c \
@@ -42,6 +45,7 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/add_signal
 			mkdir $(OBJ_PATH)/builtins
 			mkdir $(OBJ_PATH)/get_pwd
+			mkdir $(OBJ_PATH)/get_next_line
 			mkdir $(OBJ_PATH)/prompt
 			mkdir $(OBJ_PATH)/utiles
 
