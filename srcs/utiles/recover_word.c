@@ -6,15 +6,31 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:08:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/29 14:59:17 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/01 18:42:03 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+// static char *if_symbole(char *str, char symbol)
+// {
+// 	char	*str_return;
+// 	int		i;
+
+// 	i = 0;
+// 	while (str[i] && str[i] != symbol)
+// 		i++;
+// 	str_return = malloc(sizeof(char) * i + 1);
+// 	if (!str_return)
+// 		return (NULL);
+// 	ft_strlcpy(str_return, str, i + 1);
+// 	return (str_return);
+// }
+
 static char	*first_word(char *str, int *start)
 {
 	char	*return_word;
+	char	symbol;
 	int		i;
 	int		j;
 
@@ -23,11 +39,13 @@ static char	*first_word(char *str, int *start)
 	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
 			|| str[i] == 13) && str[i])
 		i++;
-	while (str[i] > 32 && str[i] < 127 && str[i])
-	{
-		i++;
-		j++;
-	}
+	symbol = str[i];
+	if (symbol == '\'' || symbol == '"')
+		while (str[++i] && str[i] != symbol)
+			j++;
+	else
+		while (str[i] > 32 && str[i] < 127 && str[i++])
+			j++;
 	return_word = malloc(sizeof(char) * j + 1);
 	if (!return_word)
 		return (NULL);
@@ -82,5 +100,8 @@ int	recover_word_plus_return_position(char	*str,
 		return_word = first_word(str, &i);
 		nb++;
 	}
+	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
+		|| str[i] == 13) && str[i])
+		i++;
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 08:11:07 by omfelk            #+#    #+#             */
-/*   Updated: 2023/10/09 08:29:49 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/01 15:51:47 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ char	*ft_strdup(const char *s)
 	size_t	i;
 
 	i = ft_strlen(s) + 1;
+	new_text = (char *) malloc((sizeof(char) * i));
+	if (new_text == NULL)
+		return (NULL);
+	ft_strlcpy(new_text, s, i);
+	return (new_text);
+}
+
+char	*ft_strldup(const char *s, size_t len_finish)
+{
+	char	*new_text;
+	size_t	i;
+
+	i = ft_strlen(s) + 1;
+	i = i - len_finish;
 	new_text = (char *) malloc((sizeof(char) * i));
 	if (new_text == NULL)
 		return (NULL);
