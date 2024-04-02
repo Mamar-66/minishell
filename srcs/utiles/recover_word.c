@@ -6,31 +6,43 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:08:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/01 18:42:03 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:07:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// static char *if_symbole(char *str, char symbol)
-// {
-// 	char	*str_return;
-// 	int		i;
+static void	first_word_plus(char *str, int *start ,int *cmp)
+{
+	char	symbol;
+	int		i;
+	int		j;
 
-// 	i = 0;
-// 	while (str[i] && str[i] != symbol)
-// 		i++;
-// 	str_return = malloc(sizeof(char) * i + 1);
-// 	if (!str_return)
-// 		return (NULL);
-// 	ft_strlcpy(str_return, str, i + 1);
-// 	return (str_return);
-// }
+	i = *start;
+	j = *cmp;
+	symbol = str[i];
+	if (symbol == '\'' || symbol == '"')
+		while (str[i])
+		{
+			i++;
+			if (str[i] == symbol)
+			{
+				j += 2;
+				i++;
+				break ;
+			}
+			j++;
+		}
+	else
+		while (str[i] > 32 && str[i] < 127 && str[i++])
+			j++;
+	*start = i;
+	*cmp = j;
+}
 
 static char	*first_word(char *str, int *start)
 {
 	char	*return_word;
-	char	symbol;
 	int		i;
 	int		j;
 
@@ -39,13 +51,7 @@ static char	*first_word(char *str, int *start)
 	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
 			|| str[i] == 13) && str[i])
 		i++;
-	symbol = str[i];
-	if (symbol == '\'' || symbol == '"')
-		while (str[++i] && str[i] != symbol)
-			j++;
-	else
-		while (str[i] > 32 && str[i] < 127 && str[i++])
-			j++;
+	first_word_plus(str, &i, &j);
 	return_word = malloc(sizeof(char) * j + 1);
 	if (!return_word)
 		return (NULL);
@@ -104,4 +110,26 @@ int	recover_word_plus_return_position(char	*str,
 		|| str[i] == 13) && str[i])
 		i++;
 	return (i);
+}
+
+/*
+	pos_strat = index start string 
+	return index finish string
+*/
+int	word_has_print_return_pos_finish(char *str, int *pos_start)
+{
+	char	*opt;
+	int		i;
+
+	i = *pos_start;
+	opt = recover_word(str, i);
+	while (ft_strncmp(opt, "-n", 3) == 0)
+	{
+		free(opt);
+		i++;
+		opt = recover_word(str, i);
+	}
+	*pos_start = i;
+	free(opt);
+	return (++i);
 }

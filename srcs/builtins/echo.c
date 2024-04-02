@@ -6,13 +6,13 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/01 18:52:19 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/02 17:52:39 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*wait_for_end_symbole(char *str, int start)
+static char	*wait_for_end_symbole(char *str)
 {
 	char	*all_str;
 	char	*buff;
@@ -21,21 +21,23 @@ static char	*wait_for_end_symbole(char *str, int start)
 	int		i;
 
 	i = 0;
-	all_str = ft_strdup(str + start + 1);
+	all_str = ft_strdup(str + 1);
 	all_str = ft_strjoin(all_str, "\n");
 	while (1)
 	{
-		if (ft_strchr(all_str, str[start]) != NULL)
+		if (ft_strchr(all_str, str[0]) != NULL)
 			break;
-		buff = get_next_line(STDIN_FILENO);
+		buff = readline("> ");
 		all_str = ft_strjoin(all_str, buff);
 		free(buff);
 	}
-	while (all_str[i] != str[start])
+	while (all_str[i] != str[0])
 		i++;
 	pre_str_return = ft_strldup(all_str, i - 1);
-	pre_str_return = ft_strjoin(pre_str_return, all_str + i + 1);
+	if (all_str[i])
+		pre_str_return = ft_strjoin(pre_str_return, all_str + i + 1);
 	str_return = ft_strldup(pre_str_return, 1);
+	free(str);
 	free(all_str);
 	free(pre_str_return);
 	return (str_return);
@@ -47,60 +49,36 @@ static char	*wait_for_end_symbole(char *str, int start)
 
 static char	*gest_symbole(char *str, int start, int finish)
 {
+	(void)finish;
 	char	*str_parssing;
 	char	*buff;
 	int		i;
 
 	i = 1;
-	buff = recover_word(str + start, 0);
-	printf("dedams >%s<\n", buff);
-	return (NULL);
+	buff = recover_word(str + start, i);
+	// printf("\nbuff deb>%c<\n", buff[0]);
+	// printf("nb = %ld\n", ft_strlen(buff));
+	// printf("buff fin >%c<\n", buff[ft_strlen(buff) - 1]);
 	while (buff)
 	{
-
-		buff = recover_word(str + start, i);
-	}
-		if ((buff[1] == '\'' || buff[start] == '"')
-			&& buff[1] != str[finish - 1])
-			buff = wait_for_end_symbole(str, start);
-		else if (str[start] == '\'')
-			str_parssing = ft_strldup(str + start + 1, 1);
-	else if (str[start] == '"')
-	{
-		printf("double %s\n", str + start);
+		if (((buff[0] == '\''  && buff[ft_strlen(buff) - 1] != '\'')
+			|| (buff[0] == '"'  && buff[ft_strlen(buff) - 1] != '"')))
+			buff = wait_for_end_symbole(buff);
+		else
+			buff = recover_word(str + start, i);
+		printf("text %s\n", buff);
 		return (NULL);
 	}
-	return (str_parssing);
+	// 	else if (str[start] == '\'')
+	// 		str_parssing = ft_strldup(str + start + 1, 1);
+	// else if (str[start] == '"')
+	// {
+	// 	printf("double %s\n", str + start);
+	// 	return (NULL);
+	// }
 	free(buff);
-}
-
-/*
-	pos_strat = index start string 
-	return index finish string
-*/
-static int	word_has_print_return_pos_finish(char *str, int *pos_start)
-{
-	char	*opt;
-	int		i;
-
-	i = *pos_start;
-	opt = recover_word(str, i);
-	while (ft_strncmp(opt, "-n", 3) == 0)
-	{
-		free(opt);
-		i++;
-		opt = recover_word(str, i);
-	}
-	free(opt);
-	*pos_start = i;
-	i = 0;
-	while (str[i])
-		i++;
-	i--;
-	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
-			|| str[i] == 13) && str[i])
-		i--;
-	return (++i);
+	str_parssing = NULL;
+	return (str_parssing);
 }
 
 /*
@@ -119,8 +97,8 @@ static char	*parssing_echo(char *str)
 	i = 2;
 	j = word_has_print_return_pos_finish(str, &i);
 	i = recover_word_plus_return_position(str, --i);
-	printf("test >%s<\n", str + i);
-	printf("test fin >%s<\n", str + j);
+	// printf("test >%s<\n", str + i);
+	// printf("test fin >%s<\n", str + j);
 	str_return = gest_symbole(str, i, j);
 	// if (ft_strncmp(opt, "-n", 3) != 0)
 	// 	str_return = ft_strjoin(str_return, "\n");
@@ -139,8 +117,3 @@ void	ft_echo(char *str)
 	// printf("%s", str);
 	free(print_str);
 }
-
-	// printf("pot = %d\n", start);
-	// printf("pot = %d\n", finish);
-	// printf("\nparsing <%s>\n", str_parssing);
-	// printf("\ndecaler fini <%s>\n", str + finish);
