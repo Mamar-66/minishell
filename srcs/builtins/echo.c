@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/02 17:52:39 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/02 19:15:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@ static char	*wait_for_end_symbole(char *str)
 			break;
 		buff = readline("> ");
 		all_str = ft_strjoin(all_str, buff);
+		all_str = ft_strjoin(all_str, "\n");
 		free(buff);
 	}
 	while (all_str[i] != str[0])
 		i++;
-	pre_str_return = ft_strldup(all_str, i - 1);
-	if (all_str[i])
+	pre_str_return = ft_strldup(all_str, ft_strlen(all_str) - i);
+	if (all_str[i + 1])
 		pre_str_return = ft_strjoin(pre_str_return, all_str + i + 1);
-	str_return = ft_strldup(pre_str_return, 1);
+	str_return = ft_strdup(pre_str_return);
 	free(str);
 	free(all_str);
 	free(pre_str_return);
@@ -66,7 +67,7 @@ static char	*gest_symbole(char *str, int start, int finish)
 			buff = wait_for_end_symbole(buff);
 		else
 			buff = recover_word(str + start, i);
-		printf("text %s\n", buff);
+		printf("%s\n", buff);
 		return (NULL);
 	}
 	// 	else if (str[start] == '\'')
