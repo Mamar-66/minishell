@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/03 12:20:59 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/04 00:32:30 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,13 @@ typedef struct s_data
 char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 
 /*
-			builtins
+	builtins
+*/
+/*
+	echo
 */
 void	ft_echo(char *str);
+char	*single_quote(char *str);
 /*
 			get_next_line
 */

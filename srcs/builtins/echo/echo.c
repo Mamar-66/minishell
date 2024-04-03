@@ -6,43 +6,12 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/03 13:00:50 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/04 00:51:49 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-static char	*wait_for_end_symbole(char *str)
-{
-	char	*all_str;
-	char	*buff;
-	char	*pre_str_return;
-	char	*str_return;
-	int		i;
-
-	i = 0;
-	all_str = ft_strdup(str + 1);
-	all_str = ft_strjoin(all_str, "\n");
-	while (1)
-	{
-		if (ft_strchr(all_str, str[0]) != NULL)
-			break;
-		buff = readline("> ");
-		all_str = ft_strjoin(all_str, buff);
-		all_str = ft_strjoin(all_str, "\n");
-		free(buff);
-	}
-	while (all_str[i] != str[0])
-		i++;
-	pre_str_return = ft_strldup(all_str, ft_strlen(all_str) - i);
-	if (all_str[i + 1])
-		pre_str_return = ft_strjoin(pre_str_return, all_str + i + 1);
-	str_return = ft_strdup(pre_str_return);
-	free(str);
-	free(all_str);
-	free(pre_str_return);
-	return (str_return);
-}
 
 /*
 	gest symbole " end ' end $
@@ -59,23 +28,13 @@ static char	*gest_symbole(char *str, int start, int finish)
 	buff = recover_word(str + start, i, false);
 	while (buff)
 	{
-		if (((buff[0] == '\''  && buff[ft_strlen(buff) - 1] != '\'')
-			|| (buff[0] == '"'  && buff[ft_strlen(buff) - 1] != '"')))
-			buff = wait_for_end_symbole(buff);
-		else if ((buff[0] == '\''  && buff[ft_strlen(buff) - 1] == '\''))
-			buff = recover_word(str + start, i, true);
+		if ((buff[0] == '\''))
+			buff = single_quote(buff);
 		else
 			buff = recover_word(str + start, i, false);
 		printf("%s\n", buff);
 		return (NULL);
 	}
-	// 	else if (str[start] == '\'')
-	// 		str_parssing = ft_strldup(str + start + 1, 1);
-	// else if (str[start] == '"')
-	// {
-	// 	printf("double %s\n", str + start);
-	// 	return (NULL);
-	// }
 	free(buff);
 	str_parssing = NULL;
 	return (str_parssing);
