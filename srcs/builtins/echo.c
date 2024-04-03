@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/02 19:15:13 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/03 13:00:50 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,16 @@ static char	*gest_symbole(char *str, int start, int finish)
 	int		i;
 
 	i = 1;
-	buff = recover_word(str + start, i);
-	// printf("\nbuff deb>%c<\n", buff[0]);
-	// printf("nb = %ld\n", ft_strlen(buff));
-	// printf("buff fin >%c<\n", buff[ft_strlen(buff) - 1]);
+	buff = recover_word(str + start, i, false);
 	while (buff)
 	{
 		if (((buff[0] == '\''  && buff[ft_strlen(buff) - 1] != '\'')
 			|| (buff[0] == '"'  && buff[ft_strlen(buff) - 1] != '"')))
 			buff = wait_for_end_symbole(buff);
+		else if ((buff[0] == '\''  && buff[ft_strlen(buff) - 1] == '\''))
+			buff = recover_word(str + start, i, true);
 		else
-			buff = recover_word(str + start, i);
+			buff = recover_word(str + start, i, false);
 		printf("%s\n", buff);
 		return (NULL);
 	}
