@@ -53,7 +53,22 @@ static char	*wait_for_the_symbole(char *str)
 
 static char	*gest_global_var(char *str)
 {
+	char	*str_return;
+	int		i;
+	int		j;
 
+	i = -1;
+	j = 0;
+	while (str[++i])
+	{
+		if (str[i] == '$')
+			if (ft_isalpha(str[i]) || str[i] == '_')
+				j++;
+			else
+				break;
+	}
+	free(str);
+	return (str_return);
 }
 
 char	*double_quote(char *str)
@@ -67,6 +82,7 @@ char	*double_quote(char *str)
 		str_return = recover_word(str, 1, true);
 	else
 		perror("error double quote\n");
+	str_return = gest_global_var(str_return);
 	free(str);
 	return (str_return);
 }
