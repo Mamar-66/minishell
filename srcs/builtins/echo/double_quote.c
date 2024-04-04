@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   single_quote.c                                     :+:      :+:    :+:   */
+/*   double_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 00:07:57 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/04 15:55:18 by omfelk           ###   ########.fr       */
+/*   Created: 2024/04/04 12:11:45 by omfelk            #+#    #+#             */
+/*   Updated: 2024/04/04 12:11:55 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,22 @@ static char	*wait_for_the_symbole(char *str)
 	return (str_return);
 }
 
-//static char	*single_quote_ok(char *str)
-//{
-//	char	*str_return;
+static char	*gest_global_var(char *str)
+{
 
-//	str_return = ft_strdup(str + 1);
-//	str_return[ft_strlen(str_return) - 1] = '\0';
-//	printf("ok\n");
-//	return (str_return);
-//}
+}
 
-char	*single_quote(char *str)
+char	*double_quote(char *str)
 {
 	char	*str_return;
 
-	if (((str[0] == '\'' && str[ft_strlen(str) - 1] != '\'')
-			|| (str[0] == '\'' && ft_strlen(str) - 1 == 0)))
+	if (((str[0] == '"' && str[ft_strlen(str) - 1] != '"')
+			|| (str[0] == '"' && ft_strlen(str) - 1 == 0)))
 		str_return = wait_for_the_symbole(str);
-	else if (((str[0] == '\'' && str[ft_strlen(str) - 1] == '\'')))
+	else if (((str[0] == '"' && str[ft_strlen(str) - 1] == '"')))
 		str_return = recover_word(str, 1, true);
 	else
-		perror("error single quote\n");
+		perror("error double quote\n");
 	free(str);
 	return (str_return);
 }

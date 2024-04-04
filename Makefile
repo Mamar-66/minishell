@@ -16,6 +16,7 @@ SRC	=	main.c \
 \
 		builtins/echo/echo.c \
 		builtins/echo/single_quote.c \
+		builtins/echo/double_quote.c \
 \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \

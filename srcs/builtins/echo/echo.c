@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/04 00:51:49 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/04 15:58:17 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ static char	*gest_symbole(char *str, int start, int finish)
 	{
 		if ((buff[0] == '\''))
 			buff = single_quote(buff);
+		else if ((buff[0] == '"'))
+			buff = double_quote(buff);
 		else
 			buff = recover_word(str + start, i, false);
-		printf("%s\n", buff);
+		printf(">%s<\n", buff);
 		return (NULL);
 	}
 	free(buff);
