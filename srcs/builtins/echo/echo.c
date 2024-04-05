@@ -6,21 +6,20 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/05 15:05:00 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:48:16 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-
 /*
 	gest symbole " end ' end $
 */
 
-static char	*gest_symbole(char *str, int start, int finish)
+static void	gest_symbole(char *str, int start)
 {
-	(void)finish;
-	char	*str_parssing;
+	char	*buff_str;
+	char	*str_retunr;
 	char	*buff;
 	int		i;
 
@@ -29,17 +28,19 @@ static char	*gest_symbole(char *str, int start, int finish)
 	while (buff)
 	{
 		if ((buff[0] == '\''))
-			buff = single_quote(buff);
+			buff_str = single_quote(buff);
 		else if ((buff[0] == '"'))
-			double_quote(buff);
+			buff_str = double_quote(buff);
 		else
-			buff = recover_word(str + start, i, false);
-		printf("\n>%s<\n", buff);
-		return (NULL);
+			buff_str = simple_str(buff);
+		str_retunr = ft_strjoin(str_retunr, buff_str);
+		free(buff_str);
+		free(buff);
+		buff = recover_word(str + start, ++i, false);
+		printf(" ");
 	}
+	printf("%s", str_retunr);
 	free(buff);
-	str_parssing = NULL;
-	return (str_parssing);
 }
 
 /*
@@ -47,34 +48,17 @@ static char	*gest_symbole(char *str, int start, int finish)
 	i = start str
 	j = end str
 */
-static char	*parssing_echo(char *str)
-{
-	char	*str_return;
-	// char	*opt;
-	int		i;
-	int		j;
-
-	// opt = recover_word(str, 2);
-	i = 2;
-	j = word_has_print_return_pos_finish(str, &i);
-	i = recover_word_plus_return_position(str, --i);
-	// printf("test >%s<\n", str + i);
-	// printf("test fin >%s<\n", str + j);
-	str_return = gest_symbole(str, i, j);
-	// if (ft_strncmp(opt, "-n", 3) != 0)
-	// 	str_return = ft_strjoin(str_return, "\n");
-	// free(opt);
-	return (str_return);
-}
 
 void	ft_echo(char *str)
 {
-	char	*print_str;
+	char	*opt;
+	int		i;
 
-	// parssing_echo(str);
-	// print_str = recover_word(str, 2);
-	print_str = parssing_echo(str);
-	printf("%s", print_str);
-	// printf("%s", str);
-	free(print_str);
+	opt = recover_word(str, 2, false);
+	i = 2;
+	word_has_print_return_pos_finish(str, &i);
+	i = recover_word_plus_return_position(str, --i);
+	gest_symbole(str, i);
+	if (ft_strncmp(opt, "-n", 3) != 0)
+		printf("\n");
 }

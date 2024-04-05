@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/05 15:04:10 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:30:42 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 	echo
 */
 void	ft_echo(char *str);
+char	*simple_str(char *str);
 char	*single_quote(char *str);
-void	double_quote(char *str);
+char	*double_quote(char *str);
 /*
 			get_next_line
 */

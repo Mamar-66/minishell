@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:08:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/03 13:02:09 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/05 16:54:58 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*recover_word(char	*str, unsigned int word_location, bool mod)
 		return_word = first_word(str, &i, mod);
 		nb++;
 	}
+	if (nb < word_location)
+		return (NULL);
 	return (return_word);
 }
 

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 00:07:57 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/04 15:55:18 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/05 17:31:34 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,6 @@ static char	*wait_for_the_symbole(char *str)
 	free(pre_str_return);
 	return (str_return);
 }
-
-//static char	*single_quote_ok(char *str)
-//{
-//	char	*str_return;
-
-//	str_return = ft_strdup(str + 1);
-//	str_return[ft_strlen(str_return) - 1] = '\0';
-//	printf("ok\n");
-//	return (str_return);
-//}
 
 char	*single_quote(char *str)
 {

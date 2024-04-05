@@ -78,8 +78,9 @@ static char *val_var(char *str, int *ptr)
 	return (str_return);
 }
 
-void	gest_global_var(char *str)
+static char	*gest_global_var(char *str)
 {
+	char	*str_return;
 	char	*var;
 	int i;
 
@@ -90,15 +91,15 @@ void	gest_global_var(char *str)
 		{
 			var = val_var(str + i + 1, &i);
 			if (var)
-				printf("%s", var);
-			//free(var);
+				str_return = ft_strjoin(str_return, var);
 		}
 		else
-			printf("%c", str[i]);
+			str_return = ft_strjoin_caract(str_return, str[i]);
 	}
+	return (str_return);
 }
 
-void	double_quote(char *str)
+char	*double_quote(char *str)
 {
 	char	*str_return;
 
@@ -109,7 +110,8 @@ void	double_quote(char *str)
 		str_return = recover_word(str, 1, true);
 	else
 		perror("error double quote\n");
-	gest_global_var(str_return);
+	str_return = gest_global_var(str_return);
 	free(str_return);
 	free(str);
+	return (str_return);
 }
