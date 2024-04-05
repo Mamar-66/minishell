@@ -51,7 +51,7 @@ static char	*wait_for_the_symbole(char *str)
 	return (str_return);
 }
 
-static char *val_var(char *str)
+static char *val_var(char *str, int *ptr)
 {
 	char	*str_return;
 	char	*var;
@@ -73,15 +73,14 @@ static char *val_var(char *str)
 		return (NULL);
 	ft_strlcpy(var, str + (i - j), j + 1);
 	str_return = getenv(var);
+	*ptr += j;
 	free(var);
 	return (str_return);
 }
 
-static char	*gest_global_var(char *str)
+void	gest_global_var(char *str)
 {
-	char	*str_return;
 	char	*var;
-	char	c[1];
 	int i;
 
 	i = -1;
@@ -89,25 +88,17 @@ static char	*gest_global_var(char *str)
 	{
 		if (str[i] == '$')
 		{
-			printf("haut\n");
-			var = val_var(str + i++ + 1);
-			i += ft_strlen(var);
-			str_return = ft_strjoin(str_return, var);
-			free(var);
+			var = val_var(str + i + 1, &i);
+			if (var)
+				printf("%s", var);
+			//free(var);
 		}
 		else
-		{
-			ft_strlcpy(c , str + i, 2);
-			printf("c = %s\n", c);
-			str_return = ft_strjoin(str_return, *(char)str[i]);
-			printf("bas\n");
-		}
+			printf("%c", str[i]);
 	}
-	//free(str);
-	return (str_return);
 }
 
-char	*double_quote(char *str)
+void	double_quote(char *str)
 {
 	char	*str_return;
 
@@ -118,7 +109,7 @@ char	*double_quote(char *str)
 		str_return = recover_word(str, 1, true);
 	else
 		perror("error double quote\n");
-	str_return = gest_global_var(str_return);
+	gest_global_var(str_return);
+	free(str_return);
 	free(str);
-	return (str_return);
 }
