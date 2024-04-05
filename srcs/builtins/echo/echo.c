@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/05 17:48:16 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/06 00:50:08 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 static void	gest_symbole(char *str, int start)
 {
 	char	*buff_str;
-	char	*str_retunr;
+	char	*str_return;
 	char	*buff;
 	int		i;
 
 	i = 1;
+	str_return = ft_strdup("");
 	buff = recover_word(str + start, i, false);
 	while (buff)
 	{
@@ -33,14 +34,14 @@ static void	gest_symbole(char *str, int start)
 			buff_str = double_quote(buff);
 		else
 			buff_str = simple_str(buff);
-		str_retunr = ft_strjoin(str_retunr, buff_str);
-		free(buff_str);
-		free(buff);
+		str_return = ft_strjoin(str_return, buff_str);
+		str_return = ft_strjoin(str_return, " ");
+		//free(buff_str);
+		//free(buff);
 		buff = recover_word(str + start, ++i, false);
-		printf(" ");
 	}
-	printf("%s", str_retunr);
-	free(buff);
+	printf("%s", str_return);
+	//free(buff);
 }
 
 /*

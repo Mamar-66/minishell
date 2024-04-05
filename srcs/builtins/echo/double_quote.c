@@ -81,20 +81,27 @@ static char *val_var(char *str, int *ptr)
 static char	*gest_global_var(char *str)
 {
 	char	*str_return;
-	char	*var;
-	int i;
+	char 	c[1];
+	char 	*var;
+	int 	i;
 
 	i = -1;
+	c[1] = '\0';
+	str_return = ft_strdup("");
 	while (str[++i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '$' && str[i + 1] != '\n')
 		{
-			var = val_var(str + i + 1, &i);
+			i++;
+			var = val_var(str + i, &i);
 			if (var)
 				str_return = ft_strjoin(str_return, var);
 		}
 		else
-			str_return = ft_strjoin_caract(str_return, str[i]);
+		{
+			c[0] = str[i];
+			str_return = ft_strjoin(str_return, c);
+		}
 	}
 	return (str_return);
 }
@@ -111,7 +118,6 @@ char	*double_quote(char *str)
 	else
 		perror("error double quote\n");
 	str_return = gest_global_var(str_return);
-	free(str_return);
 	free(str);
 	return (str_return);
 }
