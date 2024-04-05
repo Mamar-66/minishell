@@ -17,7 +17,7 @@ static char 	*wait_for_the_symbole_suite(char *all_str)
 	char	*buff;
 	char	*str_return;
 
-	buff = readline("quote > ");
+	buff = readline("dquote > ");
 	str_return = ft_strjoin(all_str, buff);
 	str_return = ft_strjoin(str_return, "\n\0");
 	free(buff);
@@ -51,23 +51,59 @@ static char	*wait_for_the_symbole(char *str)
 	return (str_return);
 }
 
+static char *val_var(char *str)
+{
+	char	*str_return;
+	char	*var;
+	int		i;
+	int 	j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]) || str[i] == '_')
+			j++;
+		else
+			break ;
+		i++;
+	}
+	var = malloc(sizeof(char) * j + 1);
+	if (!var)
+		return (NULL);
+	ft_strlcpy(var, str + (i - j), j + 1);
+	str_return = getenv(var);
+	free(var);
+	return (str_return);
+}
+
 static char	*gest_global_var(char *str)
 {
 	char	*str_return;
-	int		i;
-	int		j;
+	char	*var;
+	char	c[1];
+	int i;
 
 	i = -1;
-	j = 0;
 	while (str[++i])
 	{
 		if (str[i] == '$')
-			if (ft_isalpha(str[i]) || str[i] == '_')
-				j++;
-			else
-				break;
+		{
+			printf("haut\n");
+			var = val_var(str + i++ + 1);
+			i += ft_strlen(var);
+			str_return = ft_strjoin(str_return, var);
+			free(var);
+		}
+		else
+		{
+			ft_strlcpy(c , str + i, 2);
+			printf("c = %s\n", c);
+			str_return = ft_strjoin(str_return, *(char)str[i]);
+			printf("bas\n");
+		}
 	}
-	free(str);
+	//free(str);
 	return (str_return);
 }
 
