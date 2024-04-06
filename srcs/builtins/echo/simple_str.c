@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/05 17:46:35 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/06 15:28:29 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,28 @@ static char *val_var(char *str, int *ptr)
 static char	*gest_global_var(char *str)
 {
 	char	*str_return;
-	char	*var;
-	int i;
+	char 	c[1];
+	char 	*var;
+	int 	i;
 
 	i = -1;
+	c[1] = '\0';
+	str_return = ft_strdup("");
 	while (str[++i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '$' && str[i + 1] != '\n')
 		{
-			var = val_var(str + i + 1, &i);
+			var = val_var(str + ++i, &i);
 			if (var)
 				str_return = ft_strjoin(str_return, var);
+			else
+				str_return = ft_strjoin(str_return, " ");
 		}
 		else
-			str_return = ft_strjoin_caract(str_return, str[i]);
+		{
+			c[0] = str[i];
+			str_return = ft_strjoin(str_return, c);
+		}
 	}
 	return (str_return);
 }

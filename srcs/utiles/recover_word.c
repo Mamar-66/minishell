@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:08:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/05 16:54:58 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/06 16:32:10 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,12 @@ int	word_has_print_return_pos_finish(char *str, int *pos_start)
 		free(opt);
 		i++;
 		opt = recover_word(str, i, false);
+		if (!opt)
+		{
+			free(opt);
+			return (-1);
+		}
 	}
 	*pos_start = i;
-	free(opt);
 	return (++i);
 }

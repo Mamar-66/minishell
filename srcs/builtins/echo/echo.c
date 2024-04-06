@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/06 00:50:08 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/06 16:33:29 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	gest_symbole(char *str, int start)
 		buff = recover_word(str + start, ++i, false);
 	}
 	printf("%s", str_return);
-	//free(buff);
+	// free(buff);
 }
 
 /*
@@ -55,11 +55,18 @@ void	ft_echo(char *str)
 	char	*opt;
 	int		i;
 
-	opt = recover_word(str, 2, false);
 	i = 2;
-	word_has_print_return_pos_finish(str, &i);
-	i = recover_word_plus_return_position(str, --i);
-	gest_symbole(str, i);
+	opt = recover_word(str, 2, false);
+	if (!opt)
+	{
+		printf("\n");
+		return;
+	}
+	if (word_has_print_return_pos_finish(str, &i) != -1)
+	{
+		i = recover_word_plus_return_position(str, --i);
+		gest_symbole(str, i);
+	}
 	if (ft_strncmp(opt, "-n", 3) != 0)
 		printf("\n");
 }

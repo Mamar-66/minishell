@@ -92,10 +92,11 @@ static char	*gest_global_var(char *str)
 	{
 		if (str[i] == '$' && str[i + 1] != '\n')
 		{
-			i++;
-			var = val_var(str + i, &i);
+			var = val_var(str + ++i, &i);
 			if (var)
 				str_return = ft_strjoin(str_return, var);
+			else
+				str_return = ft_strjoin(str_return, " ");
 		}
 		else
 		{
