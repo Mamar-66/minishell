@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/06 15:59:33 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/08 13:52:51 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 /*
 	return 1 if built otherwise return 0 is cmd
 */
-static bool	built_or_cmd(char *str)
+static bool	built_or_cmd(char *str, t_data *lst_data)
 {
 	char	*text;
 
 	text = recover_word(str, 1, false);
 	if (ft_strncmp(text, "echo", 5) == 0)
-		ft_echo(str);
+		ft_echo(str, lst_data);
 	else
 	{
 		perror(text);
@@ -29,22 +29,12 @@ static bool	built_or_cmd(char *str)
 	return (1);
 }
 
-bool	gest_readline_recover(char *str)
+bool	gest_readline_recover(char *str, t_data *lst_data)
 {
-/* 	a enlever */
-	char	*text;
-
 	if (*str)
 	{
-/* 		a enlever */
-		text = recover_word(str, 1, false);
-		built_or_cmd(str);
-		if (!text)
-			printf("%s\n", "null");
-/* 		else
-			printf("%s\n", text); */
+		built_or_cmd(str, lst_data);
 		add_history(str);
-		free(text);
 	}
 	return (false);
 }
