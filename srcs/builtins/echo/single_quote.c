@@ -52,7 +52,7 @@ static char	*wait_for_the_symbole(char *str)
 	return (str_return);
 }
 
-char	*single_quote(char *str)
+static char	*single_quote_suite(char *str)
 {
 	char	*str_return;
 
@@ -64,4 +64,32 @@ char	*single_quote(char *str)
 		perror("error single quote\n");
 	free(str);
 	return (str_return);
+}
+
+void	single_quote(char *str, char sym, int *val_ptr)
+{
+	char	*str_return;
+	char	*first_ptr;
+	char	*seconde_ptr;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	first_ptr = ft_strchr(str, sym);
+	while (&str[i] != first_ptr && str[i])
+		printf("%c", str[i++]);
+	seconde_ptr = ft_strchr(str + ++i, sym);
+	while (&str[i] != seconde_ptr && str[i++])
+		j++;
+	str_return = malloc(sizeof(char) * j + 3);
+	if (!str_return)
+		return ;
+	ft_strlcpy(str_return, str + (i - j - 1), j + 3);
+	str_return = single_quote_suite(str_return);
+	printf("%s", str_return);
+	// i++;
+	// while (str[i] > 32 && str[i] < 127 && str[i])
+	// 	printf("%c", str[i++]);
+	*val_ptr += ++i;
 }

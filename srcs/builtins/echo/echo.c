@@ -12,7 +12,8 @@
 
 #include "../../../includes/minishell.h"
 
-static char *buff_val(char *str, char sym, int *val_ptr)
+
+/* static char *buff_val(char *str, char sym, int *val_ptr)
 {
 	char	*str_return;
 	char	*buff_tmp;
@@ -33,40 +34,37 @@ static char *buff_val(char *str, char sym, int *val_ptr)
 	printf("text = %s\n", str_return);
 	printf("nb = %d\n", i);
 	return (str_return);
-}
+} */
 
 /*
 	gest symbole " end ' end $
 */
 static void	gest_symbole(char *str, int start, t_data *lst_data)
 {
-	char	*buff_str;
-	char	*str_return;
+	// char	*buff_str;
+	// char	*str_return;
 	char	*buff;
-	int		i;
+	// int		i;
 
-	i = 1;
-	str_return = ft_strdup("");
-	buff = recover_word(str + start, i, false);
+	// i = 1;
+	// str_return = ft_strdup("");
+	buff = recover_word(str + start, 1, false);
 	while (buff)
 	{
 		if (ft_strchr(buff, '\''))
-		{
-			buff_val(str + start, '\'', &i);
-			return ;
-			buff_str = single_quote(buff);
-		}
+			single_quote(str + start, '\'', &start);
 		else if (ft_strchr(buff, '"'))
-			buff_str = double_quote(buff, lst_data);
+			double_quote(buff, lst_data);
 		else
-			buff_str = simple_str(buff, lst_data);
-		str_return = ft_strjoin(str_return, buff_str);
-		str_return = ft_strjoin(str_return, " ");
+			simple_str(str + start, lst_data, &start);
+		// str_return = ft_strjoin(str_return, buff_str);
+		// str_return = ft_strjoin(str_return, " ");
 		//free(buff_str);
 		//free(buff);
-		buff = recover_word(str + start, ++i, false);
+		printf("\ntext = %s\n", str + start);
+		buff = recover_word(str + start, 1, false);
 	}
-	printf("%s", str_return);
+	// printf(">%s<", str_return);
 	// free(buff);
 }
 

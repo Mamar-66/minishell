@@ -42,8 +42,8 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 	echo
 */
 void	ft_echo(char *str, t_data *lst_data);
-char	*simple_str(char *str, t_data *lst_data);
-char	*single_quote(char *str);
+char	*simple_str(char *str, t_data *lst_data, int *val_ptr);
+void	single_quote(char *str, char sym, int *val_ptr);
 char	*double_quote(char *str, t_data *lst_data);
 /*
 			get_next_line
