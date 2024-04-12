@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 00:07:57 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/12 17:24:28 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/12 23:45:22 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ static char	*single_quote_suite(char *str)
 	return (str_return);
 }
 
-void	single_quote(char *str, char sym, int *val_ptr)
+char	*single_quote(char *str, char sym, int *val_ptr)
 {
 	char	*str_return;
+	char	*first_str;
 	char	*first_ptr;
 	char	*seconde_ptr;
 	int		i;
@@ -78,15 +79,24 @@ void	single_quote(char *str, char sym, int *val_ptr)
 	j = 0;
 	first_ptr = ft_strchr(str, sym);
 	while (&str[i] != first_ptr && str[i])
-		printf("%c", str[i++]);
+		i++;
+	first_str = malloc(sizeof(char) * i + 1);
+	if (!first_str)
+		return (NULL);
+	ft_strlcpy(first_str, str, i + 1);
 	seconde_ptr = ft_strchr(str + ++i, sym);
-	while (&str[i] != seconde_ptr && str[i++])
+	while (&str[i] != seconde_ptr && str[i])
+	{
 		j++;
+		i++;
+	}
 	str_return = malloc(sizeof(char) * j + 3);
 	if (!str_return)
-		return ;
+		return (NULL);
 	ft_strlcpy(str_return, str + (i - j - 1), j + 3);
 	str_return = single_quote_suite(str_return);
-	printf("%s", str_return);
+	first_str = ft_strjoin(first_str, str_return);
 	*val_ptr += ++i;
+	free(str_return);
+	return (first_str);
 }

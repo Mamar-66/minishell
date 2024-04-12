@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/12 17:24:07 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/12 23:54:39 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,32 @@
 */
 static void	gest_symbole(char *str, int start, t_data *lst_data)
 {
-	// char	*buff_str;
-	// char	*str_return;
+	char	*buff_str;
+	char	*str_return;
 	char	*buff;
 	// int		i;
 
 	// i = 1;
-	// str_return = ft_strdup("");
+	str_return = ft_strdup("");
 	buff = recover_word(str + start, 1, false);
 	while (buff)
 	{
 		if (ft_strchr(buff, '\''))
-			single_quote(str + start, '\'', &start);
+			buff_str = single_quote(str + start, '\'', &start);
 		else if (ft_strchr(buff, '"'))
-			double_quote(buff, lst_data);
+			buff_str = double_quote(buff, lst_data);
 		else
-		{
-			//printf("buff = %s\n", buff);
-			simple_str(str + start, lst_data, &start);
-			//printf("\nstr = %s\n", str + start);
-		}
+			buff_str = simple_str(buff, lst_data, &start);
 		printf(" ");
-		// str_return = ft_strjoin(str_return, buff_str);
-		// str_return = ft_strjoin(str_return, " ");
+		str_return = ft_strjoin(str_return, buff_str);
+		str_return = ft_strjoin(str_return, " ");
 		// free(buff_str);
 		// free(buff);
 		// printf("\ntext = %s\n", str + start);
 		buff = recover_word(str + start, 1, false);
 	}
-	// printf(">%s<", str_return);
-	// free(buff);
+	printf(">%s<", str_return);
+	free(buff);
 }
 
 /*

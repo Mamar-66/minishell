@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/12 17:16:18 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/13 00:00:05 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,15 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	return (str_return);
 }
 
-void	simple_str(char *str, t_data *lst_data, int *val_ptr)
+char	*simple_str(char *str, t_data *lst_data, int *val_ptr)
 {
 	char	*str_return;
 	int		i;
 
 	i = 0;
-	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
-		|| str[i] == 13) && str[i])
+	while ((str[i] > 32 && str[i] < 127))
 		i++;
-	str_return = gest_global_var(str + i, lst_data);
-	printf("%s", str_return);
-	*val_ptr += ft_strlen(str_return) + i;
-	free(str_return);
+	str_return = gest_global_var(str, lst_data);
+	*val_ptr += i + 1;
+	return (str_return);
 }
