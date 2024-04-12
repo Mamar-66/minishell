@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 00:07:57 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/09 14:20:00 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/12 17:24:28 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,5 @@ void	single_quote(char *str, char sym, int *val_ptr)
 	ft_strlcpy(str_return, str + (i - j - 1), j + 3);
 	str_return = single_quote_suite(str_return);
 	printf("%s", str_return);
-	// i++;
-	// while (str[i] > 32 && str[i] < 127 && str[i])
-	// 	printf("%c", str[i++]);
 	*val_ptr += ++i;
 }

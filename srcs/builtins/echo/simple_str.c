@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/08 14:33:59 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/12 17:16:18 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	i = -1;
 	c[1] = '\0';
 	str_return = ft_strdup("");
-	while (str[++i])
+	while (str[++i] && str[i] != ' ')
 	{
 		if (str[i] == '$' && str[i + 1] != '\n')
 		{
@@ -69,7 +69,7 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	return (str_return);
 }
 
-char	*simple_str(char *str, t_data *lst_data, int *val_ptr)
+void	simple_str(char *str, t_data *lst_data, int *val_ptr)
 {
 	char	*str_return;
 	int		i;
@@ -79,6 +79,7 @@ char	*simple_str(char *str, t_data *lst_data, int *val_ptr)
 		|| str[i] == 13) && str[i])
 		i++;
 	str_return = gest_global_var(str + i, lst_data);
-	*val_ptr += ft_strlen(str_return);
-	return (str_return);
+	printf("%s", str_return);
+	*val_ptr += ft_strlen(str_return) + i;
+	free(str_return);
 }
