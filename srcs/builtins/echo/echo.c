@@ -44,9 +44,7 @@ static void	gest_symbole(char *str, int start, t_data *lst_data)
 	char	*buff_str;
 	char	*str_return;
 	char	*buff;
-	// int		i;
 
-	// i = 1;
 	str_return = ft_strdup("");
 	buff = recover_word(str + start, 1, false);
 	while (buff)
@@ -56,13 +54,15 @@ static void	gest_symbole(char *str, int start, t_data *lst_data)
 		else if (ft_strchr(buff, '"'))
 			buff_str = double_quote(buff, lst_data);
 		else
-			buff_str = simple_str(buff, lst_data, &start);
-		printf(" ");
+			buff_str = simple_str(str + start, lst_data, &start);
 		str_return = ft_strjoin(str_return, buff_str);
-		str_return = ft_strjoin(str_return, " ");
+		if (str[start - 1] != '\'')
+			str_return = ft_strjoin(str_return, " ");
+		while ((str[start] == 32 || str[start] == 9 || str[start] == 10
+			|| str[start] == 13) && str[start])
+			start++;
 		// free(buff_str);
 		// free(buff);
-		// printf("\ntext = %s\n", str + start);
 		buff = recover_word(str + start, 1, false);
 	}
 	printf(">%s<", str_return);

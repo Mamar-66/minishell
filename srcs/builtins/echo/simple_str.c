@@ -75,9 +75,12 @@ char	*simple_str(char *str, t_data *lst_data, int *val_ptr)
 	int		i;
 
 	i = 0;
+	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
+			|| str[i] == 13) && str[i])
+		i++;
+	str_return = gest_global_var(str + i, lst_data);
 	while ((str[i] > 32 && str[i] < 127))
 		i++;
-	str_return = gest_global_var(str, lst_data);
-	*val_ptr += i + 1;
+	*val_ptr += i;
 	return (str_return);
 }
