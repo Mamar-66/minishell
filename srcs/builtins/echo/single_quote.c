@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 00:07:57 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/12 23:45:22 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/16 19:31:06 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static char 	*wait_for_the_symbole_suite(char *all_str)
 static char	*wait_for_the_symbole(char *str)
 {
 	char	*all_str;
-	// char	*pre_str_return;
 	char	*str_return;
 	int		i;
 
@@ -42,13 +41,8 @@ static char	*wait_for_the_symbole(char *str)
 	while (all_str[i] != '\'' && all_str[i])
 		i++;
 	all_str[i] = 127;
-	// pre_str_return = ft_strldup(all_str, ft_strlen(all_str) - i);
-	// if (ft_strchr(all_str, '\''))
-	// 	pre_str_return = ft_strjoin(pre_str_return, all_str + i + 1);
-	// str_return = ft_strdup(pre_str_return);
 	str_return = ft_strdup(all_str);
 	free(all_str);
-	// free(pre_str_return);
 	return (str_return);
 }
 
@@ -96,7 +90,7 @@ char	*single_quote(char *str, char sym, int *val_ptr)
 	ft_strlcpy(str_return, str + (i - j - 1), j + 3);
 	str_return = single_quote_suite(str_return);
 	first_str = ft_strjoin(first_str, str_return);
-	*val_ptr += ++i;
+	*val_ptr += ft_strlen(first_str);
 	free(str_return);
 	return (first_str);
 }
