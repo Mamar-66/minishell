@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/16 19:31:33 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:27:21 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	gest_symbole(char *str, int start, t_data *lst_data)
 		else
 			buff_str = simple_str(str + start, lst_data, &start);
 		str_return = ft_strjoin(str_return, buff_str);
-		if (str[start] != '\'')
+		if (str[start] != '\'' && str[start] != '"')
 			str_return = ft_strjoin(str_return, " ");
 		while ((str[start] == 32 || str[start] == 9 || str[start] == 10
 			|| str[start] == 13) && str[start])

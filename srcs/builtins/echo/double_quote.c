@@ -147,7 +147,7 @@ char	*double_quote(char *str, char sym, int *val_ptr)
 	ft_strlcpy(str_return, str + (i - j - 1), j + 3);
 	str_return = double_quote_suite(str_return);
 	first_str = ft_strjoin(first_str, str_return);
-	free(str_return);
 	*val_ptr += ft_strlen(first_str);
+	free(str_return);
 	return (first_str);
 }

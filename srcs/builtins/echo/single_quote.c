@@ -6,13 +6,13 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 00:07:57 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/16 19:31:06 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/17 00:15:10 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static char 	*wait_for_the_symbole_suite(char *all_str)
+static char *wait_for_the_symbole_suite(char *all_str)
 {
 	char	*buff;
 	char	*str_return;

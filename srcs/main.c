@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/08 14:30:15 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:33:16 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **env)
 	t_data	lst_data;
 	char	*readlin_recover;
 
-	lst_data.status = 0;
+	lst_data.status = -1;
 	(void)argc;
 	(void)argv;
 	(void)env;

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/13 00:00:05 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:31:42 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,6 @@ char	*simple_str(char *str, t_data *lst_data, int *val_ptr)
 	int		i;
 
 	i = 0;
-	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
-			|| str[i] == 13) && str[i])
-		i++;
 	str_return = gest_global_var(str + i, lst_data);
 	while ((str[i] > 32 && str[i] < 127))
 		i++;
