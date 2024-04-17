@@ -6,35 +6,11 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/16 23:27:21 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/17 20:34:38 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-
-/* static char *buff_val(char *str, char sym, int *val_ptr)
-{
-	char	*str_return;
-	char	*buff_tmp;
-	int		i;
-
-	i = *val_ptr;
-	str_return = recover_word(str, i++, false);
-	buff_tmp = recover_word(str, i++, false);
-	while (ft_strchr(buff_tmp, sym) == NULL)
-	{
-		str_return = ft_strjoin(str_return, buff_tmp);
-		free(buff_tmp);
-		buff_tmp = recover_word(str, i++, false);
-	}
-	str_return = ft_strjoin(str_return, buff_tmp);
-	free(buff_tmp);
-	*val_ptr = --i;
-	printf("text = %s\n", str_return);
-	printf("nb = %d\n", i);
-	return (str_return);
-} */
 
 /*
 	gest symbole " end ' end $
@@ -50,9 +26,9 @@ static void	gest_symbole(char *str, int start, t_data *lst_data)
 	while (buff)
 	{
 		if (ft_strchr(buff, '\''))
-			buff_str = single_quote(str + start, '\'', &start);
+			buff_str = quote(str + start, '\'', &start, false);
 		else if (ft_strchr(buff, '"'))
-			buff_str = double_quote(str + start, '"', &start);
+			buff_str = quote(str + start, '"', &start, true);
 		else
 			buff_str = simple_str(str + start, lst_data, &start);
 		str_return = ft_strjoin(str_return, buff_str);
@@ -68,12 +44,6 @@ static void	gest_symbole(char *str, int start, t_data *lst_data)
 	printf(">%s<", str_return);
 	free(buff);
 }
-
-/*
-	verif is -n if true
-	i = start str
-	j = end str
-*/
 
 void	ft_echo(char *str, t_data *lst_data)
 {

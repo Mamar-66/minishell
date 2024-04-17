@@ -15,7 +15,7 @@ SRC	=	main.c \
 		add_signal/add_signal.c \
 \
 		builtins/echo/echo.c \
-		builtins/echo/single_quote.c \
+		builtins/echo/quote.c \
 		builtins/echo/double_quote.c \
 		builtins/echo/simple_str.c \
 \
