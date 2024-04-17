@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/16 23:31:42 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/18 00:06:59 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	{
 		if (str[i] == '$' && str[i + 1] != '\n')
 		{
-			var = val_var(str + ++i, &i, lst_data);
+			var = val_var(str + i + 1, &i, lst_data);
 			if (var)
 				str_return = ft_strjoin(str_return, var);
 			else

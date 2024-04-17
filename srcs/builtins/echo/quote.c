@@ -63,7 +63,7 @@ static char	*quote_suite(char *str, char sym, bool dquote)
 	return (str_return);
 }
 
-char	*quote(char *str, char sym, int *val_ptr, bool dquote)
+char	*quote(char *str, t_data *lst_data, char sym, int *val_ptr, bool dquote)
 {
 	char	*str_return;
 	char	*first_str;
@@ -92,6 +92,8 @@ char	*quote(char *str, char sym, int *val_ptr, bool dquote)
 	ft_strlcpy(str_return, str + (count[0] - count[1] - 1), count[1] + 3);
 	str_return = quote_suite(str_return, sym, dquote);
 	first_str = ft_strjoin(first_str, str_return);
+	if (dquote)
+		str_return = double_quote(str_return, lst_data);
 	*val_ptr += ft_strlen(first_str);
 	free(str_return);
 	return (first_str);
