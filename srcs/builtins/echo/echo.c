@@ -29,14 +29,17 @@ static void	gest_symbole(char *str, int start, t_data *lst_data)
 			buff_str = quote(str + start, lst_data, '\'', false);
 		else if (ft_strchr(buff, '"'))
 			buff_str = quote(str + start, lst_data, '"', true);
-		else
+		else if (buff)
+		{
+			printf("buff = <%s>\n", buff);
 			buff_str = simple_str(str + start, lst_data);
-		start += ft_strlen(buff_str);
+		}
+		start += ft_strlen(buff);
 		str_return = ft_strjoin(str_return, buff_str);
 		if (str[start] != '\'' && str[start] != '"')
 			str_return = ft_strjoin(str_return, " ");
 		while ((str[start] == 32 || str[start] == 9 || str[start] == 10
-			|| str[start] == 13) && str[start])
+				|| str[start] == 13) && str[start])
 			start++;
 		// free(buff_str);
 		// free(buff);

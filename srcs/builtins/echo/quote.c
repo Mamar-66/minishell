@@ -12,7 +12,7 @@
 
 #include "../../../includes/minishell.h"
 
-static char *wait_for_the_symbole_suite(char *all_str, bool dquote)
+static	char	*wait_for_the_symbole_suite(char *all_str, bool dquote)
 {
 	char	*buff;
 	char	*str_return;
@@ -69,7 +69,7 @@ char	*quote(char *str, t_data *lst_data, char sym, bool dquote)
 	char	*first_str;
 	char	*first_ptr;
 	char	*seconde_ptr;
-	int 	count[2];
+	int		count[2];
 
 	count[0] = 0;
 	count[1] = 0;
@@ -90,6 +90,7 @@ char	*quote(char *str, t_data *lst_data, char sym, bool dquote)
 	if (!str_return)
 		return (NULL);
 	ft_strlcpy(str_return, str + (count[0] - count[1] - 1), count[1] + 3);
+	printf("str_return = %s\n", str_return);
 	str_return = quote_suite(str_return, sym, dquote);
 	first_str = ft_strjoin(first_str, str_return);
 	if (dquote)
