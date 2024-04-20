@@ -26,11 +26,12 @@ static void	gest_symbole(char *str, int start, t_data *lst_data)
 	while (buff)
 	{
 		if (ft_strchr(buff, '\''))
-			buff_str = quote(str + start, lst_data, '\'', &start, false);
+			buff_str = quote(str + start, lst_data, '\'', false);
 		else if (ft_strchr(buff, '"'))
-			buff_str = quote(str + start, lst_data, '"', &start, true);
+			buff_str = quote(str + start, lst_data, '"', true);
 		else
-			buff_str = simple_str(str + start, lst_data, &start);
+			buff_str = simple_str(str + start, lst_data);
+		start += ft_strlen(buff_str);
 		str_return = ft_strjoin(str_return, buff_str);
 		if (str[start] != '\'' && str[start] != '"')
 			str_return = ft_strjoin(str_return, " ");

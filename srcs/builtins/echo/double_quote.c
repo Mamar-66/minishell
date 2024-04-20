@@ -54,16 +54,11 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	{
 		if (str[i] == '$' && str[i + 1] != '\n')
 		{
-			printf("av = %d\n", i);
 			var = val_var(str + i++ + 1, &i, lst_data);
-			printf("var = <%s>\n", var);
 			if (var)
 				str_return = ft_strjoin(str_return, var);
-			else
-				str_return = ft_strjoin(str_return, " ");
-			str_return = ft_strjoin(str_return, " ");	
-			printf("ap = %d\n", i);
-			
+			if (str[i] == '\n')
+				i--;
 		}
 		else
 		{
@@ -71,7 +66,6 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 			str_return = ft_strjoin(str_return, c);
 		}
 	}
-	printf("str = %s\n", str_return);
 	return (str_return);
 }
 
@@ -80,5 +74,7 @@ char	*double_quote(char *str, t_data *lst_data)
 	char	*str_return;
 
 	str_return = gest_global_var(str, lst_data);
+	printf("str = %s\n", str_return);
+	free(str);
 	return (str_return);
 }

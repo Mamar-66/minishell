@@ -42,8 +42,8 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 	echo
 */
 void	ft_echo(char *str, t_data *lst_data);
-char	*simple_str(char *str, t_data *lst_data, int *val_ptr);
-char	*quote(char *str, t_data *lst_data, char sym, int *val_ptr, bool quote);
+char	*simple_str(char *str, t_data *lst_data);
+char	*quote(char *str, t_data *lst_data, char sym, bool quote);
 char	*double_quote(char *str, t_data *lst_data);
 /*
 			get_next_line
@@ -66,5 +66,5 @@ bool	gest_readline_recover(char *str, t_data *lst_data);
 char	*recover_word(char	*str, unsigned int word_location, bool mod);
 int		recover_word_plus_return_position(char	*str,
 			unsigned int word_location);
-int	word_has_print_return_pos_finish(char *str, int *pos_start);
+int		word_has_print_return_pos_finish(char *str, int *pos_start);
 #endif

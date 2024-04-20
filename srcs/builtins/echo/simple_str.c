@@ -69,15 +69,10 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	return (str_return);
 }
 
-char	*simple_str(char *str, t_data *lst_data, int *val_ptr)
+char	*simple_str(char *str, t_data *lst_data)
 {
 	char	*str_return;
-	int		i;
 
-	i = 0;
-	str_return = gest_global_var(str + i, lst_data);
-	while ((str[i] > 32 && str[i] < 127))
-		i++;
-	*val_ptr += i;
+	str_return = gest_global_var(str, lst_data);
 	return (str_return);
 }
