@@ -90,7 +90,7 @@ char	*quote(char *str, t_data *lst_data, char sym, bool dquote)
 	if (!str_return)
 		return (NULL);
 	ft_strlcpy(str_return, str + (count[0] - count[1] - 1), count[1] + 3);
-	printf("str_return = %s\n", str_return);
+// printf("str_return = %s\n", str_return);
 	str_return = quote_suite(str_return, sym, dquote);
 	first_str = ft_strjoin(first_str, str_return);
 	if (dquote)

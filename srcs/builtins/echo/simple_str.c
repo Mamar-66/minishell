@@ -51,7 +51,7 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	i = -1;
 	c[1] = '\0';
 	str_return = ft_strdup("");
-	while (str[++i] && str[i] != ' ')
+	while (str[++i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
 	{
 		if (str[i] == '$' && str[i + 1] != '\n')
 		{

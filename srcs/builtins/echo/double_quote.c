@@ -72,6 +72,7 @@ char	*double_quote(char *str, t_data *lst_data)
 	char	*str_return;
 
 	str_return = gest_global_var(str, lst_data);
+// printf("STR RETURN = %s\n", str_return);
 	free(str);
 	return (str_return);
 }

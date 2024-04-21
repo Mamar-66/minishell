@@ -12,20 +12,35 @@
 
 #include "../../includes/minishell.h"
 
+static	void	first_word_plus_plus(char *str, int *j, int *i)
+{
+	int	f_i;
+	int	f_j;
+
+	f_i = *i;
+	f_j = *j;
+	while (str[f_i] > 32 && str[f_i] < 127 && str[f_i])
+	{
+		f_j++;
+		f_i++;
+	}
+	*i = f_i;
+	*j = f_j;
+}
+
 static	void	first_word_plus(char *str, int *start, int *cmp)
 {
-	char	symbol;
 	int		i;
 	int		j;
 
 	i = *start;
 	j = *cmp;
-	symbol = str[i];
-	if (symbol == '\'' || symbol == '"')
+	if (str[*start] == '\'' || str[*start] == '"')
 	{
-		while (str[++i])
+		while (str[i])
 		{
-			if (str[i] == symbol)
+			i++;
+			if (str[i] == str[*start])
 			{
 				j += 2;
 				i++;
@@ -35,8 +50,7 @@ static	void	first_word_plus(char *str, int *start, int *cmp)
 		}
 	}
 	else
-		while (str[i] > 32 && str[i] < 127 && str[i++])
-			j++;
+		first_word_plus_plus(str, &j, &i);
 	*start = i;
 	*cmp = j;
 }
