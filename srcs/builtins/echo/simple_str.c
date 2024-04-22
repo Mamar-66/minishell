@@ -53,7 +53,7 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	str_return = ft_strdup("");
 	while (str[++i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
 	{
-		if (str[i] == '$' && str[i + 1] != '\n')
+		if (str[i] == '$' && str[i + 1] != '\n' && str[i + 1] != ' '&& str[i + 1])
 		{
 			var = val_var(str + i + 1, &i, lst_data);
 			if (var)

@@ -19,7 +19,8 @@ static	void	first_word_plus_plus(char *str, int *j, int *i)
 
 	f_i = *i;
 	f_j = *j;
-	while (str[f_i] > 32 && str[f_i] < 127 && str[f_i])
+	while (str[f_i] > 32 && str[f_i] < 127 && str[f_i]
+			&& str[f_i] != '"' && str[f_i] != '\'')
 	{
 		f_j++;
 		f_i++;
