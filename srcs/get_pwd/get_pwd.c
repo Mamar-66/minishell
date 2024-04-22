@@ -33,5 +33,6 @@ char	*return_pwd(void)
 	i = 0;
 	while (i < 4)
 		return_pwd = ft_strjoin(return_pwd, tab_prompt[i++]);
+	free(tab_prompt[2]);
 	return (return_pwd);
 }

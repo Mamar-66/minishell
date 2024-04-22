@@ -20,7 +20,7 @@ static	void	first_word_plus_plus(char *str, int *j, int *i)
 	f_i = *i;
 	f_j = *j;
 	while (str[f_i] > 32 && str[f_i] < 127 && str[f_i]
-			&& str[f_i] != '"' && str[f_i] != '\'')
+		&& str[f_i] != '"' && str[f_i] != '\'')
 	{
 		f_j++;
 		f_i++;
@@ -137,6 +137,7 @@ int	recover_word_plus_return_position(char	*str,
 	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
 			|| str[i] == 13) && str[i])
 		i++;
+	free(return_word);
 	return (i);
 }
 
@@ -163,5 +164,6 @@ int	word_has_print_return_pos_finish(char *str, int *pos_start)
 		}
 	}
 	*pos_start = i;
+	free(opt);
 	return (++i);
 }

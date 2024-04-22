@@ -26,6 +26,7 @@ static bool	built_or_cmd(char *str, t_data *lst_data)
 		perror(text);
 		return (0);
 	}
+	free(text);
 	return (1);
 }
 
