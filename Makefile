@@ -28,6 +28,7 @@ SRC	=	main.c \
 		prompt/gest_readline_recover.c \
 \
 		utiles/recover_word.c \
+		utiles/utiles_for_echo.c \
 
 OBJ	=	$(SRC:.c=.o)
 

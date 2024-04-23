@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/17 23:13:32 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/23 12:33:01 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ char	*recover_word(char	*str, unsigned int word_location, bool mod);
 int		recover_word_plus_return_position(char	*str,
 			unsigned int word_location);
 int		word_has_print_return_pos_finish(char *str, int *pos_start);
+char	*first_word(char *str, int *start, bool mod);
 #endif
