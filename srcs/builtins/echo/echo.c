@@ -6,66 +6,15 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/23 13:14:58 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/24 11:12:08 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static	char	*gest_symbole_plus(char *str, char *buff, t_data *lst_data)
-{
-	char	*buff_return;
-
-	if (ft_strchr(buff, '\'') && ft_strchr(buff, '"'))
-	{
-		if (ft_strchr(buff, '\'') < ft_strchr(buff, '"'))
-			buff_return = quote(str, lst_data, '\'', false);
-		else
-			buff_return = quote(str, lst_data, '"', false);
-	}
-	else if (ft_strchr(buff, '\''))
-		buff_return = quote(str, lst_data, '\'', false);
-	else if (ft_strchr(buff, '"'))
-		buff_return = quote(str, lst_data, '"', true);
-	else if (buff)
-		buff_return = simple_str(str, lst_data);
-	return (buff_return);
-}
-
-/*
-	gest symbole " end ' end $
-*/
-static void	gest_symbole(char *str, int start, t_data *lst_data)
-{
-	char	*buff_str;
-	char	*str_return;
-	char	*buff;
-
-	str_return = ft_strdup("");
-	buff_str = NULL;
-	buff = recover_word(str + start, 1, false);
-	while (buff)
-	{
-		buff_str = gest_symbole_plus(str + start, buff, lst_data);
-		start += ft_strlen(buff);
-		str_return = ft_strjoin(str_return, buff_str);
-		if (!ft_strchr(buff, '"') && !ft_strchr(buff, '\'')
-			&& str[start] != '\'' && str[start] != '"')
-			str_return = ft_strjoin(str_return, " ");
-		while ((str[start] == 32 || str[start] == 9 || str[start] == 10
-				|| str[start] == 13) && str[start])
-			start++;
-		free(buff_str);
-		free(buff);
-		buff = recover_word(str + start, 1, false);
-	}
-	printf(">%s<", str_return);
-	free(buff);
-	free(str_return);
-}
-
 void	ft_echo(char *str, t_data *lst_data)
 {
+	(void)lst_data;
 	char	*opt;
 	int		i;
 
@@ -79,7 +28,7 @@ void	ft_echo(char *str, t_data *lst_data)
 	if (word_has_print_return_pos_finish(str, &i) != -1)
 	{
 		i = recover_word_plus_return_position(str, --i);
-		gest_symbole(str, i, lst_data);
+		printf("<%s>", str + i);
 	}
 	if (ft_strncmp(opt, "-n", 3) != 0)
 		printf("\n");

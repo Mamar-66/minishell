@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 15:33:17 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/24 11:14:32 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 	resul_prompt = get_result_prompt();
 	if (resul_prompt == NULL)
 		gest_ctrl_d(lst_data);
+	add_history(resul_prompt);
 	return (resul_prompt);
 }
 

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 14:01:26 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/23 16:17:16 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/24 10:33:35 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	return juste string of pwd
 */
-char	*return_str_pwd()
+char	*return_str_pwd(void)
 {
 	char	buff[255];
 
@@ -26,6 +26,7 @@ char	*return_str_pwd()
 /*
 	for display
 */
+
 char	*return_pwd(void)
 {
 	char	*tab_prompt[4];
