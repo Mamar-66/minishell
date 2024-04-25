@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/24 16:28:32 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/25 18:19:42 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static bool	built_or_cmd(char *str, t_data *lst_data)
 {
 	char	*cmd;
 
-	printf("str = %s\n", str);
+//printf("str = %s\n", str);
 	cmd = recover_word(str, 1, false);
 	if (ft_strncmp_ign_del(cmd, "echo", 5) == 0)
 		ft_echo(str, lst_data);

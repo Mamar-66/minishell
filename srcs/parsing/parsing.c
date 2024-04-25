@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/24 11:55:42 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/25 20:11:25 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,16 @@ static	char	*if_space_end_wedspace(char *str_return, char *str,
 	return (ft_str_return);
 }
 
-static	char	*gest_symbole_plus(char *str, char *buff, t_data *lst_data)
+static	char	*gest_symbole_plus(char *buff, t_data *lst_data)
 {
 	char	*buff_return;
 
-	if (ft_strchr(buff, '\'') && ft_strchr(buff, '"'))
-	{
-		if (ft_strchr(buff, '\'') < ft_strchr(buff, '"'))
-			buff_return = quote(str, lst_data, '\'', false);
-		else
-			buff_return = quote(str, lst_data, '"', false);
-	}
-	else if (ft_strchr(buff, '\''))
-		buff_return = quote(str, lst_data, '\'', false);
-	else if (ft_strchr(buff, '"'))
-		buff_return = quote(str, lst_data, '"', true);
+	if (buff[0] == '\'')
+		buff_return = quote(buff, lst_data);
+	else if (buff[0] == '"')
+		buff_return = quote(buff, lst_data);
 	else if (buff)
-		buff_return = simple_str(str, lst_data);
+		buff_return = simple_str(buff, lst_data);
 	return (buff_return);
 }
 
@@ -66,16 +59,18 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 	str_return = ft_strdup("");
 	buff_str = NULL;
 	buff = recover_word(str + start, 1, false);
-	while (buff)
+	while (buff && str)
 	{
-		buff_str = gest_symbole_plus(str + start, buff, lst_data);
+//printf("buff = %s\n", buff);
+//printf("str = %s\n", str + start);
+//printf("start = %d\n", start);
+		buff_str = gest_symbole_plus(buff, lst_data);
 		start += ft_strlen(buff);
 		str_return = ft_strjoin(str_return, buff_str);
 		str_return = if_space_end_wedspace(str_return, str, buff, &start);
 		free(buff_str);
 		free(buff);
 		buff = recover_word(str + start, 1, false);
-		printf("buff = %s\n", buff);
 	}
 	free(buff);
 	return (str_return);
