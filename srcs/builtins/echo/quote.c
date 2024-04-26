@@ -103,14 +103,14 @@ char	*quote(char *str, t_data *lst_data)
 	char	*return_str;
 
 	if (str[0] == '\'' && str[ft_strlen(str) - 1] == '\'')
-	{
-		write(1, "ok\n", 3);
 		return_str = ft_strldup(str + 1, 1);
-
-	}
 	else if (str[0] == '"' && str[ft_strlen(str) - 1] == '"') 
 		return_str = double_quote(ft_strldup(str + 1, 1), lst_data);
 	else
 		return_str = NULL;
+	if (!return_str && str[0] == '\'')
+		printf("error argument simple quote\n");
+	else if (!return_str && str[0] == '"')
+		printf("error argument double quote\n");
 	return (return_str);
 }

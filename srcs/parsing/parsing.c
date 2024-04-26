@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/25 20:11:25 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/26 12:17:14 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 //printf("str = %s\n", str + start);
 //printf("start = %d\n", start);
 		buff_str = gest_symbole_plus(buff, lst_data);
+		if (!buff_str)
+		{
+			free(buff_str);
+			free(buff);
+			return (NULL);
+		}
 		start += ft_strlen(buff);
 		str_return = ft_strjoin(str_return, buff_str);
 		str_return = if_space_end_wedspace(str_return, str, buff, &start);
