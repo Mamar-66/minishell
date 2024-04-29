@@ -27,6 +27,7 @@ SRC	=	main.c \
 		get_pwd/get_pwd.c \
 \
 		parsing/parsing.c \
+		parsing/redirect.c \
 \
 		prompt/get_prompt.c \
 		prompt/gest_readline_recover.c \

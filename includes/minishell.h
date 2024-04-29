@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/26 14:15:19 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/29 16:31:24 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
 # include <unistd.h>
@@ -26,6 +27,7 @@
 typedef struct s_data
 {
 	int	status;
+	int	fd_saved_std_out;
 }	t_data;
 /*
 	add_signal/add_signal.c
@@ -41,8 +43,8 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 /*
 	echo
 */
-void	ft_echo(char *str, t_data *lst_data);
-char	*simple_str(char *str, t_data *lst_data);
+void	ft_echo(char *str);
+char	*simple_str(char *buff, char *str, int *start, t_data *lst_data);
 char	*quote(char *str, t_data *lst_data);
 char	*double_quote(char *str, t_data *lst_data);
 
@@ -60,6 +62,9 @@ char	*return_pwd(void);
 			parsing
 */
 char	*parsing(char *str, t_data *lst_data);
+// redirect
+void	redirect(char *buff, char *str, int *start, t_data *lst_data);
+
 /*
 			prompt
 */

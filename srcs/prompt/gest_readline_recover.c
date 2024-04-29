@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/26 14:26:06 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/29 16:20:41 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@
 static bool	built_or_cmd(char *str, t_data *lst_data)
 {
 	char	*cmd;
+	(void)lst_data;
 
 //printf("str = %s\n", str);
 	cmd = recover_word(str, 1, false);
 	if (ft_strncmp_ign_del(cmd, "echo", 5) == 0)
-		ft_echo(str, lst_data);
+		ft_echo(str);
 	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0)
 		ft_pwd(str + ft_strlen(cmd));
 	else
@@ -45,6 +46,7 @@ bool	gest_readline_recover(char *str, t_data *lst_data)
 	if (*str)
 	{
 		built_or_cmd(str, lst_data);
+		dup2(lst_data->fd_saved_std_out, STDOUT_FILENO);
 	}
 	return (false);
 }

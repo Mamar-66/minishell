@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/24 11:14:32 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/29 14:36:38 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	gest_ctrl_d(t_data *lst_data)
 {
 	printf("exit\n");
 	lst_data->status = 0;
-	exit (1);
+	exit (0);
 }
 
 char	*add_signal_plus_return_result_prompt(t_data *lst_data)

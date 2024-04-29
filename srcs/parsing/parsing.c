@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/26 12:17:14 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/29 16:24:48 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	char	*if_space_end_wedspace(char *str_return, char *str,
 	return (ft_str_return);
 }
 
-static	char	*gest_symbole_plus(char *buff, t_data *lst_data)
+static	char	*gest_symbole_plus(char *buff, char *str, int *start, t_data *lst_data)
 {
 	char	*buff_return;
 
@@ -43,7 +43,7 @@ static	char	*gest_symbole_plus(char *buff, t_data *lst_data)
 	else if (buff[0] == '"')
 		buff_return = quote(buff, lst_data);
 	else if (buff)
-		buff_return = simple_str(buff, lst_data);
+		buff_return = simple_str(buff, str, start, lst_data);
 	return (buff_return);
 }
 
@@ -61,10 +61,7 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 	buff = recover_word(str + start, 1, false);
 	while (buff && str)
 	{
-//printf("buff = %s\n", buff);
-//printf("str = %s\n", str + start);
-//printf("start = %d\n", start);
-		buff_str = gest_symbole_plus(buff, lst_data);
+		buff_str = gest_symbole_plus(buff, str, &start,lst_data);
 		if (!buff_str)
 		{
 			free(buff_str);
