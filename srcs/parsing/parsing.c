@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/29 16:24:48 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/30 14:56:45 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 			free(buff);
 			return (NULL);
 		}
+	// printf("parssing = <%s>\n", str + start);
+	// printf("parssing = <%s>\n", buff_str);
 		start += ft_strlen(buff);
 		str_return = ft_strjoin(str_return, buff_str);
 		str_return = if_space_end_wedspace(str_return, str, buff, &start);

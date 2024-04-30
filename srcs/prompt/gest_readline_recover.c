@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/29 16:20:41 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:12:57 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	built_or_cmd(char *str, t_data *lst_data)
 	if (ft_strncmp_ign_del(cmd, "echo", 5) == 0)
 		ft_echo(str);
 	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0)
-		ft_pwd(str + ft_strlen(cmd));
+		ft_pwd();
 	else
 	{
 		printf(": command not found\n");
@@ -43,7 +43,7 @@ static bool	built_or_cmd(char *str, t_data *lst_data)
 
 bool	gest_readline_recover(char *str, t_data *lst_data)
 {
-	if (*str)
+	if (str)
 	{
 		built_or_cmd(str, lst_data);
 		dup2(lst_data->fd_saved_std_out, STDOUT_FILENO);

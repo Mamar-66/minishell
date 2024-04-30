@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/29 16:31:24 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/30 12:22:17 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*simple_str(char *buff, char *str, int *start, t_data *lst_data);
 char	*quote(char *str, t_data *lst_data);
 char	*double_quote(char *str, t_data *lst_data);
 
-void	ft_pwd(char *str);
+void	ft_pwd();
 /*
 			get_next_line
 */
@@ -63,7 +63,7 @@ char	*return_pwd(void);
 */
 char	*parsing(char *str, t_data *lst_data);
 // redirect
-void	redirect(char *buff, char *str, int *start, t_data *lst_data);
+char	*redirect(char *buff, char *str, int *start, t_data *lst_data);
 
 /*
 			prompt

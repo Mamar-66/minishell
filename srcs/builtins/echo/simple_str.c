@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/29 17:34:59 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:37:46 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 			str_return = ft_strjoin(str_return, c);
 		}
 	}
+	// free(str);
 	return (str_return);
 }
 
@@ -73,7 +74,12 @@ char	*simple_str(char *buff, char *str, int *start, t_data *lst_data)
 {
 	char	*str_return;
 
-	redirect(buff, str, start, lst_data);
-	str_return = gest_global_var(buff, lst_data);
+	str_return = redirect(buff, str, start, lst_data);
+	if (!str_return)
+	{
+		printf("bash: syntax error file name not defined\n");
+		return (NULL);
+	}
+	str_return = gest_global_var(str_return, lst_data);
 	return (str_return);
 }
