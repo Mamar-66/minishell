@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/30 12:22:17 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/01 16:27:31 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*return_pwd(void);
 */
 char	*parsing(char *str, t_data *lst_data);
 // redirect
-char	*redirect(char *buff, char *str, int *start, t_data *lst_data);
+char	*redirect(char *buff, char *str, int *start);
 
 /*
 			prompt

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/30 14:56:45 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/01 17:29:51 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static	char	*if_space_end_wedspace(char *str_return, char *str,
 	char *buff, int *start)
 {
-	(void)buff;
 	int		i;
 	char	*ft_str_return;
 
@@ -23,7 +22,7 @@ static	char	*if_space_end_wedspace(char *str_return, char *str,
 		while ((str[i] == 32 || str[i] == 9 || str[i] == 10
 				|| str[i] == 13) && str[i])
 				i++;
-		if (i != *start)
+		if (i != *start && buff[0] != '>')
 			ft_str_return = ft_strjoin(str_return, " ");
 		else
 		{
@@ -68,8 +67,6 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 			free(buff);
 			return (NULL);
 		}
-	// printf("parssing = <%s>\n", str + start);
-	// printf("parssing = <%s>\n", buff_str);
 		start += ft_strlen(buff);
 		str_return = ft_strjoin(str_return, buff_str);
 		str_return = if_space_end_wedspace(str_return, str, buff, &start);
