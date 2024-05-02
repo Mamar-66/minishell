@@ -6,55 +6,77 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/01 17:29:41 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:00:46 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// static	void	gest_guillemets(bool *guillemets)
-// {
-
-// }
-
-// static	void	double_redirect_right(char *str, int *start, bool *redirect)
-// {
-// 	char	*file_name;
-// 	int		fd;
-// 	int 	i;
-
-// 	i = *start;
-// 	if (str[i] == '>' && str[i + 1] == '\0')
-// 		i++;
-// 	else
-// 	{
-// 		while (str[i] != '>' && str[i])
-// 			i++;
-// 		i += 2;
-// 	}
-// 	file_name = recover_word(str + i, 1, false);
-// 	fd = open(file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
-// 	while (&str[i] != ft_strchr(str + *start, *file_name))
-// 		i++;
-// 	i += ft_strlen(file_name);
-// 	*start = i - 1;
-// 	*redirect = true;
-// 	dup2(fd, STDOUT_FILENO);
-// 	close(fd);
-// }
-
-static	char	*redirect_right(char *str, int *start)
+static	char	*double_redirect_right_suite(char *str, int *start)
 {
-	char	*return_str;
+	char	*str_return;
 	char	c[2];
-	char	*file_name;
-	int		fd;
-	int 	i;
+	int		i;
 
 	i = *start;
+	str_return = "";
 	c[0] = 127;
 	c[1] = '\0';
-	return_str = ft_strdup("");
+	while (str[i])
+	{
+		if (str[i] == '>')
+		{
+			str[i++] = 127;
+			i++;
+			break ;
+		}
+		c[0] = str[i];
+		str_return = ft_strjoin(str_return, c);
+		i++;
+	}
+	*start = i;
+	return (str_return);
+}
+
+static	char	*double_redirect_right(char *str, int *start)
+{
+	char	*str_return;
+	char	*file_name;
+	int		i_fd[2];
+
+	i_fd[0] = *start;
+	str_return = double_redirect_right_suite(str, &i_fd[0]);
+	file_name = recover_word(str + i_fd[0], 1, false);
+	if (!file_name)
+	{
+		printf("bash: syntax error file name not defined\n");
+		return (NULL);
+	}
+	i_fd[1] = open(file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
+	if (i_fd[1] == -1)
+		perror("errro open fd\n");
+	while (str[i_fd[0]] && str[i_fd[0]] == ' ')
+		i_fd[0]++;
+	while (str[i_fd[0]] && str[i_fd[0]] > 32 && str[i_fd[0]] < 127)
+		i_fd[0]++;
+	*start = i_fd[0];
+	if (!dup2(i_fd[1], STDOUT_FILENO))
+		perror("parssing\n");
+	free(file_name);
+	close(i_fd[1]);
+	return (str_return);
+}
+
+static	char	*redirect_right_suite(char *str, int *start)
+{
+	char	*str_return;
+	char	c[2];
+	int		i;
+
+	i = *start;
+	str_return = "";
+	c[0] = 127;
+	c[1] = '\0';
 	while (str[i])
 	{
 		if (str[i] == '>')
@@ -63,38 +85,65 @@ static	char	*redirect_right(char *str, int *start)
 			break ;
 		}
 		c[0] = str[i];
-		return_str = ft_strjoin(return_str, c);
+		str_return = ft_strjoin(str_return, c);
 		i++;
 	}
-	file_name = recover_word(str + i, 1, false);
-	if (!file_name)
-		return (NULL);
-	fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd == -1)
-		perror("errro open fd\n");
-	while (str[i] && str[i] == ' ')
-		i++;
-	while (str[i] && str[i] > 32 && str[i] < 127)
-		i++;
 	*start = i;
-	if (!dup2(fd, STDOUT_FILENO))
+	return (str_return);
+}
+
+static	char	*redirect_right(char *str, int *start)
+{
+	char	*str_return;
+	char	*file_name;
+	int		i_fd[2];
+
+	i_fd[0] = *start;
+	str_return = redirect_right_suite(str, &i_fd[0]);
+	file_name = recover_word(str + i_fd[0], 1, false);
+	if (!file_name)
+	{
+		printf("bash: syntax error file name not defined\n");
+		return (NULL);
+	}
+	i_fd[1] = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (i_fd[1] == -1)
+		perror("errro open fd\n");
+	while (str[i_fd[0]] && str[i_fd[0]] == ' ')
+		i_fd[0]++;
+	while (str[i_fd[0]] && str[i_fd[0]] > 32 && str[i_fd[0]] < 127)
+		i_fd[0]++;
+	*start = i_fd[0];
+	if (!dup2(i_fd[1], STDOUT_FILENO))
 		perror("parssing\n");
-	close(fd);
-	return (return_str);
+	free(file_name);
+	close(i_fd[1]);
+	return (str_return);
 }
 
 char	*redirect(char *buff, char *str, int *start)
 {
 	char	*str_return;
+	char	*ptr;
 
-	if (ft_strchr(buff, '>'))
+	ptr = ft_strchr(buff, '>');
+	if (ptr && *ptr == '>' && *(ptr + 1) == '>' && *(ptr + 2) == '>')
+	{
+		printf("bash: syntax token `>'\n");
+		return (NULL);
+	}
+	if (ptr && *ptr == '>' && *(ptr + 1) != '>')
 	{
 		str_return = redirect_right(str, start);
+		*start -= ft_strlen(buff);
+		return (str_return);
+	}
+	else if (ptr && *ptr == '>' && *(ptr + 1) == '>' && *(ptr + 1) == '>')
+	{
+		str_return = double_redirect_right(str, start);
 		*start -= ft_strlen(buff);
 		return (str_return);
 	}
 	else
 		return (buff);
 }
-
-// lst_argv->fd_output = open(lst_argv->file_output, O_CREAT | O_RDWR | O_APPEND, 0644);

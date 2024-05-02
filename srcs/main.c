@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/30 15:12:37 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/02 12:13:58 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data lst_data;
-	char	*readlin_recover;
+	t_data		lst_data;
+	char		*readlin_recover;
 
 	lst_data.status = -1;
 	lst_data.fd_saved_std_out = dup(STDOUT_FILENO);

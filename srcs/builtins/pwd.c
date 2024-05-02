@@ -6,13 +6,13 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:37 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/30 10:49:56 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/02 12:14:16 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_pwd()
+void	ft_pwd(void)
 {
 	char	*affiche_pwd;
 

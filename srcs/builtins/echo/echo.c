@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/30 15:37:56 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/02 13:30:00 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_echo(char *str)
 	opt = recover_word(str, 2, false);
 	if (!opt)
 	{
+		free(opt);
 		printf("\n");
 		return ;
 	}

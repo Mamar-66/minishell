@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/01 17:29:51 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/02 13:54:31 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@ static	char	*if_space_end_wedspace(char *str_return, char *str,
 	char	*ft_str_return;
 
 	i = *start;
-		while ((str[i] == 32 || str[i] == 9 || str[i] == 10
-				|| str[i] == 13) && str[i])
-				i++;
-		if (i != *start && buff[0] != '>')
-			ft_str_return = ft_strjoin(str_return, " ");
-		else
-		{
-			ft_str_return = ft_strdup(str_return);
-			free(str_return);
-		}
+	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
+			|| str[i] == 13) && str[i])
+		i++;
+	if (i != *start && buff[0] != '>')
+		ft_str_return = ft_strjoin(str_return, " ");
+	else
+	{
+		ft_str_return = ft_strdup(str_return);
+		free(str_return);
+	}
 	*start = i;
 	return (ft_str_return);
 }
 
-static	char	*gest_symbole_plus(char *buff, char *str, int *start, t_data *lst_data)
+static	char	*gest_symbole_plus(char *buff, char *str
+	, int *start, t_data *lst_data)
 {
 	char	*buff_return;
 
@@ -56,15 +57,15 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 	char	*buff;
 
 	str_return = ft_strdup("");
-	buff_str = NULL;
 	buff = recover_word(str + start, 1, false);
 	while (buff && str)
 	{
-		buff_str = gest_symbole_plus(buff, str, &start,lst_data);
+		buff_str = gest_symbole_plus(buff, str, &start, lst_data);
 		if (!buff_str)
 		{
 			free(buff_str);
 			free(buff);
+			free(str_return);
 			return (NULL);
 		}
 		start += ft_strlen(buff);
