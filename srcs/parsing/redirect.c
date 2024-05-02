@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/02 14:00:46 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/02 15:10:34 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@ static	char	*double_redirect_right_suite(char *str, int *start)
 	int		i;
 
 	i = *start;
-	str_return = "";
+	str_return = NULL;
 	c[0] = 127;
 	c[1] = '\0';
 	while (str[i])
 	{
-		if (str[i] == '>')
-		{
-			str[i++] = 127;
-			i++;
+		if (str[i++] == '>')
 			break ;
-		}
-		c[0] = str[i];
+		c[0] = str[i - 1];
+		if (!str_return)
+			str_return = ft_strdup("");
 		str_return = ft_strjoin(str_return, c);
-		i++;
 	}
-	*start = i;
+	*start = i + 1;
+	if (!str_return)
+		return ("");
 	return (str_return);
 }
 
@@ -74,21 +73,21 @@ static	char	*redirect_right_suite(char *str, int *start)
 	int		i;
 
 	i = *start;
-	str_return = "";
+	str_return = NULL;
 	c[0] = 127;
 	c[1] = '\0';
 	while (str[i])
 	{
-		if (str[i] == '>')
-		{
-			str[i++] = 127;
+		if (str[i++] == '>')
 			break ;
-		}
-		c[0] = str[i];
+		c[0] = str[i - 1];
+		if (!str_return)
+			str_return = ft_strdup("");
 		str_return = ft_strjoin(str_return, c);
-		i++;
 	}
 	*start = i;
+	if (!str_return)
+		return ("");
 	return (str_return);
 }
 

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/02 13:54:31 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:35:21 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,15 @@ static	char	*gest_symbole_plus(char *buff, char *str
 	char	*buff_return;
 
 	if (buff[0] == '\'')
+	{
+		printf("simple = %s\n", buff);
 		buff_return = quote(buff, lst_data);
+	}
 	else if (buff[0] == '"')
+	{
+		printf("double = %s\n", buff);
 		buff_return = quote(buff, lst_data);
+	}
 	else if (buff)
 		buff_return = simple_str(buff, str, start, lst_data);
 	return (buff_return);
@@ -58,7 +64,7 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 
 	str_return = ft_strdup("");
 	buff = recover_word(str + start, 1, false);
-	while (buff && str)
+	while (buff)
 	{
 		buff_str = gest_symbole_plus(buff, str, &start, lst_data);
 		if (!buff_str)
@@ -84,6 +90,7 @@ char	*parsing(char *str, t_data *lst_data)
 	char	*str_return;
 
 	str_return = gest_symbole(str, 0, lst_data);
+	// printf("str return = %s\n", str_return);
 	free(str);
 	return (str_return);
 }
