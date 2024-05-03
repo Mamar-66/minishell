@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/02 14:43:35 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:01:54 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*simple_str(char *buff, char *str, int *start, t_data *lst_data)
 {
 	char	*str_return;
 
-	str_return = redirect(buff, str, start);
+	str_return = redirect(buff, str, start, lst_data);
 	if (!str_return)
 	{
 		free(str_return);

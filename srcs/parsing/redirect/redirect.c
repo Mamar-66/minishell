@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/03 12:02:00 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/03 17:09:52 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ static	char	*double_redirect_right_suite(char *str, int *start)
 	return (str_return);
 }
 
-static	char	*double_redirect_right(char *str, int *start)
+static	char	*double_redirect_right(char *str, int *start, t_data *lst_data)
 {
+	(void)lst_data;
 	char	*str_return;
 	char	*file_name;
 	int		i_fd[2];
@@ -91,7 +92,7 @@ static	char	*redirect_right_suite(char *str, int *start)
 	return (str_return);
 }
 
-static	char	*redirect_right(char *str, int *start)
+static	char	*redirect_right(char *str, int *start, t_data *lst_data)
 {
 	char	*str_return;
 	char	*file_name;
@@ -99,8 +100,8 @@ static	char	*redirect_right(char *str, int *start)
 
 	i_fd[0] = *start;
 	str_return = redirect_right_suite(str, &i_fd[0]);
-	file_name = recover_word(str + i_fd[0], 1, false);
-	if (!verif_name_file(file_name))
+	file_name = verif_name_file(str + i_fd[0], lst_data);
+	if (!file_name)
 		return (NULL);
 	i_fd[1] = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (i_fd[1] == -1)
@@ -117,7 +118,7 @@ static	char	*redirect_right(char *str, int *start)
 	return (str_return);
 }
 
-char	*redirect(char *buff, char *str, int *start)
+char	*redirect(char *buff, char *str, int *start, t_data *lst_data)
 {
 	char	*str_return;
 	char	*ptr;
@@ -130,13 +131,13 @@ char	*redirect(char *buff, char *str, int *start)
 	}
 	if (ptr && *ptr == '>' && *(ptr + 1) != '>')
 	{
-		str_return = redirect_right(str, start);
+		str_return = redirect_right(str, start, lst_data);
 		*start -= ft_strlen(buff);
 		return (str_return);
 	}
 	else if (ptr && *ptr == '>' && *(ptr + 1) == '>' && *(ptr + 1) == '>')
 	{
-		str_return = double_redirect_right(str, start);
+		str_return = double_redirect_right(str, start, lst_data);
 		*start -= ft_strlen(buff);
 		return (str_return);
 	}
