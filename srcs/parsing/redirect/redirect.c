@@ -6,11 +6,11 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/02 15:10:34 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/03 12:02:00 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 static	char	*double_redirect_right_suite(char *str, int *start)
 {
@@ -100,11 +100,8 @@ static	char	*redirect_right(char *str, int *start)
 	i_fd[0] = *start;
 	str_return = redirect_right_suite(str, &i_fd[0]);
 	file_name = recover_word(str + i_fd[0], 1, false);
-	if (!file_name)
-	{
-		printf("bash: syntax error file name not defined\n");
+	if (!verif_name_file(file_name))
 		return (NULL);
-	}
 	i_fd[1] = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (i_fd[1] == -1)
 		perror("errro open fd\n");
