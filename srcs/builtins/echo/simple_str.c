@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/03 17:01:54 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/07 16:17:01 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ static	char	*val_var(char *str, int *ptr, t_data *lst_data)
 static char	*gest_global_var(char *str, t_data *lst_data)
 {
 	char	*str_return;
-	char	c[1];
+	char	c[2];
 	char	*var;
 	int		i;
 
 	i = -1;
+	c[0] = 127;
 	c[1] = '\0';
 	str_return = ft_strdup("");
 	while (str[++i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
@@ -72,13 +73,15 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 char	*simple_str(char *buff, char *str, int *start, t_data *lst_data)
 {
 	char	*str_return;
+	char	*buff_intern;
 
-	str_return = redirect(buff, str, start, lst_data);
-	if (!str_return)
+	buff_intern = redirect(buff, str, start, lst_data);
+	if (!buff_intern)
 	{
-		free(str_return);
+		free(buff_intern);
 		return (NULL);
 	}
-	str_return = gest_global_var(str_return, lst_data);
+	str_return = gest_global_var(buff_intern, lst_data);
+	free(buff_intern);
 	return (str_return);
 }

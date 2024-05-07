@@ -21,9 +21,6 @@ SRC	=	main.c \
 		\
 		builtins/pwd.c \
 \
-		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c \
-\
 		get_pwd/get_pwd.c \
 \
 		parsing/parsing.c \
@@ -58,7 +55,6 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/get_pwd
 			mkdir $(OBJ_PATH)/parsing
 			mkdir $(OBJ_PATH)/parsing/redirect
-			mkdir $(OBJ_PATH)/get_next_line
 			mkdir $(OBJ_PATH)/prompt
 			mkdir $(OBJ_PATH)/utiles
 

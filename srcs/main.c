@@ -6,11 +6,14 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/02 12:13:58 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/07 10:21:52 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// valgrind --leak-check=full --show-leak-kinds=all
+//  --suppressions=val.supp -s  ./minishell
 
 int	main(int argc, char **argv, char **env)
 {

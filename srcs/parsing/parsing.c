@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/02 14:35:21 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/07 10:21:16 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,11 @@ char	*parsing(char *str, t_data *lst_data)
 	char	*str_return;
 
 	str_return = gest_symbole(str, 0, lst_data);
-	// printf("str return = %s\n", str_return);
+	if (str_return && ft_strncmp(str_return, "", 1) == 0)
+	{
+		free(str_return);
+		str_return = NULL;
+	}
 	free(str);
 	return (str_return);
 }
