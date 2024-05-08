@@ -32,6 +32,7 @@ SRC	=	main.c \
 \
 		utiles/recover_word.c \
 		utiles/utiles_for_echo.c \
+		utiles/my_fonction_free/free_tab.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -57,6 +58,7 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/parsing/redirect
 			mkdir $(OBJ_PATH)/prompt
 			mkdir $(OBJ_PATH)/utiles
+			mkdir $(OBJ_PATH)/utiles/my_fonction_free
 
 libft:
 	@echo "\033[0;33m\nCOMPILING LIBFT $(LIBFT_PATH)\n"

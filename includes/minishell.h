@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/03 17:05:44 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/08 13:41:27 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 {
 	int	status;
 	int	fd_saved_std_out;
+	int	fd_saved_std_in;
 }	t_data;
 /*
 	add_signal/add_signal.c
@@ -81,4 +82,6 @@ int		recover_word_plus_return_position(char	*str,
 			unsigned int word_location);
 int		word_has_print_return_pos_finish(char *str, int *pos_start);
 char	*first_word(char *str, int *start, bool mod);
+// my_fonction_free
+void	my_free_tab(char **tab);
 #endif
