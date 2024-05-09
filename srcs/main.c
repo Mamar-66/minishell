@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/09 12:25:18 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/09 20:47:31 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	ex_child(char *str_traitement, t_data *lst_data, int *pipe_fd)
  	return (true);
 }
 
-bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
+static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
 {
 	(void)lst_data;
 
@@ -54,7 +54,6 @@ static	bool	ft_ex(char *str_traitement, t_data *lst_data)
 	(void)lst_data;
  	pid_t	child_pid;
  	int		pipe_fd[2];
-	char	*tmp;
 
 	// printf("manager\n");
 	// printf("str = %s\n", str_traitement);
@@ -69,10 +68,7 @@ static	bool	ft_ex(char *str_traitement, t_data *lst_data)
  	else if (child_pid == 0)
  		ex_child(str_traitement, lst_data, pipe_fd);
  	else
- 		ex_father(lst_data, pipe_fd, child_pid);
-	tmp = get_next_line(STDIN_FILENO);
-	printf("recupe = %s\n", tmp);
-	free(tmp);
+		ex_father(lst_data, pipe_fd, child_pid);
 	return (true);
 }
 
@@ -81,6 +77,7 @@ static	bool	ft_manager(t_data *lst_data)
 	char	*readlin_recover;
 	char	**tab_arm_pipe;
 	int		i;
+	char	*tmp;
 
 	// while (1)
 	// {
@@ -96,6 +93,9 @@ static	bool	ft_manager(t_data *lst_data)
 		my_free_tab(tab_arm_pipe);
 		free(readlin_recover);
 	// }
+	tmp = get_next_line(STDIN_FILENO);
+	printf("recupe = %s\n", tmp);
+	free(tmp);
 	return (true);
 }
 
