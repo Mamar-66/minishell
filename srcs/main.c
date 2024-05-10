@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/09 20:47:31 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/10 18:22:05 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ static bool	ex_child(char *str_traitement, t_data *lst_data, int *pipe_fd)
  	}
  	close(pipe_fd[1]);
 	gest_readline_recover(str_traitement, lst_data);
-	// printf("child\n");
-	// printf("strr = %s\n", str_traitement);
- 	return (true);
+	exit (EXIT_SUCCESS);
 }
 
 static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
@@ -44,8 +42,7 @@ static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
  		return (false);
  	}
  	close(pipe_fd[0]);
- 	waitpid(child_pid, NULL, 0);
-	// printf("father\n");
+	waitpid(child_pid, NULL, 0);
 	return (true);
 }
 
@@ -55,12 +52,10 @@ static	bool	ft_ex(char *str_traitement, t_data *lst_data)
  	pid_t	child_pid;
  	int		pipe_fd[2];
 
-	// printf("manager\n");
-	// printf("str = %s\n", str_traitement);
 	if (pipe(pipe_fd) == -1)
 		perror("error pipe ");
  	child_pid = fork();
- 	if (child_pid == -1)
+ 	if (child_pid < 0)
  	{
  		perror("error child_pid ");
  		return (false);
@@ -76,26 +71,25 @@ static	bool	ft_manager(t_data *lst_data)
 {
 	char	*readlin_recover;
 	char	**tab_arm_pipe;
-	int		i;
 	char	*tmp;
+	int		i;
 
-	// while (1)
-	// {
+	while (true)
+	{
 		i = -1;
 		readlin_recover = add_signal_plus_return_result_prompt(lst_data);
 		tab_arm_pipe = ft_split(readlin_recover, '|');
 		while (tab_arm_pipe[++i])
 		{
 			tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
-			if (tab_arm_pipe[i])
-				ft_ex(tab_arm_pipe[i], lst_data);
+			ft_ex(tab_arm_pipe[i], lst_data);
 		}
+		tmp = get_next_line(STDIN_FILENO);
+		printf("recupee = %s\n", tmp);
+		free(tmp);
 		my_free_tab(tab_arm_pipe);
 		free(readlin_recover);
-	// }
-	tmp = get_next_line(STDIN_FILENO);
-	printf("recupe = %s\n", tmp);
-	free(tmp);
+	 }
 	return (true);
 }
 

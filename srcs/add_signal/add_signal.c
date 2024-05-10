@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/29 14:36:38 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/10 18:21:18 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ static void	gest_signal(int numsignal)
 		{
 			printf("sigquit\n");
 		}
+		else if (numsignal == SIGCHLD)
+		{
+			printf("fils\n");
+		}
 	}
 }
 
@@ -40,17 +44,20 @@ static void	gest_ctrl_d(t_data *lst_data)
 
 char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 {
-	struct sigaction	action;
+	(void)lst_data;
+	struct sigaction action;
 	char				*resul_prompt;
 
 	ft_bzero(&action, sizeof(action));
 	action.sa_handler = &gest_signal;
+	if (sigaction(SIGCHLD, &action, NULL) == -1)
+		perror("SIGCHLD");
 	if (sigaction(SIGINT, &action, NULL) == -1)
 		perror("SIGINT");
 	if (sigaction(SIGQUIT, &action, NULL) == -1)
 		perror("SIGQUIT");
 	resul_prompt = get_result_prompt();
-	if (resul_prompt == NULL)
+	 if (resul_prompt == NULL)
 		gest_ctrl_d(lst_data);
 	add_history(resul_prompt);
 	return (resul_prompt);
