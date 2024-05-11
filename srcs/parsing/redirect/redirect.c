@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/07 16:26:01 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/11 11:13:09 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	char	*double_redirect_right(char *str, int *start, t_data *lst_data)
 	file_name = verif_name_file(str + ++i_fd[0], lst_data);
 	if (!file_name)
 	{
-		free(str_return);	
+		free(str_return);
 		return (NULL);
 	}
 	i_fd[1] = open(file_name, O_CREAT | O_RDWR | O_APPEND, 0644);
@@ -102,7 +102,7 @@ static	char	*redirect_right(char *str, int *start, t_data *lst_data)
 	file_name = verif_name_file(str + i_fd[0], lst_data);
 	if (!file_name)
 	{
-		free(str_return);	
+		free(str_return);
 		return (NULL);
 	}
 	i_fd[1] = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);

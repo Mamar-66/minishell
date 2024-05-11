@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/08 13:41:27 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/11 13:05:59 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+typedef struct s_lst_pipex
+{
+	char	**tab_path;
+}	t_lst_pipex;
+
+
 typedef struct s_data
 {
-	int	status;
-	int	fd_saved_std_out;
-	int	fd_saved_std_in;
+	char		**env;
+	int			status;
+	int			fd_saved_std_out;
+	int			fd_saved_std_in;
+	t_lst_pipex lst_pipex;
 }	t_data;
 /*
 	add_signal/add_signal.c
@@ -42,13 +50,15 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 	builtins
 */
 /*
-	echo
+			ECHO
 */
 void	ft_echo(char *str);
 char	*simple_str(char *buff, char *str, int *start, t_data *lst_data);
 char	*quote(char *str, t_data *lst_data);
 char	*double_quote(char *str, t_data *lst_data);
-
+/*
+			PWD
+*/
 void	ft_pwd(void);
 /*
 			get_next_line
@@ -84,4 +94,6 @@ int		word_has_print_return_pos_finish(char *str, int *pos_start);
 char	*first_word(char *str, int *start, bool mod);
 // my_fonction_free
 void	my_free_tab(char **tab);
+
+bool	ft_pipex(char *cmd, t_data *lst_data);
 #endif

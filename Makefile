@@ -27,6 +27,9 @@ SRC	=	main.c \
 		parsing/redirect/redirect.c \
 		parsing/redirect/verif_name_file.c \
 \
+		pipex/ft_pipex.c \
+		pipex/return_path.c \
+\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
 \
@@ -58,6 +61,7 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/builtins/echo
 			mkdir $(OBJ_PATH)/get_pwd
 			mkdir $(OBJ_PATH)/get_next_line
+			mkdir $(OBJ_PATH)/pipex
 			mkdir $(OBJ_PATH)/parsing
 			mkdir $(OBJ_PATH)/parsing/redirect
 			mkdir $(OBJ_PATH)/prompt
