@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/11 13:16:10 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/13 13:03:09 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	bool	ft_manager(t_data *lst_data)
 {
 	char	*readlin_recover;
 	char	**tab_arm_pipe;
-	char	buff[255];
+	char	buff[25555];
 	int		i;
 
 	while (true)
@@ -83,10 +83,10 @@ static	bool	ft_manager(t_data *lst_data)
 			tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
 			ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe);
 		}
-		ft_bzero(buff, 255);
-		read(STDIN_FILENO, buff, 255);
+		ft_bzero(buff, 25555);
+		read(STDIN_FILENO, buff, 25555);
 		printf("%s", buff);
-		ft_bzero(buff, 255);
+		ft_bzero(buff, 25555);
 		my_free_tab(tab_arm_pipe);
 	}
 	return (true);
