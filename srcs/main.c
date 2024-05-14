@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/13 13:03:09 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/14 14:02:39 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,60 +15,22 @@
 // valgrind --leak-check=full --show-leak-kinds=all
 //  --suppressions=val.supp -s  ./minishell
 
-static bool	ex_child(char *str_traitement, t_data *lst_data,
-	int *pipe_fd, char **tab_free)
+static void	affiche_in_terminal(t_data *lst_data)
 {
-	close(pipe_fd[0]);
-	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-	{
-		perror("error <dup2(pipe_fd[1], STDOUT_FILENO)> ");
-		return (false);
-	}
-	close(pipe_fd[1]);
-	gest_readline_recover(str_traitement, lst_data);
-	my_free_tab(tab_free);
-	exit (true);
-}
+	char	buff[25555];
 
-static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
-{
-	(void)lst_data;
-	close(pipe_fd[1]);
-	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+	ft_bzero(buff, 25555);
+	if(lst_data->mod_lectur_for_read_final)
 	{
-		perror("(dup2(pipe_fd[0], STDIN_FILENO)");
-		return (false);
+		read(STDIN_FILENO, buff, 25555);
+		printf("%s", buff);			
 	}
-	close(pipe_fd[0]);
-	waitpid(child_pid, NULL, 0);
-	return (true);
-}
-
-static	bool	ft_ex(char *str_traitement, t_data *lst_data, char **tab_free)
-{
-	pid_t	child_pid;
-	int		pipe_fd[2];
-
-	if (pipe(pipe_fd) == -1)
-		perror("error pipe ");
-	child_pid = fork();
-	if (child_pid < 0)
-	{
-		perror("error child_pid ");
-		return (false);
-	}
-	else if (child_pid == 0)
-		ex_child(str_traitement, lst_data, pipe_fd, tab_free);
-	else
-		ex_father(lst_data, pipe_fd, child_pid);
-	return (true);
 }
 
 static	bool	ft_manager(t_data *lst_data)
 {
 	char	*readlin_recover;
 	char	**tab_arm_pipe;
-	char	buff[25555];
 	int		i;
 
 	while (true)
@@ -81,12 +43,10 @@ static	bool	ft_manager(t_data *lst_data)
 		while (tab_arm_pipe && tab_arm_pipe[++i])
 		{
 			tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
-			ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe);
+			if (!built_or_cmd_for_father(tab_arm_pipe[i], lst_data))
+				ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe);
 		}
-		ft_bzero(buff, 25555);
-		read(STDIN_FILENO, buff, 25555);
-		printf("%s", buff);
-		ft_bzero(buff, 25555);
+		affiche_in_terminal(lst_data);
 		my_free_tab(tab_arm_pipe);
 	}
 	return (true);
@@ -96,13 +56,16 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data		lst_data;
 
-	lst_data.status = -1;
-	lst_data.fd_saved_std_out = dup(STDOUT_FILENO);
-	lst_data.fd_saved_std_in = dup(STDIN_FILENO);
-	lst_data.env = env;
 	(void)argc;
 	(void)argv;
-	(void)env;
+	lst_data.status = -1;
+	lst_data.mod_lectur_for_read_final = false;
+	lst_data.fd_saved_std_out = dup(STDOUT_FILENO);
+	lst_data.fd_saved_std_in = dup(STDIN_FILENO);
+	lst_data.env = NULL;
+	lst_data.t = NULL;
+	lst_data.tenv = NULL;
+	rempli(&lst_data, env);
 	ft_manager(&lst_data);
 	return (1);
 }

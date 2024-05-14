@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/07 10:21:16 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:23:11 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,9 @@ static	char	*gest_symbole_plus(char *buff, char *str
 	char	*buff_return;
 
 	if (buff[0] == '\'')
-	{
-		printf("simple = %s\n", buff);
 		buff_return = quote(buff, lst_data);
-	}
 	else if (buff[0] == '"')
-	{
-		printf("double = %s\n", buff);
 		buff_return = quote(buff, lst_data);
-	}
 	else if (buff)
 		buff_return = simple_str(buff, str, start, lst_data);
 	return (buff_return);

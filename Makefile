@@ -12,14 +12,29 @@ LIBFT_FILE		=	libft.a
 
 SRC	=	main.c \
 \
+		ft_ex/ft_ex.c \
+		ft_ex/ft_ex_for_father.c \
+\
 		add_signal/add_signal.c \
 \
 		builtins/echo/echo.c \
 		builtins/echo/quote.c \
 		builtins/echo/double_quote.c \
 		builtins/echo/simple_str.c \
+		builtins/export/export.c \
+		builtins/export/export2.c \
+		builtins/export/export3.c \
+		builtins/export/export4.c \
+		builtins/export/export5.c \
+		builtins/export/export6.c \
+		builtins/export/export7.c \
+		builtins/cd/cd.c \
+		builtins/cd/cd2.c \
+		builtins/unset.c \
+		builtins/exit.c \
 		\
 		builtins/pwd.c \
+		builtins/env.c \
 \
 		get_pwd/get_pwd.c \
 \
@@ -28,10 +43,6 @@ SRC	=	main.c \
 		parsing/redirect/verif_name_file.c \
 \
 		pipex/ft_pipex.c \
-		pipex/return_path.c \
-\
-		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c \
 \
 		prompt/get_prompt.c \
 		prompt/gest_readline_recover.c \
@@ -39,6 +50,8 @@ SRC	=	main.c \
 		utiles/recover_word.c \
 		utiles/utiles_for_echo.c \
 		utiles/my_fonction_free/free_tab.c \
+		utiles/initialisenv.c \
+		utiles/my_ft_getenv.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -59,14 +72,16 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/add_signal
 			mkdir $(OBJ_PATH)/builtins
 			mkdir $(OBJ_PATH)/builtins/echo
+			mkdir $(OBJ_PATH)/builtins/export
+			mkdir $(OBJ_PATH)/builtins/cd
 			mkdir $(OBJ_PATH)/get_pwd
-			mkdir $(OBJ_PATH)/get_next_line
 			mkdir $(OBJ_PATH)/pipex
 			mkdir $(OBJ_PATH)/parsing
 			mkdir $(OBJ_PATH)/parsing/redirect
 			mkdir $(OBJ_PATH)/prompt
 			mkdir $(OBJ_PATH)/utiles
 			mkdir $(OBJ_PATH)/utiles/my_fonction_free
+			mkdir $(OBJ_PATH)/ft_ex
 
 libft:
 	@echo "\033[0;33m\nCOMPILING LIBFT $(LIBFT_PATH)\n"

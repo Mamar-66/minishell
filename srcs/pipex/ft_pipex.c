@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/13 17:12:10 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/14 14:06:20 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ static char **cmd_with_option(char *str, char *path_ok)
 	tab_return = ft_calloc(sizeof(char *), 2);
 	tab_return[0] = ft_strdup(path_ok);
 	buff = recover_word(str, i++, false);
-	while(buff && buff[0] == '-')
+	while(buff)
 	{
 		tab_return = ft_realloc_tab(tab_return, 2);
 		tab_return[j++] = ft_strdup(buff);
+		printf("tab_return = %s\n", tab_return[j - 1]);
 		free(buff);
 		buff = recover_word(str, i++, false);
 	}
@@ -68,6 +69,7 @@ static void	add_in_tab_path(t_data *lst_data)
 	int	j;
 
 	j = 0;
+	
 	while (lst_data->env[j])
 	{
 		if (ft_strncmp(lst_data->env[j], "PATH=", 4) == 0)
@@ -82,13 +84,14 @@ bool	ft_pipex(char *cmd, t_data *lst_data)
 	char	*path_ok;
 	char	**tab_with_opt;
 
+
 	add_in_tab_path(lst_data);
 	path_ok = checked_access(lst_data->lst_pipex.tab_path, cmd);
+	if (!path_ok)
+		return (NULL);
 	tab_with_opt = cmd_with_option(cmd, path_ok);
-	if (execve(path_ok, tab_with_opt, NULL) == -1)
-	{
-		perror("error execve ");
+	printf("tab = %s\n", tab_with_opt[0]);
+	if (execve(path_ok, tab_with_opt, lst_data->env) == -1)
 		return (false);
-	}
 	return (true);
 }

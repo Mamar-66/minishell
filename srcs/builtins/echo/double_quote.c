@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:11:45 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/04 12:11:55 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/14 10:52:36 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	char	*val_var(char *str, int *ptr, t_data *lst_data)
 	if (!var)
 		return (NULL);
 	ft_strlcpy(var, str + (i_j[0] - i_j[1]), i_j[1] + 1);
-	str_return = getenv(var);
+	str_return = ft_getenv(lst_data->env, var);
 	*ptr += i_j[1];
 	free(var);
 	return (str_return);

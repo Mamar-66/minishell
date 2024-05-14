@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_tab.c                                         :+:      :+:    :+:   */
+/*   my_ft_getenv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 13:38:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/11 11:33:47 by omfelk           ###   ########.fr       */
+/*   Created: 2024/05/14 10:24:24 by omfelk            #+#    #+#             */
+/*   Updated: 2024/05/14 10:51:39 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	freeverithing(t_data *env)
+char	*ft_getenv(char	**tab_env, char *str_chrch)
 {
-	if (env->tenv)
-		fre(env->tenv);
-	if (env->t)
-		free(env->t);
-	if (env->env)
-		fre(env->env);
-	// if (env->temp)
-	// 	fre(env->temp);
-}
-
-void	my_free_tab(char **tab)
-{
-	int	i;
+	char	*str_return;
+	int		i;
 
 	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab[i]);
-	free(tab);
+	while (tab_env[i])
+	{
+		if (ft_strncmp(tab_env[i], str_chrch, ft_strlen(str_chrch)) == 0)
+			break ;
+		i++;
+	}
+	if (tab_env[i])
+		str_return = tab_env[i] + ft_strlen(str_chrch) + 1;
+	else
+		str_return = "";
+	return (str_return);
 }

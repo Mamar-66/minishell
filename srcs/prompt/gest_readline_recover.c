@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/13 14:36:44 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/14 13:56:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,37 @@
 //		en etait verifier avec pipex ;)
 // !!!!!!!!
 
+bool	built_or_cmd_for_father(char *str, t_data *lst_data)
+{
+	char	*cmd;
+
+	lst_data->mod_lectur_for_read_final = false;
+	cmd = recover_word(str, 1, false);
+	if (ft_strncmp(cmd, "env", 4) == 0)
+		ft_env(str, lst_data);
+	else if (ft_strncmp(cmd, "export", 7) == 0)
+		ft_export(str, lst_data);
+	else if (ft_strncmp(cmd, "cd", 3) == 0)
+		ft_cd(str, lst_data);
+	else if (ft_strncmp(cmd, "unset", 6) == 0)
+		ft_unset(str + 6, lst_data);
+	// else if (ft_ex_father(str, lst_data))
+	// {
+	// 	free(cmd);
+	// 	return (true);
+	// }
+	else
+	{
+		free(cmd);
+		return (false);
+	}
+	free(cmd);
+	return (true);
+}
+
 static bool	built_or_cmd(char *str, t_data *lst_data)
 {
+	(void)lst_data;
 	char	*cmd;
 
 	cmd = recover_word(str, 1, false);
@@ -29,9 +58,9 @@ static bool	built_or_cmd(char *str, t_data *lst_data)
 		ft_echo(str);
 	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0)
 		ft_pwd();
-	else if (!ft_pipex(str, lst_data))
+	else  if (!ft_pipex(str, lst_data))
 	{
-		printf(": command not found\n");
+		printf("%s: command not found\n", cmd);
 		free(cmd);
 		return (0);
 	}
@@ -47,10 +76,3 @@ bool	gest_readline_recover(char *str, t_data *lst_data)
 	}
 	return (false);
 }
-/* 
-	else if (ft_strncmp(text, "cd", 2) == 0)
-	else if (ft_strncmp(text, "export", 6) == 0)
-	else if (ft_strncmp(text, "unset", 5) == 0)
-	else if (ft_strncmp(text, "env", 3) == 0)
-	else if (ft_strncmp(text, "exit", 4) == 0)
- */
