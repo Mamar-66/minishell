@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/14 13:56:13 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:36:38 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data)
 		ft_cd(str, lst_data);
 	else if (ft_strncmp(cmd, "unset", 6) == 0)
 		ft_unset(str + 6, lst_data);
-	// else if (ft_ex_father(str, lst_data))
-	// {
-	// 	free(cmd);
-	// 	return (true);
-	// }
 	else
 	{
 		free(cmd);

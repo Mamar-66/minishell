@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 07:52:31 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/14 14:05:30 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:26:06 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static bool	ex_child(char *str_traitement, t_data *lst_data,
 {
 	close(pipe_fd[0]);
 	if (ft_strncmp(str_traitement, "bash", 5) == 0)
+		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
+	else if (ft_strncmp(str_traitement, "./", 2) == 0)
 		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
 	else
 		dup2(pipe_fd[1], STDOUT_FILENO);

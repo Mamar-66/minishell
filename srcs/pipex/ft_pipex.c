@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/14 14:06:20 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:41:30 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static char **cmd_with_option(char *str, char *path_ok)
 	{
 		tab_return = ft_realloc_tab(tab_return, 2);
 		tab_return[j++] = ft_strdup(buff);
-		printf("tab_return = %s\n", tab_return[j - 1]);
 		free(buff);
 		buff = recover_word(str, i++, false);
 	}
@@ -79,6 +78,19 @@ static void	add_in_tab_path(t_data *lst_data)
 	lst_data->lst_pipex.tab_path = ft_split(lst_data->env[j] + 5, ':');
 }
 
+static	char	*path_for_ex(char *cmd)
+{
+	char	*str_return;
+	char	tab[2];
+
+	tab[0] = '/';
+	tab[1] = '\0';
+	str_return = return_str_pwd();
+	str_return = ft_strjoin(str_return, tab);
+	str_return = ft_strjoin(str_return, cmd);
+	return (str_return);
+}
+
 bool	ft_pipex(char *cmd, t_data *lst_data)
 {
 	char	*path_ok;
@@ -87,11 +99,16 @@ bool	ft_pipex(char *cmd, t_data *lst_data)
 
 	add_in_tab_path(lst_data);
 	path_ok = checked_access(lst_data->lst_pipex.tab_path, cmd);
-	if (!path_ok)
+	if (!path_ok && cmd[0] == '.' && cmd[1] == '/')
+		path_ok = path_for_ex(cmd);
+	else if (!path_ok)
 		return (NULL);
 	tab_with_opt = cmd_with_option(cmd, path_ok);
-	printf("tab = %s\n", tab_with_opt[0]);
+	printf("str = %s\n", tab_with_opt[1]);
 	if (execve(path_ok, tab_with_opt, lst_data->env) == -1)
+	{
+		printf("execve\n");
 		return (false);
+	}
 	return (true);
 }
