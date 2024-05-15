@@ -28,6 +28,7 @@ SRC	=	main.c \
 		builtins/export/export5.c \
 		builtins/export/export6.c \
 		builtins/export/export7.c \
+		builtins/export/export8.c \
 		builtins/cd/cd.c \
 		builtins/cd/cd2.c \
 		builtins/unset.c \

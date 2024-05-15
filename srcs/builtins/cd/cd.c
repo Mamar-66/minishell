@@ -49,12 +49,12 @@ void	change(char *pwd, char *oldpwd, t_data *env)
 		if (ft_strncmp(env->tenv[i], pwd, 5) == 0)
 		{
 			free(env->tenv[i]);
-			env->tenv[i] = pwd;
+			env->tenv[i] = ft_strdup(pwd);
 		}
 		else if (ft_strncmp(env->tenv[i], oldpwd, 8) == 0)
 		{
 			free(env->tenv[i]);
-			env->tenv[i] = oldpwd;
+			env->tenv[i] = ft_strdup(oldpwd);
 		}
 		i++;
 	}

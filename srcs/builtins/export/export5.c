@@ -22,14 +22,13 @@ static void	delete(int i, t_data *env)
 	}
 }
 
-static char	*deletes(char *str, char *env)
+static char	*deletes(char *str, char *env, int j)
 {
-	int		j;
 	int		a;
 	size_t	i;
 	char	*res;
 
-	res = ft_calloc(sizeof(char), ft_strlen(env) + 1);
+	res = ft_calloc(sizeof(char), ft_strlen(env) + 2);
 	j = 0;
 	a = 0;
 	while (env[j])
@@ -48,6 +47,7 @@ static char	*deletes(char *str, char *env)
 		}
 		res[a++] = env[j++];
 	}
+	free(env);
 	return (res);
 }
 
@@ -72,7 +72,7 @@ void	ft_unsetbis(char *str, t_data *env)
 			}
 			i++;
 		}
-		env->t = deletes(argv[j], env->t);
+		env->t = deletes(argv[j], env->t, j);
 		j++;
 	}
 	fre(argv);
@@ -102,26 +102,26 @@ char	*verif(char *a)
 	size_t	i;
 	char	*b;
 
-	b = ft_calloc(sizeof(char), ft_strlen(a) + 1);
-	i = 0;
-	while (i != ft_strlen(a))
+	b = NULL;
+	if (a[0])
 	{
-		while (a[i] == ' ' && i != ft_strlen(a))
-			i++;
-		if ((a[i] <= 90 && a[i] >= 65)
-			|| (a[i] <= 122 && a[i] >= 97) || (a[i] == ' '))
+		i = 0;
+		b = ft_calloc(sizeof(char), ft_strlen(a) + 1);
+		while (i != ft_strlen(a))
 		{
-			while (a[i] != ' ' && i != ft_strlen(a))
+			i = suiteverif(i, a);
+			if ((a[i] <= 90 && a[i] >= 65)
+				|| (a[i] <= 122 && a[i] >= 97) || (a[i] == ' '))
+				i = suiteverif(i, a);
+			else if (a[i])
+			{
+				b = veriff(a, b, i);
+				return (b);
+			}
+			if (i != ft_strlen(a))
 				i++;
 		}
-		else if (a[i])
-		{
-			b = veriff(a, b, i);
-			return (b);
-		}
-		if (i != ft_strlen(a))
-			i++;
 	}
-	b[0] = 'a';
+	b = anothersuite(b);
 	return (b);
 }

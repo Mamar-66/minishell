@@ -34,6 +34,7 @@ static void	gest_signal(int numsignal)
 static void	gest_ctrl_d(t_data *lst_data)
 {
 	printf("exit\n");
+	freeverithing(lst_data);
 	lst_data->status = 0;
 	exit (0);
 }

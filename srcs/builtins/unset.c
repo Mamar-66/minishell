@@ -72,6 +72,7 @@ char	*deletes(char *str, char *env, int a)
 			j = suitedelete(env, i, j);
 		res[a++] = env[j++];
 	}
+	free(env);
 	return (res);
 }
 

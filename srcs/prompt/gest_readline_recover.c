@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/15 14:36:38 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:58:20 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,18 @@
 //		en etait verifier avec pipex ;)
 // !!!!!!!!
 
-bool	built_or_cmd_for_father(char *str, t_data *lst_data)
+static void	suiteexit(char *cmd, char *str, t_data *env, char **argv)
+{
+	char	*temp;
+
+	temp = NULL;
+	temp = ft_strdup(str + 4);
+	fre(argv);
+	free(cmd);
+	ft_exit(temp, env);
+}
+
+bool	built_or_cmd_for_father(char *str, t_data *lst_data, char **tab_arm_pipe)
 {
 	char	*cmd;
 
@@ -34,6 +45,10 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data)
 		ft_cd(str, lst_data);
 	else if (ft_strncmp(cmd, "unset", 6) == 0)
 		ft_unset(str + 6, lst_data);
+	else if (ft_strncmp(cmd, "exit", 5) == 0)
+		suiteexit(cmd ,str, lst_data, tab_arm_pipe);
+	else if (ft_ex_father(str, lst_data))
+		printf("father\n");
 	else
 	{
 		free(cmd);

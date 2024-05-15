@@ -80,7 +80,7 @@ void	ft_exportt(char *argv, t_data *env)
 	i = 0;
 	while (j == 0)
 	{
-		str = verif(argv + 7 + i);
+		str = verif(argv + 6 + i);
 		if (str[0] != '\0')
 			ft_unsetbis(str, env);
 		if (str[0] == 'a')

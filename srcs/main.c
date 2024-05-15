@@ -43,7 +43,7 @@ static	bool	ft_manager(t_data *lst_data)
 		while (tab_arm_pipe && tab_arm_pipe[++i])
 		{
 			tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
-			if (!built_or_cmd_for_father(tab_arm_pipe[i], lst_data))
+			if (!built_or_cmd_for_father(tab_arm_pipe[i], lst_data, tab_arm_pipe))
 				ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe);
 		}
 		affiche_in_terminal(lst_data);

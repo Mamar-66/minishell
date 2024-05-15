@@ -97,6 +97,9 @@ int		ftn(char *str);
 void	extensiontwo(char **av, t_data *env, int i, int j);
 void	extension(char **av, t_data *env, int i, int j);
 char	*copy(char *str);
+char	*encoress(char *temp, char **argv);
+int	suiteverif(size_t i, char *a);
+char *anothersuite(char *b);
 /*
 			get_next_line
 */
@@ -137,5 +140,5 @@ void	my_free_tab(char **tab);
 
 bool	ft_pipex(char *cmd, t_data *lst_data);
 
-bool	built_or_cmd_for_father(char *str, t_data *lst_data);
+bool	built_or_cmd_for_father(char *str, t_data *lst_data, char **tab_arm_pipe);
 #endif

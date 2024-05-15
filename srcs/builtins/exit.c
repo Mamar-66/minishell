@@ -60,12 +60,18 @@ void	ft_count(char *str)
 {
 	char	**temp;
 
+	temp = NULL;
 	temp = ft_split(str, ' ');
 	printf("exit\n");
-	if (temp[1] != NULL && str[0] != '\0')
+	if (temp && str[0])
 	{
-		printf("minishelle: exit: too many arguments\n");
-		exit (1);
+		if (temp[1] && str[0] != '\0')
+		{
+			printf("minishelle: exit: too many arguments\n");
+			free(str);
+			fre(temp);
+			exit (1);
+		}
 	}
 	fre(temp);
 }
@@ -73,6 +79,7 @@ void	ft_count(char *str)
 void	ft_numeric(char *str)
 {
 	printf("minishelle: exit: %s: numeric argument required\n", str);
+	free(str);
 	exit (2);
 }
 
@@ -101,5 +108,6 @@ void	ft_exit(char *str, t_data *env)
 		ft_numeric(str);
 	if (str[0] == '\0')
 		j = 0;
+	free(str);
 	exit (j);
 }

@@ -83,7 +83,7 @@ char	**plus(char **temp, t_data *env)
 	while (env->tenv[i])
 	{
 		trier[i] = encores(env->tenv[i], temp);
-		env->tenv[i] = encores(env->tenv[i], temp);
+		env->tenv[i] = encoress(env->tenv[i], temp);
 		i++;
 	}
 	j = -1;
@@ -133,4 +133,6 @@ void	ft_export(char *argv, t_data *env)
 		print(temp);
 		fre(trier);
 	}
+	else
+		fre(trier);
 }

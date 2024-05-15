@@ -90,6 +90,7 @@ void	nodouble(char *str, t_data *env)
 		}
 		j++;
 	}
+	fre(av);
 }
 
 char	**decale(char **argv, int i)
