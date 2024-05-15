@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/15 14:58:20 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:12:29 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data, char **tab_arm_pipe)
 		ft_unset(str + 6, lst_data);
 	else if (ft_strncmp(cmd, "exit", 5) == 0)
 		suiteexit(cmd ,str, lst_data, tab_arm_pipe);
-	else if (ft_ex_father(str, lst_data))
-		printf("father\n");
 	else
 	{
 		free(cmd);
