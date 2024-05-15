@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/15 14:45:18 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/15 16:02:38 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,14 @@ static void	add_in_tab_path(t_data *lst_data)
 static	char	*path_for_ex(char *cmd)
 {
 	char	*str_return;
+	char	*cmd_tmp;
 	char	tab[2];
 
 	tab[0] = '/';
 	tab[1] = '\0';
+	cmd_tmp = recover_word(cmd, 1, false);
+	if (access(cmd_tmp, X_OK | R_OK) == 0)
+		return (ft_strdup(cmd_tmp));
 	str_return = return_str_pwd();
 	str_return = ft_strjoin(str_return, tab);
 	str_return = ft_strjoin(str_return, cmd);
@@ -99,7 +103,7 @@ bool	ft_pipex(char *cmd, t_data *lst_data)
 
 	add_in_tab_path(lst_data);
 	path_ok = checked_access(lst_data->lst_pipex.tab_path, cmd);
-	if (!path_ok && cmd[0] == '.' && cmd[1] == '/')
+	if (!path_ok && ft_strchr(cmd, '/'))
 		path_ok = path_for_ex(cmd);
 	else if (!path_ok)
 		return (NULL);
