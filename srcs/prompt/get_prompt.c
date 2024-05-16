@@ -17,6 +17,8 @@ char	*get_result_prompt(void)
 	char	*prompt;
 	char	*result_prompt;
 
+	rl_replace_line("", 0);
+	rl_redisplay();
 	prompt = return_pwd();
 	result_prompt = readline(prompt);
 	free(prompt);

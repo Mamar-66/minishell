@@ -41,6 +41,8 @@ SRC	=	main.c \
 \
 		parsing/parsing.c \
 		parsing/redirect/redirect.c \
+		parsing/redirect/redirect_right.c \
+		parsing/redirect/redirect_left.c \
 		parsing/redirect/verif_name_file.c \
 \
 		pipex/ft_pipex.c \

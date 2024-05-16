@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 07:52:31 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/15 15:40:05 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/16 14:21:25 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static bool	ex_child(char *str_traitement, t_data *lst_data,
 	close(pipe_fd[1]);
 	gest_readline_recover(str_traitement, lst_data);
 	my_free_tab(tab_free);
+	freeverithing(lst_data);
 	exit (true);
 }
 

@@ -52,7 +52,9 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 	if (sigaction(SIGINT, &action, NULL) == -1)
 		perror("SIGINT");
 	if (sigaction(SIGQUIT, &action, NULL) == -1)
-		perror("SIGQUIT");
+		perror("signal");
+	if (signal(SIGTSTP, SIG_IGN) == SIG_ERR)
+		perror("signal");
 	resul_prompt = get_result_prompt();
 	if (resul_prompt == NULL)
 		gest_ctrl_d(lst_data);
