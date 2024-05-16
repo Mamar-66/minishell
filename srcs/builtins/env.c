@@ -36,6 +36,34 @@ static int	certif(char **argv)
 	}
 }
 
+void	ft_exportation(char *argv, t_data *env)
+{
+	char	**trier;
+	char	**temp;
+	int		i;
+
+	env->t = ft_stjoin(env->t, argv + 6);
+	temp = ft_split(env->t, ' ');
+	nodouble(env->t, env);
+	ft_exportt(argv, env);
+	i = 0;
+	while (temp[i])
+	{
+		metacarac(temp[i], env);
+		i++;
+	}
+	trier = plus(temp, env);
+	changeenv(trier, env);
+	if (v(argv + 6) == 0)
+	{	
+		temp = trie(trier);
+		temp = ajoute(temp);
+		fre(trier);
+	}
+	else
+		fre(trier);
+}
+
 void	ft_env(char *str, t_data *en)
 {
 	int		i;
@@ -45,6 +73,7 @@ void	ft_env(char *str, t_data *en)
 	if (certif(temp) == 0)
 		return ;
 	i = 0;
+	ft_exportation("export", en);
 	if (en->env)
 	{
 		while (en->env[i])

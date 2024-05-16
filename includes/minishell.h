@@ -100,6 +100,9 @@ char	*copy(char *str);
 char	*encoress(char *temp, char **argv);
 int	suiteverif(size_t i, char *a);
 char *anothersuite(char *b);
+int	nodif(char *str, char *s);
+char	**trie(char **trier);
+char	**plus(char **temp, t_data *env);
 /*
 			get_next_line
 */
