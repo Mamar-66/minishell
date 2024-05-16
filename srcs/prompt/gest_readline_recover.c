@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/15 15:12:29 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/16 11:57:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	suiteexit(char *cmd, char *str, t_data *env, char **argv)
 	ft_exit(temp, env);
 }
 
-bool	built_or_cmd_for_father(char *str, t_data *lst_data, char **tab_arm_pipe)
+bool	built_or_cmd_for_father(char *str, t_data *lst_data,
+			char **tab_arm_pipe)
 {
 	char	*cmd;
 
@@ -46,7 +47,7 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data, char **tab_arm_pipe)
 	else if (ft_strncmp(cmd, "unset", 6) == 0)
 		ft_unset(str + 6, lst_data);
 	else if (ft_strncmp(cmd, "exit", 5) == 0)
-		suiteexit(cmd ,str, lst_data, tab_arm_pipe);
+		suiteexit(cmd, str, lst_data, tab_arm_pipe);
 	else
 	{
 		free(cmd);
@@ -58,7 +59,6 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data, char **tab_arm_pipe)
 
 static bool	built_or_cmd(char *str, t_data *lst_data)
 {
-	(void)lst_data;
 	char	*cmd;
 
 	cmd = recover_word(str, 1, false);
@@ -66,7 +66,7 @@ static bool	built_or_cmd(char *str, t_data *lst_data)
 		ft_echo(str);
 	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0)
 		ft_pwd();
-	else  if (!ft_pipex(str, lst_data))
+	else if (!ft_pipex(str, lst_data))
 	{
 		printf("%s: command not found\n", cmd);
 		free(cmd);

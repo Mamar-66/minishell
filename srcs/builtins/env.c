@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:21 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 15:56:24 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/16 12:03:52 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	certif(char **argv)
 
 	if (argv[1])
 	{
-		printf("NoNoNo\n");
+		printf("minishelle: env: too many arguments\n");
 		i = 0;
 		while (argv[i])
 		{

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/14 11:12:41 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/16 11:50:11 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_lst_pipex
 	char	**tab_path;
 }	t_lst_pipex;
 
-
 typedef struct s_data
 {
 	char		**env;
@@ -40,7 +39,7 @@ typedef struct s_data
 	int			fd_saved_std_out;
 	int			fd_saved_std_in;
 	bool		mod_lectur_for_read_final;
-	t_lst_pipex lst_pipex;
+	t_lst_pipex	lst_pipex;
 }	t_data;
 /*
 	add_signal/add_signal.c
@@ -98,9 +97,9 @@ void	extensiontwo(char **av, t_data *env, int i, int j);
 void	extension(char **av, t_data *env, int i, int j);
 char	*copy(char *str);
 char	*encoress(char *temp, char **argv);
-int	suiteverif(size_t i, char *a);
-char *anothersuite(char *b);
-int	nodif(char *str, char *s);
+int		suiteverif(size_t i, char *a);
+char	*anothersuite(char *b);
+int		nodif(char *str, char *s);
 char	**trie(char **trier);
 char	**plus(char **temp, t_data *env);
 /*
@@ -143,5 +142,6 @@ void	my_free_tab(char **tab);
 
 bool	ft_pipex(char *cmd, t_data *lst_data);
 
-bool	built_or_cmd_for_father(char *str, t_data *lst_data, char **tab_arm_pipe);
+bool	built_or_cmd_for_father(char *str, t_data *lst_data,
+			char **tab_arm_pipe);
 #endif

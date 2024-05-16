@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:38:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/11 11:33:47 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/16 11:58:08 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	freeverithing(t_data *env)
 		free(env->t);
 	if (env->env)
 		fre(env->env);
-	// if (env->temp)
-	// 	fre(env->temp);
 }
 
 void	my_free_tab(char **tab)

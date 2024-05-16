@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/15 13:18:47 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/16 11:51:18 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	affiche_in_terminal(t_data *lst_data)
 	char	buff[25555];
 
 	ft_bzero(buff, 25555);
-	if(lst_data->mod_lectur_for_read_final)
+	if (lst_data->mod_lectur_for_read_final)
 	{
 		read(STDIN_FILENO, buff, 25555);
-		printf("%s", buff);			
+		printf("%s", buff);
 	}
 }
 
@@ -43,7 +43,8 @@ static	bool	ft_manager(t_data *lst_data)
 		while (tab_arm_pipe && tab_arm_pipe[++i])
 		{
 			tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
-			if (!built_or_cmd_for_father(tab_arm_pipe[i], lst_data, tab_arm_pipe))
+			if (!built_or_cmd_for_father(tab_arm_pipe[i],
+					lst_data, tab_arm_pipe))
 				ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe);
 		}
 		affiche_in_terminal(lst_data);
