@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/16 16:20:08 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/17 11:53:11 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	lst_data.status = -1;
+	lst_data.fd_here_doc = -1;
 	lst_data.mod_lectur_for_read_final = false;
 	lst_data.fd_saved_std_out = dup(STDOUT_FILENO);
 	lst_data.fd_saved_std_in = dup(STDIN_FILENO);

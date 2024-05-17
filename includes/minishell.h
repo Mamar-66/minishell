@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/16 14:46:21 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/17 11:02:18 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include <limits.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
@@ -38,6 +39,8 @@ typedef struct s_data
 	int			status;
 	int			fd_saved_std_out;
 	int			fd_saved_std_in;
+	char		*here_doc;
+	int			fd_here_doc;
 	bool		mod_lectur_for_read_final;
 	t_lst_pipex	lst_pipex;
 }	t_data;
@@ -120,6 +123,7 @@ char	*redirect(char *buff, char *str, int *start, t_data *lst_data);
 char	*redirect_right(char *str, int *start, t_data *lst_data);
 char	*double_redirect_right(char *str, int *start, t_data *lst_data);
 char	*redirect_left(char *str, int *start, t_data *lst_data);
+char	*double_redirect_left(char *str, int *start, t_data *lst_data);
 char	*verif_name_file(char *str, t_data *lst_data);
 
 /*

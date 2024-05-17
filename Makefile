@@ -43,6 +43,7 @@ SRC	=	main.c \
 		parsing/redirect/redirect.c \
 		parsing/redirect/redirect_right.c \
 		parsing/redirect/redirect_left.c \
+		parsing/redirect/double_redirect_left.c \
 		parsing/redirect/verif_name_file.c \
 \
 		pipex/ft_pipex.c \
@@ -55,6 +56,9 @@ SRC	=	main.c \
 		utiles/my_fonction_free/free_tab.c \
 		utiles/initialisenv.c \
 		utiles/my_ft_getenv.c \
+\
+		get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -85,6 +89,7 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/utiles
 			mkdir $(OBJ_PATH)/utiles/my_fonction_free
 			mkdir $(OBJ_PATH)/ft_ex
+			mkdir $(OBJ_PATH)/get_next_line
 
 libft:
 	@echo "\033[0;33m\nCOMPILING LIBFT $(LIBFT_PATH)\n"

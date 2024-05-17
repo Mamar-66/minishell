@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/16 16:13:22 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/17 11:42:09 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,20 @@ char	*redirect(char *buff, char *str, int *start, t_data *lst_data)
 		return (str_return);
 	}
 	ptr = ft_strchr(buff, '<');
+	if (ptr && *ptr == '<' && *(ptr + 1) == '<' && *(ptr + 2) == '<')
+	{
+		printf("minishell: syntax token `<'\n");
+		return (NULL);
+	}
 	if (ptr && *ptr == '<' && *(ptr + 1) != '<')
 	{
 		str_return = redirect_left(str, start, lst_data);
+		*start -= ft_strlen(buff);
+		return (str_return);
+	}
+	else if (ptr && *ptr == '<' && *(ptr + 1) == '<')
+	{
+		str_return = double_redirect_left(str, start, lst_data);
 		*start -= ft_strlen(buff);
 		return (str_return);
 	}

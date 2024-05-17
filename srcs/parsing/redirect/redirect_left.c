@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:25:03 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/16 16:09:05 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/17 10:32:31 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*redirect_left(char *str, int *start, t_data *lst_data)
 	char	*file_name;
 	int		i_fd[2];
 
-	(void)lst_data;
 	i_fd[0] = *start;
 	str_return = redirect_left_suite(str, &i_fd[0]);
 	file_name = verif_name_file(str + i_fd[0], lst_data);
