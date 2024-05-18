@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:25:03 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/17 10:32:31 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/18 11:51:18 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ char	*redirect_left(char *str, int *start, t_data *lst_data)
 		printf("minishell: %s: No such file or directory\n", file_name);
 		return (NULL);
 	}
-	// printf("name file = %s\n", file_name);
-	// printf("str = %s\n", str_return);
 	*start = i_fd[0];
 	if (!dup2(STDIN_FILENO, i_fd[1]))
 		printf("redirect input\n");

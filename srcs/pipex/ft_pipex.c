@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/16 12:04:06 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/18 14:42:25 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ bool	ft_pipex(char *cmd, t_data *lst_data)
 	else if (!path_ok)
 		return (NULL);
 	tab_with_opt = cmd_with_option(cmd, path_ok);
+	dup2(STDIN_FILENO, lst_data->fd_here_doc);
+	printf("str = <%s>\n", get_next_line(lst_data->fd_here_doc));
+	printf("str = <%s>\n", get_next_line(lst_data->fd_here_doc));
 	if (execve(path_ok, tab_with_opt, lst_data->env) == -1)
 	{
 		printf("execve\n");
