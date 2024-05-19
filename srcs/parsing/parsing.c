@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/18 11:12:37 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/19 10:54:10 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ char	*parsing(char *str, t_data *lst_data)
 		free(str_return);
 		str_return = NULL;
 	}
-	if (str_return[ft_strlen(str_return) - 1] == ' ')
+	if (str_return && str_return[ft_strlen(str_return) - 1] == ' ')
 		str_return[ft_strlen(str_return) - 1] = '\0';
-	if (lst_data->here_doc)
+	if (str_return && lst_data->here_doc)
 		str_return = ft_strjoin(str_return, "\n");
 	free(str);
 	return (str_return);

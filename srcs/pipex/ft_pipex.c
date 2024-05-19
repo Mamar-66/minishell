@@ -6,13 +6,13 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/18 14:42:25 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/19 11:32:22 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static	char	**cmd_with_option(char *str, char *path_ok)
+static	char	**cmd_with_option(char *str, char *path_ok, t_data *lst_data)
 {
 	char	**tab_return;
 	char	*buff;
@@ -31,6 +31,12 @@ static	char	**cmd_with_option(char *str, char *path_ok)
 		free(buff);
 		buff = recover_word(str, i++, false);
 	}
+	if (lst_data->here_doc)
+	{
+		tab_return = ft_realloc_tab(tab_return, 2);
+		tab_return[j -1] = ft_strdup("/proc/self/fd/0");
+	}
+	tab_return[j] = NULL;
 	return (tab_return);
 }
 
@@ -105,10 +111,8 @@ bool	ft_pipex(char *cmd, t_data *lst_data)
 		path_ok = path_for_ex(cmd);
 	else if (!path_ok)
 		return (NULL);
-	tab_with_opt = cmd_with_option(cmd, path_ok);
-	dup2(STDIN_FILENO, lst_data->fd_here_doc);
-	printf("str = <%s>\n", get_next_line(lst_data->fd_here_doc));
-	printf("str = <%s>\n", get_next_line(lst_data->fd_here_doc));
+	tab_with_opt = cmd_with_option(cmd, path_ok, lst_data);
+	lst_data->here_doc = false;
 	if (execve(path_ok, tab_with_opt, lst_data->env) == -1)
 	{
 		printf("execve\n");
