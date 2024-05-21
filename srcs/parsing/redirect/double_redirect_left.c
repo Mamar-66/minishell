@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 10:07:14 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/19 11:31:37 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:34:37 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 static char	*first_run(char *here_doc_end, t_data *lst_data)
 {
 	char	*str_return;
+	char	buff[2555];
 
-	str_return = parsing(get_next_line(STDIN_FILENO), lst_data);
+	ft_bzero(buff, 2555);
+	read(STDIN_FILENO, buff, 2555);
+	str_return = parsing(ft_strdup(buff), lst_data);
 	if (str_return && !ft_strncmp(str_return, here_doc_end, INT_MAX))
 	{
 		get_next_line(-1);
@@ -31,9 +34,11 @@ static char	*first_run(char *here_doc_end, t_data *lst_data)
 static	char	*continu_here_doc_switch_stdin(t_data *lst_data,
 	char *here_doc_end)
 {
-	char	*buff;
+	char	buff[2555];
 	char	*text_here_doc;
+	char	*tmp;
 
+	ft_bzero(buff, 2555);
 	text_here_doc = first_run(here_doc_end, lst_data);
 	if (!text_here_doc)
 		return (NULL);
@@ -41,18 +46,18 @@ static	char	*continu_here_doc_switch_stdin(t_data *lst_data,
 	{
 		while (1)
 		{
-			buff = parsing(get_next_line(STDIN_FILENO), lst_data);
-			if (!buff)
-				buff = ft_strdup("\n");
-			if (!ft_strncmp(buff, here_doc_end, INT_MAX))
+			read(STDIN_FILENO, buff, 2555);
+			tmp =  parsing(ft_strdup(buff), lst_data);
+			if (!tmp)
+				tmp = ft_strdup("\n");
+			if (!ft_strncmp(tmp, here_doc_end, INT_MAX))
 				break ;
-			text_here_doc = ft_strjoin(text_here_doc, buff);
-			free(buff);
+			text_here_doc = ft_strjoin(text_here_doc, tmp);
+			free(tmp);
 		}
 	}
+		free(tmp);
 	get_next_line(-1);
-	if (buff)
-		free(buff);
 	return (text_here_doc);
 }
 
@@ -112,6 +117,7 @@ char	*double_redirect_left(char *str, int *start, t_data *lst_data)
 	int		i_fd[2];
 
 	i_fd[0] = *start;
+	lst_data->here_doc_parssing = true;
 	str_return = redirect_double_left_suite(str, &i_fd[0]);
 	text_end_here_doc = verif_name_file(str + ++i_fd[0], lst_data);
 	text_end_here_doc = ft_realloc(text_end_here_doc,
@@ -123,7 +129,8 @@ char	*double_redirect_left(char *str, int *start, t_data *lst_data)
 		i_fd[0]++;
 	while (str[i_fd[0]] && str[i_fd[0]] > 32 && str[i_fd[0]] < 127)
 		i_fd[0]++;
-	*start = i_fd[0];
+	*start = i_fd[0] + 1;
 	free(text_end_here_doc);
+	lst_data->here_doc_parssing = false;
 	return (str_return);
 }

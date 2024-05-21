@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/19 11:32:22 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/21 11:13:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	char	**cmd_with_option(char *str, char *path_ok, t_data *lst_data)
 	if (lst_data->here_doc)
 	{
 		tab_return = ft_realloc_tab(tab_return, 2);
-		tab_return[j -1] = ft_strdup("/proc/self/fd/0");
+		tab_return[j - 1] = ft_strdup("/proc/self/fd/0");
 	}
 	tab_return[j] = NULL;
 	return (tab_return);

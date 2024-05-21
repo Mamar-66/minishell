@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/18 12:13:36 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:29:43 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	int			fd_saved_std_in;
 	int			fd_here_doc;
 	bool		here_doc;
+	bool		here_doc_parssing;
 	bool		mod_lectur_for_read_final;
 	t_lst_pipex	lst_pipex;
 }	t_data;

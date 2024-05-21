@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/18 12:51:03 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:30:27 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 // valgrind --leak-check=full --show-leak-kinds=all
 //  --suppressions=val.supp -s  ./minishell
 
-static void	affiche_in_terminal(t_data *lst_data, char *readline_recover)
+static void	affiche_in_terminal(t_data *lst_data,
+	char *readline_recover, char **tab_arm_pipe)
 {
 	char	buff[25555];
 
 	ft_bzero(buff, 25555);
-	if (lst_data->mod_lectur_for_read_final && readline_recover[0])
+	if (lst_data->mod_lectur_for_read_final && readline_recover[0]
+		&& tab_arm_pipe[0])
 	{
 		read(STDIN_FILENO, buff, 25555);
 		printf("%s", buff);
@@ -50,7 +52,7 @@ static	bool	ft_manager(t_data *lst_data)
 					lst_data, tab_arm_pipe))
 				ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe);
 		}
-		affiche_in_terminal(lst_data, readlin_recover);
+		affiche_in_terminal(lst_data, readlin_recover, tab_arm_pipe);
 		my_free_tab(tab_arm_pipe);
 	}
 	return (true);
@@ -63,6 +65,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	lst_data.status = -1;
+	lst_data.here_doc_parssing = false;
 	lst_data.mod_lectur_for_read_final = false;
 	lst_data.fd_saved_std_out = dup(STDOUT_FILENO);
 	lst_data.fd_saved_std_in = dup(STDIN_FILENO);

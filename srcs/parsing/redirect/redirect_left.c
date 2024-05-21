@@ -6,11 +6,24 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:25:03 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/18 11:51:18 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/21 15:53:12 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+static	int	saut(char *str, int i_fd)
+{
+	int	int_return;
+
+	int_return = i_fd;
+	while (str[int_return] && str[int_return] == ' ')
+		int_return++;
+	while (str[int_return] && str[int_return] > 32 && str[int_return] < 127)
+		int_return++;
+	int_return++;
+	return (int_return);
+}
 
 static	char	*redirect_left_suite(char *str, int *start)
 {
@@ -57,7 +70,7 @@ char	*redirect_left(char *str, int *start, t_data *lst_data)
 		printf("minishell: %s: No such file or directory\n", file_name);
 		return (NULL);
 	}
-	*start = i_fd[0];
+	*start = saut(str, i_fd[0]);
 	if (!dup2(STDIN_FILENO, i_fd[1]))
 		printf("redirect input\n");
 	free(file_name);
