@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:11:45 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/14 10:52:36 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 12:18:43 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static	char	*val_var(char *str, int *ptr, t_data *lst_data)
 	i_j[1] = 0;
 	if (str[0] == '?')
 	{
-		str_return = ft_strdup(ft_itoa(lst_data->status));
+		str_return = ft_itoa(lst_data->status);
+		*ptr = *ptr + 1;
 		return (str_return);
 	}
 	while (str[++i_j[0]])
@@ -34,7 +35,7 @@ static	char	*val_var(char *str, int *ptr, t_data *lst_data)
 	if (!var)
 		return (NULL);
 	ft_strlcpy(var, str + (i_j[0] - i_j[1]), i_j[1] + 1);
-	str_return = ft_getenv(lst_data->env, var);
+	str_return = ft_strdup(ft_getenv(lst_data->env, var));
 	*ptr += i_j[1];
 	free(var);
 	return (str_return);
@@ -52,18 +53,18 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	str_return = ft_strdup("");
 	while (str[++i])
 	{
+		c[0] = str[i];
 		if (str[i] == '$' && str[i + 1] != '\n'
 			&& str[i + 1] != ' ' && str[i + 1] != '"')
 		{
 			var = val_var(str + i + 1, &i, lst_data);
 			if (var)
 				str_return = ft_strjoin(str_return, var);
+			if (var)
+				free(var);
 		}
 		else
-		{
-			c[0] = str[i];
 			str_return = ft_strjoin(str_return, c);
-		}
 	}
 	return (str_return);
 }

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 13:38:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/22 10:01:08 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 12:38:21 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	my_free_tab(char **tab)
 	i = 0;
 	while (tab[i])
 		free(tab[i++]);
-	free(tab);
+	if (tab)
+		free(tab);
 }

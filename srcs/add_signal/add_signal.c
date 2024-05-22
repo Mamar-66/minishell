@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/11 11:09:14 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 12:31:03 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,9 @@ static void	gest_ctrl_d(t_data *lst_data)
 
 char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 {
-	// struct sigaction	action;
 	char				*resul_prompt;
 
 	resul_prompt = "";
-	// ft_bzero(&action, sizeof(action));
-	// action.sa_handler = &gest_signal;
-	// if (sigaction(SIGCHLD, &action, NULL) == -1)
-	// 	perror("SIGCHLD");
-	// else if (sigaction(SIGINT, &action, NULL) == -1)
-	// 	perror("SIGINT");
-	// else if (sigaction(SIGQUIT, &action, NULL) == -1)
-	// 	perror("signal");
 	if (signal(SIGTSTP, SIG_IGN) == SIG_ERR)
 		perror("signal");
 	signal(SIGINT, gest_signal);
@@ -58,8 +49,3 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 	add_history(resul_prompt);
 	return (resul_prompt);
 }
-
-	// sigemptyset(&action.sa_mask);
-	// sigaddset(&action.sa_mask, SIGQUIT);
-	//sigaddset(&action.sa_mask, SIGINT);
-	//sigaddset(&action.sa_mask, SIGTERM);

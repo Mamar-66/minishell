@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:08:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/02 13:29:46 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 14:31:23 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ static	void	first_word_plus_plus(char *str, int *j, int *i)
 
 	f_i = *i;
 	f_j = *j;
-	while (str[f_i] > 32
-		&& (str[f_i] < 127 || str[f_i] == 127)
-		&& str[f_i] != '"' && str[f_i] != '\'')
+	while (str[f_i] > 32 && (str[f_i] < 127 || str[f_i] == 127)
+		&& str[f_i] != '"' && str[f_i] != '\'' && str[f_i] != '<')
 	{
 		f_j++;
 		f_i++;

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:28:04 by omfelk            #+#    #+#             */
-/*   Updated: 2024/04/23 12:40:56 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 12:01:56 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,14 @@ bool	verif_n(char *opt)
 	size_t	i;
 
 	i = 0;
-	while (opt[++i])
+	if (opt[0] == '-')
+		i++;
+	while (opt[i])
+	{
 		if (opt[i] != 'n')
 			return (false);
+		i++;
+	}
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/21 16:36:27 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 14:31:51 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static	char	*if_space_end_wedspace(char *str_return, char *str,
 	char	*ft_str_return;
 
 	i = *start;
-	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
-			|| str[i] == 13) && str[i])
+	while (str[i] && (str[i] == 32 || str[i] == 9 || str[i] == 10
+			|| str[i] == 13))
 		i++;
 	if (i != *start && buff[0] != '>')
 		ft_str_return = ft_strjoin(str_return, " ");
@@ -58,8 +58,11 @@ static char	*gest_symbole(char *str, int start, t_data *lst_data)
 
 	str_return = ft_strdup("");
 	buff = recover_word(str + start, 1, false);
+	printf("str = %s\n", str + start);
+	printf("buff = <%s>\n", buff);
 	while (buff)
 	{
+		printf("ok\n");
 		buff_str = gest_symbole_plus(buff, str, &start, lst_data);
 		if (!buff_str)
 		{
@@ -85,12 +88,15 @@ char	*parsing(char *str, t_data *lst_data)
 	int		i;
 
 	i = 0;
-	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
-			|| str[i] == 13) && str[i])
+	while (str[i] && (str[i] == 32 || str[i] == 9 || str[i] == 10
+			|| str[i] == 13))
 		i++;
 	str_return = gest_symbole(str + i, 0, lst_data);
 	if (!str_return)
+	{
+		free(str);
 		return (NULL);
+	}
 	if (str_return && ft_strncmp(str_return, "", 1) == 0)
 	{
 		free(str_return);
