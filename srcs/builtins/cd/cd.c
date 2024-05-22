@@ -89,6 +89,7 @@ static void	change_directory(const char *path, t_data *env, char **argv)
 
 	if (!path || !getcwd(oldpwd, 512) || chdir(path) || !getcwd(pwd, 512))
 	{
+		env->status = 1;
 		printf("No file or directory\n");
 		return ;
 	}
@@ -105,6 +106,7 @@ void	ft_cd(char *str, t_data *env)
 	if (argv[2])
 	{
 		fre(argv);
+		env->status = 1;
 		printf("mishelle: cd: too many arguments\n");
 		return ;
 	}
@@ -114,6 +116,7 @@ void	ft_cd(char *str, t_data *env)
 		if (!path)
 		{
 			fre(argv);
+			env->status = 1;
 			printf("mishelle: cd: HOME not set\n");
 			return ;
 		}

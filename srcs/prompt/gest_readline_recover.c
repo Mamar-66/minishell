@@ -36,6 +36,7 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data,
 {
 	char	*cmd;
 
+	lst_data->status = 0;
 	lst_data->mod_lectur_for_read_final = false;
 	cmd = recover_word(str, 1, false);
 	if (ft_strncmp(cmd, "env", 4) == 0)
@@ -44,6 +45,8 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data,
 		ft_export(str, lst_data);
 	else if (ft_strncmp(cmd, "cd", 3) == 0)
 		ft_cd(str, lst_data);
+	else if (ft_strncmp(cmd, "echo", 5) == 0)
+		ft_echo(str);
 	else if (ft_strncmp(cmd, "unset", 6) == 0)
 		ft_unset(str + 6, lst_data);
 	else if (ft_strncmp(cmd, "exit", 5) == 0)
@@ -62,16 +65,16 @@ static bool	built_or_cmd(char *str, t_data *lst_data)
 	char	*cmd;
 
 	cmd = recover_word(str, 1, false);
-	if (ft_strncmp_ign_del(cmd, "echo", 5) == 0)
-		ft_echo(str);
-	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0)
+	if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0)
 		ft_pwd();
 	else if (!ft_pipex(str, lst_data))
 	{
+		lst_data->status = 127;
 		printf("%s: command not found\n", cmd);
 		free(cmd);
 		return (0);
 	}
+	lst_data->status = 0;
 	free(cmd);
 	return (1);
 }

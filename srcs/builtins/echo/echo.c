@@ -16,6 +16,7 @@ void	ft_echo(char *str)
 {
 	char	*opt;
 	int		i;
+	int		j;
 
 	i = 2;
 	opt = recover_word(str, 2, false);
@@ -28,9 +29,14 @@ void	ft_echo(char *str)
 	if (word_has_print_return_pos_finish(str, &i) != -1)
 	{
 		i = recover_word_plus_return_position(str, --i);
-		printf("%s", str + i);
+		j = i;
+		while (str[j])
+		{
+			write(STDOUT_FILENO, &str[j], 1);
+			j++;
+		}
 	}
-	if (ft_strncmp(opt, "-n", 3) != 0)
+	if (!verif_n(opt))
 		printf("\n");
 	free(opt);
 }

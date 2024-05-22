@@ -12,12 +12,13 @@
 
 #include "../../includes/minishell.h"
 
-static int	certif(char **argv)
+static int	certif(char **argv, t_data *env)
 {
 	int	i;
 
 	if (argv[1])
 	{
+		env->status = 127;
 		printf("minishelle: env: too many arguments\n");
 		i = 0;
 		while (argv[i])
@@ -70,7 +71,7 @@ void	ft_env(char *str, t_data *en)
 	char	**temp;
 
 	temp = ft_split(str, ' ');
-	if (certif(temp) == 0)
+	if (certif(temp, en) == 0)
 		return ;
 	i = 0;
 	ft_exportation("export", en);

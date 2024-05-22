@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	lst_data.status = -1;
+	lst_data.status = 0;
 	lst_data.here_doc_parssing = false;
 	lst_data.mod_lectur_for_read_final = false;
 	lst_data.fd_saved_std_out = dup(STDOUT_FILENO);

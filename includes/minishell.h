@@ -40,6 +40,7 @@ typedef struct s_data
 	int			fd_saved_std_out;
 	int			fd_saved_std_in;
 	int			fd_here_doc;
+	int			numsignal;
 	bool		here_doc;
 	bool		here_doc_parssing;
 	bool		mod_lectur_for_read_final;
@@ -63,6 +64,7 @@ char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 			ECHO
 */
 void	ft_echo(char *str);
+bool	verif_n(char *opt);
 char	*simple_str(char *buff, char *str, int *start, t_data *lst_data);
 char	*quote(char *str, t_data *lst_data);
 char	*double_quote(char *str, t_data *lst_data);
@@ -106,6 +108,7 @@ char	*anothersuite(char *b);
 int		nodif(char *str, char *s);
 char	**trie(char **trier);
 char	**plus(char **temp, t_data *env);
+void	ft_error_and_status(t_data *en, char *str);
 /*
 			get_next_line
 */

@@ -41,6 +41,17 @@ int	recover_word_plus_return_position(char	*str,
 	return (i);
 }
 
+bool	verif_n(char *opt)
+{
+	size_t	i;
+
+	i = 0;
+	while (opt[++i])
+		if (opt[i] != 'n')
+			return (false);
+	return (true);
+}
+
 /*
 	pos_strat = index start string 
 	return index finish string
@@ -52,7 +63,7 @@ int	word_has_print_return_pos_finish(char *str, int *pos_start)
 
 	i = *pos_start;
 	opt = recover_word(str, i, false);
-	while (ft_strncmp(opt, "-n", 3) == 0)
+	while (verif_n(opt))
 	{
 		free(opt);
 		i++;

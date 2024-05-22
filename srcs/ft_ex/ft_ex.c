@@ -12,6 +12,12 @@
 
 #include "../../includes/minishell.h"
 
+
+// static void	gest_status_waitpid(int status, t_data *lst_data)
+// {
+
+// }
+
 static bool	ex_child(char *str_traitement, t_data *lst_data,
 	int *pipe_fd, char **tab_free)
 {
@@ -31,6 +37,9 @@ static bool	ex_child(char *str_traitement, t_data *lst_data,
 
 static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
 {
+	int	statu;
+	int	exit_status;
+
 	(void)lst_data;
 	close(pipe_fd[1]);
 	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
@@ -39,7 +48,10 @@ static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
 		return (false);
 	}
 	close(pipe_fd[0]);
-	waitpid(child_pid, NULL, 0);
+	waitpid(child_pid, &statu, 0);
+	exit_status = WEXITSTATUS(statu);
+	printf("Le processus enfant s'est terminé avec le code de sortie : %d\n", exit_status);
+	lst_data->status = exit_status;
 	return (true);
 }
 

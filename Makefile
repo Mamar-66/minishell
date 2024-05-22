@@ -13,7 +13,6 @@ LIBFT_FILE		=	libft.a
 SRC	=	main.c \
 \
 		ft_ex/ft_ex.c \
-		ft_ex/ft_ex_for_father.c \
 \
 		add_signal/add_signal.c \
 \

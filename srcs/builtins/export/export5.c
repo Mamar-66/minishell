@@ -22,7 +22,7 @@ static void	delete(int i, t_data *env)
 	}
 }
 
-static char	*deletes(char *str, char *env, int j)
+static char	*deletes(char *str, char *env, int j, t_data *en)
 {
 	int		a;
 	size_t	i;
@@ -42,7 +42,7 @@ static char	*deletes(char *str, char *env, int j)
 				i++;
 		if (i == ft_strlen(str) && (env[i + j] == ' ' || env[i + j] == '\0'))
 		{
-			printf("minishelle: export: `%s\': not a valid identifier\n", str);
+			ft_error_and_status(en, str);
 			j = j + i;
 		}
 		res[a++] = env[j++];
@@ -66,13 +66,14 @@ void	ft_unsetbis(char *str, t_data *env)
 		{
 			if (ft_stcmp(argv[j], env->tenv[i], ft_strlen(argv[j])) == 0)
 			{
+				env->status = 1;
 				printf("minishelle: export: `%s\': not a valid identifier\n",
 					env->tenv[i]);
 				delete(i, env);
 			}
 			i++;
 		}
-		env->t = deletes(argv[j], env->t, j);
+		env->t = deletes(argv[j], env->t, j, env);
 		j++;
 	}
 	fre(argv);

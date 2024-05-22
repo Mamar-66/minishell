@@ -20,3 +20,9 @@ char	*anothersuite(char *b)
 	b[0] = 'a';
 	return (b);
 }
+
+void	ft_error_and_status(t_data *en, char *str)
+{
+	en->status = 1;
+	printf("minishelle: export: `%s\': not a valid identifier\n", str);
+}

@@ -40,19 +40,19 @@ char	*ft_cdd(char **argv, t_data *env)
 
 	if (!ft_strncmp(argv[1], "-", 2))
 	{
-		i = 0;
-		while (env->tenv[i])
+		i = -1;
+		while (env->tenv[++i])
 		{
 			if (ft_strncmp(env->tenv[i], "OLDPWD=", 7) == 0)
 			{
 				path = env->tenv[i] + 7;
 				printf("%s\n", path);
 			}
-			i++;
 		}
 		if (!path)
 		{
 			fre(argv);
+			env->status = 1;
 			printf("mishelle: cd: OLDPWD not set\n");
 			return (NULL);
 		}

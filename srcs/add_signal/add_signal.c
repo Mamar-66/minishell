@@ -24,10 +24,6 @@ static void	gest_signal(int numsignal)
 			rl_replace_line("", 0);
 			rl_redisplay();
 		}
-		else if (numsignal == SIGQUIT)
-		{
-			printf("sigquit\n");
-		}
 	}
 }
 
@@ -35,26 +31,27 @@ static void	gest_ctrl_d(t_data *lst_data)
 {
 	printf("exit\n");
 	freeverithing(lst_data);
-	lst_data->status = 0;
 	exit (0);
 }
 
 char	*add_signal_plus_return_result_prompt(t_data *lst_data)
 {
-	struct sigaction	action;
+	// struct sigaction	action;
 	char				*resul_prompt;
 
 	resul_prompt = "";
-	ft_bzero(&action, sizeof(action));
-	action.sa_handler = &gest_signal;
-	if (sigaction(SIGCHLD, &action, NULL) == -1)
-		perror("SIGCHLD");
-	if (sigaction(SIGINT, &action, NULL) == -1)
-		perror("SIGINT");
-	if (sigaction(SIGQUIT, &action, NULL) == -1)
-		perror("signal");
+	// ft_bzero(&action, sizeof(action));
+	// action.sa_handler = &gest_signal;
+	// if (sigaction(SIGCHLD, &action, NULL) == -1)
+	// 	perror("SIGCHLD");
+	// else if (sigaction(SIGINT, &action, NULL) == -1)
+	// 	perror("SIGINT");
+	// else if (sigaction(SIGQUIT, &action, NULL) == -1)
+	// 	perror("signal");
 	if (signal(SIGTSTP, SIG_IGN) == SIG_ERR)
 		perror("signal");
+	signal(SIGINT, gest_signal);
+		// lst_data->status = 130;
 	resul_prompt = get_result_prompt();
 	if (resul_prompt == NULL)
 		gest_ctrl_d(lst_data);
