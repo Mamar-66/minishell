@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/21 15:41:21 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 09:39:02 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	bool	cmp_symb(char *str, char symb)
 	space = false;
 	while (str[i] && str[i] != symb)
 		i++;
-	while(str[i] && (str[i] == ' ' || str[i] == symb))
+	while (str[i] && (str[i] == ' ' || str[i] == symb))
 	{
 		if (str[i] == symb && space)
 			return (false);

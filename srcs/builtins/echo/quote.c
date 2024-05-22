@@ -30,10 +30,10 @@ char	*quote(char *str, t_data *lst_data)
 		printf("error argument double quote <%s>\n", str);
 	if (lst_data->here_doc_parssing)
 	{
-			if (!return_str && str[0] == '\'')
-				return (ft_strdup("-1"));
-			if (!return_str && str[0] == '"')
-				return (ft_strdup("-1"));
+		if (!return_str && str[0] == '\'')
+			return (ft_strdup("-1"));
+		if (!return_str && str[0] == '"')
+			return (ft_strdup("-1"));
 	}
 	return (return_str);
 }

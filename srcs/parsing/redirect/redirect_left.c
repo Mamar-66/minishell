@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:25:03 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/21 15:53:12 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 10:05:00 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ char	*redirect_left(char *str, int *start, t_data *lst_data)
 	str_return = redirect_left_suite(str, &i_fd[0]);
 	file_name = verif_name_file(str + i_fd[0], lst_data);
 	if (!file_name)
-	{
-		free(str_return);
-		return (NULL);
-	}
+		return (free(str_return), NULL);
 	i_fd[1] = open(file_name, O_RDWR);
 	if (i_fd[1] == -1)
 	{
 		printf("minishell: %s: No such file or directory\n", file_name);
-		return (NULL);
+		if (str_return)
+			free(str_return);
+		return (free(file_name) , NULL);
 	}
 	*start = saut(str, i_fd[0]);
 	if (!dup2(STDIN_FILENO, i_fd[1]))

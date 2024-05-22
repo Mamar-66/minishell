@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 10:07:14 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/21 17:14:06 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/05/22 09:39:55 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static	char	*continu_here_doc_switch_stdin(t_data *lst_data,
 		while (1)
 		{
 			read(STDIN_FILENO, buff, 2555);
-			tmp =  parsing(ft_strdup(buff), lst_data);
+			tmp = parsing(ft_strdup(buff), lst_data);
 			if (!tmp)
 				tmp = ft_strdup("\n");
 			if (!ft_strncmp(tmp, here_doc_end, INT_MAX))
@@ -60,7 +60,7 @@ static	char	*continu_here_doc_switch_stdin(t_data *lst_data,
 			free(tmp);
 		}
 	}
-		free(tmp);
+	free(tmp);
 	return (text_here_doc);
 }
 
