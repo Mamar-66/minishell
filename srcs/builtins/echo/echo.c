@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/24 16:46:30 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:55:05 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_echo(char *str, t_data *lst_data)
 {
+	(void)lst_data;
 	char	*opt;
 	int		i;
 	int		j;
@@ -33,10 +34,7 @@ void	ft_echo(char *str, t_data *lst_data)
 		if (!lst_data->is_pipe)
 		{
 			while (str[j])
-			{
-				write(STDOUT_FILENO, &str[j], 1);
-				j++;
-			}
+				write(STDOUT_FILENO, &str[j++], 1);
 			if (!verif_n(opt))
 				printf("\n");
 		}

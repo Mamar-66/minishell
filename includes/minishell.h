@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/30 15:50:22 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/04 14:40:23 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_data
 // static void	gest_ctrl_D(t_data *lst_data);
 
 bool	ft_ex(char *str_traitement, t_data *lst_data,
-			char **tab_free, char *str, char **tab_free_dup);
+			char **tab_free, char *str, char **tab_free_dup, char *reel);
 bool	ft_ex_father(char *str_traitement, t_data *lst_data);
 char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 
@@ -127,7 +127,7 @@ char	*return_pwd(void);
 */
 char	*parsing(char *str, t_data *lst_data);
 // redirect
-bool	here_doc_switch_stdin(t_data *lst_data, char *here_doc_end);
+bool	here_doc_switch_stdin(char *str, t_data *lst_data, char *here_doc_end);
 char	*redirect(char *buff, char *str, int *start, t_data *lst_data);
 char	*redirect_right(char *str, int *start, t_data *lst_data);
 char	*double_redirect_right(char *str, int *start, t_data *lst_data);
@@ -140,7 +140,7 @@ char	*verif_name_file(char *str, t_data *lst_data);
 */
 char	*get_result_prompt(void);
 // static bool	built_or_cmd(char str);
-bool	gest_readline_recover(char *str, t_data *lst_data);
+bool	gest_readline_recover(char *str, t_data *lst_data, char *reel);
 /*
 			utiles
 */
@@ -172,5 +172,6 @@ char	*inverse_split_export(char **tab);
 void	affiche_in_terminal(t_data *lst_data,
 	char *readline_recover, char **tab_arm_pipe);
 bool	av_ex(char *cmd);
+char	**split_for_ex_pipe(char *str);
 
 #endif

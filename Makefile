@@ -59,6 +59,7 @@ SRC	=	main.c \
 		utiles/my_fonction_free/free_tab.c \
 		utiles/initialisenv.c \
 		utiles/my_ft_getenv.c \
+		utiles/split_for_ex/split_for_ex.c \
 \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c \
@@ -91,6 +92,7 @@ $(OBJ_PATH):
 			mkdir $(OBJ_PATH)/prompt
 			mkdir $(OBJ_PATH)/utiles
 			mkdir $(OBJ_PATH)/utiles/my_fonction_free
+			mkdir $(OBJ_PATH)/utiles/split_for_ex
 			mkdir $(OBJ_PATH)/ft_ex
 			mkdir $(OBJ_PATH)/get_next_line
 

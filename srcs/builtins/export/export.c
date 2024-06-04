@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 15:56:34 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/04 17:30:19 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	ft_export(char *argv, t_data *env)
 	char	**temp;
 	int		i;
 
+	printf("bool export = %d\n", env->is_pipe);
 	env->t = ft_stjoin(env->t, argv + 6);
 	temp = ft_split(env->t, ' ');
 	nodouble(env->t, env);

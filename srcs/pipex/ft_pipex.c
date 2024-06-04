@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/29 11:31:24 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:39:29 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ static	char	**cmd_with_option(char *str, char *path_ok, t_data *lst_data)
 	buff = recover_word(str, i++, false);
 	while (buff)
 	{
-		tab_return = ft_realloc_tab(tab_return, 1, true);
+		tab_return = ft_realloc_tab(tab_return, 2, true);
 		tab_return[j++] = ft_strdup(buff);
 		free(buff);
 		buff = recover_word(str, i++, false);
 	}
-	if (lst_data->here_doc)
+	if (lst_data->here_doc && ft_strncmp(str, "mkdir", 5)
+		&& ft_strncmp(str, "ls", 2))
 	{
-		tab_return = ft_realloc_tab(tab_return, 1, true);
-		tab_return[j] = ft_strdup("/proc/self/fd/0");
+		tab_return = ft_realloc_tab(tab_return, 2, true);
+		tab_return[j++] = ft_strdup("/proc/self/fd/0");
 	}
 	tab_return[j] = NULL;
 	return (tab_return);
@@ -109,18 +110,12 @@ bool	ft_pipex(char *cmd, t_data *lst_data)
 	add_in_tab_path(lst_data);
 	path_ok = checked_access(lst_data->lst_pipex.tab_path, cmd);
 	if (!path_ok && ft_strchr(cmd, '/'))
-	{
 		path_ok = path_for_ex(cmd);
-	}
 	else if (!path_ok)
 		return (NULL);
 	tab_with_opt = cmd_with_option(cmd, path_ok, lst_data);
 	lst_data->here_doc = false;
 	if (execve(path_ok, tab_with_opt, lst_data->env) == -1)
-	{
-		free(path_ok);
-		fre(tab_with_opt);
-		return (false);
-	}
+		return (free(path_ok), fre(tab_with_opt), false);
 	return (true);
 }

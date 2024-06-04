@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 07:52:31 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/30 15:48:58 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/04 16:47:18 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // static void	gest_status_waitpid(int status, t_data *lst_data)
 
 static int	ex_child(char *str_traitement, t_data *lst_data,
-	int *pipe_fd, char **tab_free, char **tab_free_dup)
+	int *pipe_fd, char **tab_free, char **tab_free_dup, char *reel)
 {
 	close(pipe_fd[0]);
 	if (ft_strncmp(str_traitement, "bash", 5) == 0)
@@ -25,7 +25,7 @@ static int	ex_child(char *str_traitement, t_data *lst_data,
 	else
 		dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[1]);
-	gest_readline_recover(str_traitement, lst_data);
+	gest_readline_recover(str_traitement, lst_data, reel);
 	my_free_tab(tab_free);
 	my_free_tab(tab_free_dup);
 	freeverithing(lst_data);
@@ -52,7 +52,7 @@ static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
 }
 
 bool	ft_ex(char *str_traitement, t_data *lst_data,
-	char **tab_free, char *str, char **tab_free_dup)
+	char **tab_free, char *str, char **tab_free_dup, char *reel)
 {
 	pid_t	child_pid;
 	int		pipe_fd[2];
@@ -69,7 +69,7 @@ bool	ft_ex(char *str_traitement, t_data *lst_data,
 	else if (child_pid == 0)
 	{
 		free(str);
-		ex_child(str_traitement, lst_data, pipe_fd, tab_free, tab_free_dup);
+		ex_child(str_traitement, lst_data, pipe_fd, tab_free, tab_free_dup, reel);
 	}
 	else
 	{

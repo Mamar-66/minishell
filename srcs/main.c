@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/31 18:35:43 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/04 17:20:19 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,14 @@ static	void	ft_manager_suite_suite(char **tab_arm_pipe, char *readlin_recover,
 		lst_data->pour_toi_simon = 0;
 		if (!tab_arm_pipe[i])
 			break ;
+		if (i > 0 && tab_arm_pipe[i + 1])
+			lst_data->is_pipe = true;
+		else if (i > 0)
+			lst_data->is_pipe = false;
 		if (!built_or_cmd_for_father(tab_arm_pipe[i],
 				lst_data, tab_arm_pipe, dup_tab[i]))
-			ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe, readlin_recover, dup_tab);
+			ft_ex(tab_arm_pipe[i], lst_data, tab_arm_pipe,
+				readlin_recover, dup_tab, dup_tab[i]);
 	}
 	my_free_tab(dup_tab);
 }
@@ -43,7 +48,7 @@ static	void	ft_manager_plus(char *readlin_recover, t_data *lst_data)
 
 	if (readlin_recover)
 	{
-		tab_arm_pipe = ft_split(readlin_recover, '|');
+		tab_arm_pipe = split_for_ex_pipe(ft_strdup(readlin_recover));
 		if (tab_arm_pipe[0] && tab_arm_pipe[1])
 			lst_data->is_pipe = true;
 		ft_manager_suite_suite(tab_arm_pipe, readlin_recover, lst_data);
@@ -64,7 +69,6 @@ static	bool	ft_manager(t_data *lst_data)
 		dup2(lst_data->fd_saved_std_in, STDIN_FILENO);
 		dup2(lst_data->fd_saved_std_out, STDOUT_FILENO);
 		readlin_recover = add_signal_plus_return_result_prompt(lst_data);
-		// readlin_recover = parsing(readlin_recover, lst_data);
 		if (av_ex(readlin_recover))
 			ft_manager_plus(readlin_recover, lst_data);
 	}

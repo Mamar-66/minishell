@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/15 12:53:04 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/04 15:42:44 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static	char	*val_var(char *str, int *ptr, t_data *lst_data)
 	while (str[++i_j[0]])
 		if (ft_isalpha(str[i_j[0]]) || str[i_j[0]] == '_')
 			i_j[1]++;
-	else
-		break ;
+		else
+			break ;
 	var = malloc(sizeof(char) * i_j[1] + 1);
 	if (!var)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbarbe <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 13:33:40 by sbarbe            #+#    #+#             */
-/*   Updated: 2024/05/13 13:33:45 by sbarbe           ###   ########.fr       */
+/*   Updated: 2024/06/04 17:30:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	print2(char **temp, int i)
 
 void	print(char **temp, t_data *en)
 {
-	int	i;
+	int		i;
 	char	*rev;
 
 	i = 0;

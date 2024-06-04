@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/31 09:15:05 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/03 13:04:11 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,29 @@ static	char	*redirect_right_ici(char *buff, char *str, int *start, t_data *lst_d
 
 char	*redirect(char *buff, char *str, int *start, t_data *lst_data)
 {
-	char	*str_return;
 	char	*ptr_right;
 	char	*ptr_left;
+	char	*tmp;
 
 	ptr_right = ft_strchr(str, '>');
 	ptr_left = ft_strchr(str, '<');
+	tmp = NULL;
 	if (ptr_right && ptr_left)
 	{
 		if (ptr_right < ptr_left)
-			printf("Minishell: syntax error near unexpected token `<'\n");
+		{
+			tmp = recover_word(ptr_right, 2, false);
+			if (ft_strchr(tmp, '<') != NULL)
+				printf("Minishell: syntax error near unexpected token `<'\n");
+			return (free(tmp), NULL);
+		}
 		else
-			printf("Minishell: syntax error near unexpected token `>'\n");
-		return (NULL);
+		{
+			tmp = recover_word(ptr_left, 2, false);
+			if (ft_strchr(tmp, '>') != NULL)
+				printf("Minishell: syntax error near unexpected token `>'\n");
+			return (free(tmp), NULL);
+		}
 	}
-	str_return = redirect_right_ici(buff, str, start, lst_data);
-	return (str_return);
+	return (free(tmp), redirect_right_ici(buff, str, start, lst_data));
 }

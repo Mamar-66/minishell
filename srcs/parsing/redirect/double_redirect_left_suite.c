@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:10:59 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/31 18:36:41 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/03 14:47:59 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,27 @@ static	char	*run(char *text, char *here_doc_end, t_data *lst_data)
 	return (free(buff), text_here_doc);
 }
 
-static	char	*continu_here_doc_switch_stdin(t_data *lst_data,
+static	char	*continu_here_doc_switch_stdin(char *str, t_data *lst_data,
 	char *here_doc_end)
 {
+	(void)str;
 	char	*text_here_doc;
+	// char	*tmp;
 
+	// tmp = NULL;
 	g_global_numsignal = -10;
 	text_here_doc = first_run(here_doc_end, lst_data);
 	if (!text_here_doc)
 		return (ft_strdup(""));
 	else
 		text_here_doc = run(text_here_doc, here_doc_end, lst_data);
+	// tmp = recover_word(str, 4, false);
+	// if (tmp)
+		// return (free(tmp), free(text_here_doc), ft_strdup(""));
 	return (text_here_doc);
 }
 
-bool	here_doc_switch_stdin(t_data *lst_data, char *here_doc_end)
+bool	here_doc_switch_stdin(char *str, t_data *lst_data, char *here_doc_end)
 {
 	int		pipe_fd[2];
 	char	*text_here_doc;
@@ -107,10 +113,8 @@ bool	here_doc_switch_stdin(t_data *lst_data, char *here_doc_end)
 		printf("error pipe heredoc \n");
 		return (false);
 	}
-	close(pipe_fd[1]);
 	lst_data->here_doc = true;
-	text_here_doc = continu_here_doc_switch_stdin(lst_data, here_doc_end);
-	printf("text = <%s>\n", text_here_doc);
+	text_here_doc = continu_here_doc_switch_stdin(str, lst_data, here_doc_end);
 	if (g_global_numsignal != 130)
 		write(pipe_fd[1], text_here_doc, ft_strlen(text_here_doc));
 	else
@@ -118,6 +122,7 @@ bool	here_doc_switch_stdin(t_data *lst_data, char *here_doc_end)
 	lst_data->fd_here_doc = dup2(pipe_fd[0], STDIN_FILENO);
 	if (lst_data->fd_here_doc == -1)
 		perror("dup2 :");
+	close(pipe_fd[1]);
 	close(pipe_fd[0]);
 	free(text_here_doc);
 	return (wr);
