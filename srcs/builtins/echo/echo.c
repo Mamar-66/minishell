@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/04 16:55:05 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:01:20 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_echo(char *str, t_data *lst_data)
 {
-	(void)lst_data;
 	char	*opt;
 	int		i;
 	int		j;
@@ -24,7 +23,10 @@ void	ft_echo(char *str, t_data *lst_data)
 	if (!opt)
 	{
 		free(opt);
-		printf("\n");
+		if (lst_data->is_pipe)
+			write_in_stdin("", true, lst_data);
+		else
+			printf("\n");
 		return ;
 	}
 	if (word_has_print_return_pos_finish(str, &i) != -1)

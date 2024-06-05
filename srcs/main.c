@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/04 17:20:19 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/05 14:53:42 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static	void	ft_manager_suite_suite(char **tab_arm_pipe, char *readlin_recover,
 	dup_tab = ft_realloc_tab(tab_arm_pipe, 1, false);
 	while (tab_arm_pipe && tab_arm_pipe[++i])
 	{
+		dup2(lst_data->fd_saved_std_out, STDOUT_FILENO);
 		tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
 		lst_data->pour_toi_simon = 0;
 		if (!tab_arm_pipe[i])
 			break ;
-		if (i > 0 && tab_arm_pipe[i + 1])
+		if (i > 0 && tab_arm_pipe[i + 1] && !ft_strchr(dup_tab[i], '>'))
 			lst_data->is_pipe = true;
-		else if (i > 0)
+		else if (i > 0 || ft_strchr(dup_tab[i], '>'))
 			lst_data->is_pipe = false;
 		if (!built_or_cmd_for_father(tab_arm_pipe[i],
 				lst_data, tab_arm_pipe, dup_tab[i]))

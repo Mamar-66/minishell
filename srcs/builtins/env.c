@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:21 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/04 17:21:32 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/05 12:18:14 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	ft_env(char *str, t_data *en)
 	char	**temp;
 	char	*rev;
 
-	printf("bool env = %d\n", en->is_pipe);
 	temp = ft_split(str, ' ');
 	if (certif(temp, en) == 0)
 	{

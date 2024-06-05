@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/04 14:40:23 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/05 14:30:52 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*double_quote(char *str, t_data *lst_data);
 /*
 			PWD
 */
-void	ft_pwd(void);
+void	ft_pwd(t_data *lst_data);
 void	ft_env(char *str, t_data *en);
 void	ft_export(char *argv, t_data *env);
 int		good(char **trier);

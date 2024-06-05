@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/04 16:46:17 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:22:37 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ static	void	write_error(char *cmd, t_data *lst_data)
 	if (ft_strchr(text, '/'))
 	{
 		write(fd, text, ft_strlen(text));
-		write(fd, ": Is a directory\n", ft_strlen(": Is a directory\n"));
+		write(fd, " : Is a directory\n", ft_strlen(": Is a directory\n"));
 	}
 	else
 	{
 		write(fd, text, ft_strlen(text));
-		write(fd, ": command not found\n", ft_strlen(": command not found\n"));
+		write(fd, " \x1b[31m: command not found\x1b[0m\n",
+			ft_strlen(" \x1b[31m: command not found\x1b[0m\n"));
 	}
 	close(fd);
 	free(text);
@@ -52,22 +53,12 @@ static void	suiteexit(char *cmd, char *str, t_data *env, char **argv)
 	ft_exit(temp, env);
 }
 
-// static void	vide_buf()
-// {
-// 	char *tmp;
-
-// 	tmp = get_next_line(STDIN_FILENO);
-// 	if (tmp)
-// 		free(tmp);
-// }
-
 bool	built_or_cmd_for_father(char *str, t_data *lst_data,
 			char **tab_arm_pipe, char *str_reel)
 {
 	char	*cmd;
 	char	*cmd1;
 
-	// vide_buf();
 	lst_data->status = 0;
 	lst_data->mod_lectur_for_read_final = false;
 	cmd = recover_word(str, 1, false);
@@ -84,6 +75,8 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data,
 		ft_unset(str + 5, lst_data);
 	else if (ft_strncmp(cmd, "exit", 5) == 0)
 		suiteexit(cmd, str, lst_data, tab_arm_pipe);
+	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0 && ft_strlen(cmd1) <= 5)
+		ft_pwd(lst_data);
 	else
 		return (free(cmd), free(cmd1), false);
 	return (free(cmd), free(cmd1), true);
@@ -96,9 +89,7 @@ static bool	built_or_cmd(char *str, t_data *lst_data, char *reel)
 
 	cmd = recover_word(str, 1, false);
 	cmd1 = recover_word(reel, 1, false);
-	if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0 && ft_strlen(cmd1) <= 5)
-		ft_pwd();
-	else if (!ft_pipex(str, lst_data))
+	if (!ft_pipex(str, lst_data))
 	{
 		lst_data->status = 127;
 		write_error(cmd1, lst_data);
