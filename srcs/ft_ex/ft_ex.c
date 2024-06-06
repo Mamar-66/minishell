@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 07:52:31 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 13:34:04 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 18:35:32 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	ex_child(char **tab_ex, t_data *lst_data,
 	if (ft_strncmp(tab_ex[0], "bash", 5) == 0)
 		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
 	else if (ft_strchr(tab_ex[0], '/'))
+		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
+	else if (lst_data->here_doc)
 		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
 	else
 		dup2(pipe_fd[1], STDOUT_FILENO);

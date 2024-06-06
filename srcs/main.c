@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 17:06:42 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 18:33:30 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static	void	ft_manager_suite_suite(char **tab_arm_pipe,
 	while (tab_arm_pipe && tab_arm_pipe[++i])
 	{
 		dup2(lst_data->fd_saved_std_out, STDOUT_FILENO);
-		tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
 		lst_data->pour_toi_simon = 0;
+		tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
 		if (!tab_arm_pipe[i])
 			break ;
 		if (i > 0 && tab_arm_pipe[i + 1] && !ft_strchr(dup_tab[i], '>'))

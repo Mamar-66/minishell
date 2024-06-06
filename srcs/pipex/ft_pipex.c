@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 14:46:12 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 18:26:52 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ bool	ft_pipex(char *cmd, t_data *lst_data)
 		return (NULL);
 	tab_with_opt = cmd_with_option(cmd, path_ok, lst_data);
 	lst_data->here_doc = false;
-	if (ft_strncmp(path_ok, "/usr/bin/echo", 13 == 0
-			|| ft_strncmp(path_ok, "/usr/bin/pwd", 12) == 0))
+	if (ft_strncmp(path_ok, "/usr/bin/echo", 13) == 0
+		|| ft_strncmp(path_ok, "/usr/bin/pwd", 12) == 0)
 		return (free(path_ok), fre(tab_with_opt), false);
 	if (execve(path_ok, tab_with_opt, lst_data->env) == -1)
 		return (free(path_ok), fre(tab_with_opt), false);
