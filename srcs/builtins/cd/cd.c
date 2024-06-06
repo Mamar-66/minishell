@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:55:56 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/28 12:04:46 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 12:32:17 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	change_directory(const char *path, t_data *env, char **argv)
 	fre(argv);
 	update_pwd(oldpwd, pwd, env);
 	if (env->is_pipe)
-			write_in_stdin("", true, env);
+		write_in_stdin("", true, env);
 }
 
 void	ft_cd(char *str, t_data *env)

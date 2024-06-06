@@ -6,11 +6,25 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/05 15:01:20 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:40:45 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+static	bool	echo_suite(char *opt, t_data *lst_data)
+{
+	if (!opt)
+	{
+		free(opt);
+		if (lst_data->is_pipe)
+			write_in_stdin("", true, lst_data);
+		else
+			printf("\n");
+		return (false);
+	}
+	return (true);
+}
 
 void	ft_echo(char *str, t_data *lst_data)
 {
@@ -20,15 +34,8 @@ void	ft_echo(char *str, t_data *lst_data)
 
 	i = 2;
 	opt = recover_word(str, 2, false);
-	if (!opt)
-	{
-		free(opt);
-		if (lst_data->is_pipe)
-			write_in_stdin("", true, lst_data);
-		else
-			printf("\n");
+	if (!echo_suite(opt, lst_data))
 		return ;
-	}
 	if (word_has_print_return_pos_finish(str, &i) != -1)
 	{
 		i = recover_word_plus_return_position(str, --i);

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/05 14:30:52 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 17:07:59 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_lst_pipex
 
 typedef struct s_data
 {
+	int			i;
 	int			pour_toi_simon;
 	char		**env;
 	char		**tenv;
@@ -56,8 +57,8 @@ typedef struct s_data
 // static void	gest_signal(int numsignal);
 // static void	gest_ctrl_D(t_data *lst_data);
 
-bool	ft_ex(char *str_traitement, t_data *lst_data,
-			char **tab_free, char *str, char **tab_free_dup, char *reel);
+bool	ft_ex(char **tab_ex, t_data *lst_data,
+			char **tab_free, char **tab_free_dup);
 bool	ft_ex_father(char *str_traitement, t_data *lst_data);
 char	*add_signal_plus_return_result_prompt(t_data *lst_data);
 
@@ -127,7 +128,7 @@ char	*return_pwd(void);
 */
 char	*parsing(char *str, t_data *lst_data);
 // redirect
-bool	here_doc_switch_stdin(char *str, t_data *lst_data, char *here_doc_end);
+bool	here_doc_switch_stdin(t_data *lst_data, char *here_doc_end);
 char	*redirect(char *buff, char *str, int *start, t_data *lst_data);
 char	*redirect_right(char *str, int *start, t_data *lst_data);
 char	*double_redirect_right(char *str, int *start, t_data *lst_data);

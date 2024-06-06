@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 11:36:08 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/03 11:52:32 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 12:30:54 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	gest_signal(int numsignal)
 	{
 		if (g_global_numsignal == -10)
 		{
-			// open("/dev/null", O_RDONLY);
 			close(STDIN_FILENO);
 			printf("\n");
 			g_global_numsignal = 130;

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:43 by omfelk            #+#    #+#             */
-/*   Updated: 2024/03/26 15:56:51 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 12:31:25 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	ft_unset(char *str, t_data *env)
 	}
 	changeenv(env->tenv, env);
 	if (env->is_pipe)
-			write_in_stdin("", true, env);
+		write_in_stdin("", true, env);
 	fre(argv);
 }

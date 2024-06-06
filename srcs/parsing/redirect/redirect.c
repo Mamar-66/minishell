@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/03 13:04:11 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:45:54 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static	char	*suite_redirect(char *buff, char *str,
 		return (ft_strdup(buff));
 }
 
-static	char	*redirect_right_ici(char *buff, char *str, int *start, t_data *lst_data)
+static	char	*redirect_right_ici(char *buff, char *str,
+	int *start, t_data *lst_data)
 {
 	char	*str_return;
 	char	*ptr;

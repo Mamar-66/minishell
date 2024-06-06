@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 14:25:03 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/24 10:31:51 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 17:19:25 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static	int	saut(char *str, int i_fd)
 	int	int_return;
 
 	int_return = i_fd;
-	if (ft_strncmp(str, "echo", 4) == 0)
+	if (ft_strncmp(str, "echo", 4) == 0 || ft_strncmp(str, "export", 6) == 0
+		|| ft_strncmp(str, "cd", 2) == 0 || ft_strncmp(str, "ls", 2) == 0)
 	{
 		while (str[int_return] && str[int_return] == ' ')
 			int_return++;

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:21:39 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/04 15:42:44 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 15:24:17 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,22 @@ static	char	*val_var(char *str, int *ptr, t_data *lst_data)
 	if (str[0] == '?')
 	{
 		*ptr += 1;
-		str_return = ft_itoa(lst_data->status);
-		return (str_return);
+		return (ft_itoa(lst_data->status));
 	}
 	while (str[++i_j[0]])
+	{
 		if (ft_isalpha(str[i_j[0]]) || str[i_j[0]] == '_')
 			i_j[1]++;
 		else
 			break ;
+	}
 	var = malloc(sizeof(char) * i_j[1] + 1);
 	if (!var)
 		return (NULL);
 	ft_strlcpy(var, str + (i_j[0] - i_j[1]), i_j[1] + 1);
-	str_return = ft_strdup(ft_getenv(lst_data->env, var));
+	str_return = ft_getenv(lst_data->env, var);
 	*ptr += i_j[1];
-	free(var);
-	return (str_return);
+	return (free(var), str_return);
 }
 
 static char	*gest_global_var(char *str, t_data *lst_data)

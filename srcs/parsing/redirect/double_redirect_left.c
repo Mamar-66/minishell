@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 10:07:14 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/03 14:29:51 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:53:45 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*double_redirect_left(char *str, int *start, t_data *lst_data)
 	text_end_here_doc = ft_realloc(text_end_here_doc,
 			ft_strlen(text_end_here_doc) + 1);
 	text_end_here_doc[ft_strlen(text_end_here_doc)] = '\n';
-	if (!here_doc_switch_stdin(str, lst_data, text_end_here_doc))
+	if (!here_doc_switch_stdin(lst_data, text_end_here_doc))
 		return (free(str_return), free(text_end_here_doc), NULL);
 	while (str[i_fd[0]] && str[i_fd[0]] == ' ')
 		i_fd[0]++;

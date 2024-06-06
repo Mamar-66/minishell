@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:06:37 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/05 14:02:33 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 12:30:10 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	av_ex(char *str)
 
 	i = 0;
 	while ((str[i] == 32 || str[i] == 9 || str[i] == 10
-		|| str[i] == 13) && str[i])
+			|| str[i] == 13) && str[i])
 		i++;
 	if (str[i] == '|')
 	{
@@ -41,26 +41,3 @@ void	affiche_in_terminal(t_data *lst_data,
 		printf("%s", buff);
 	}
 }
-
-// bool	*ordre(char **tab)
-// {
-// 	bool	*tab_return;
-// 	int		j;
-
-// 	j = 0;
-// 	while (tab[j])
-// 		j++;
-// 	tab_return = ft_calloc(sizeof(bool), j + 1);
-// 	if (!tab_return)
-// 		return (NULL);
-// 	j = -1;
-// 	while (tab[++j])
-// 	{
-// 		if (ft_strchr(tab[j], '>'))
-// 			tab_return[j] = false;
-
-// 	}
-
-	
-// 	return (tab_return);
-// }

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/05 15:22:37 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/06 15:29:37 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static	void	write_error(char *cmd, t_data *lst_data)
 		write(fd, text, ft_strlen(text));
 		write(fd, " : Is a directory\n", ft_strlen(": Is a directory\n"));
 	}
-	else
+	else if (!ft_strchr(text, 127))
 	{
 		write(fd, text, ft_strlen(text));
 		write(fd, " \x1b[31m: command not found\x1b[0m\n",
