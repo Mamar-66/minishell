@@ -33,6 +33,15 @@ void	changes(char *pwd, char *oldpwd, t_data *env)
 	}
 }
 
+void	cd_erro(char **argv, t_data *env)
+{
+	fre(argv);
+	env->status = 1;
+	if (env->is_pipe)
+		write_in_stdin("", true, env);
+	printf("mishell: cd: OLDPWD not set\n");
+}
+
 char	*ft_cdd(char *str, char **argv, t_data *env)
 {
 	char	*path;
@@ -53,16 +62,20 @@ char	*ft_cdd(char *str, char **argv, t_data *env)
 			}
 		}
 		if (!path)
-		{
-			fre(argv);
-			env->status = 1;
-			if (env->is_pipe)
-				write_in_stdin("", true, env);
-			printf("mishelle: cd: OLDPWD not set\n");
+			cd_erro(argv, env);
+		if (!path)
 			return (NULL);
-		}
 	}
 	else
 		path = str;
 	return (path);
+}
+
+void	cd_ero(char **argv, t_data *env)
+{
+	fre(argv);
+	env->status = 1;
+	if (env->is_pipe)
+		write_in_stdin("", true, env);
+	printf("mishell: cd: HOME not set\n");
 }

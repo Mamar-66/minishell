@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:51:38 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 14:45:54 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/09 23:21:39 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,31 +94,33 @@ static	char	*redirect_right_ici(char *buff, char *str,
 	return (suite_redirect(buff, str, start, lst_data));
 }
 
+static	bool	ft_verif_quote(char *ptr)
+{
+	int		i;
+
+	i = 0;
+	if (!ptr)
+		return (false);
+	while (ptr[i])
+	{
+		if (ptr[i] == '"' || ptr[i] == '\'')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 char	*redirect(char *buff, char *str, int *start, t_data *lst_data)
 {
 	char	*ptr_right;
 	char	*ptr_left;
-	char	*tmp;
 
 	ptr_right = ft_strchr(str, '>');
 	ptr_left = ft_strchr(str, '<');
-	tmp = NULL;
+	if (ft_verif_quote(ptr_right) || ft_verif_quote(ptr_left))
+		return (ft_strdup(buff));
 	if (ptr_right && ptr_left)
-	{
-		if (ptr_right < ptr_left)
-		{
-			tmp = recover_word(ptr_right, 2, false);
-			if (ft_strchr(tmp, '<') != NULL)
-				printf("Minishell: syntax error near unexpected token `<'\n");
-			return (free(tmp), NULL);
-		}
-		else
-		{
-			tmp = recover_word(ptr_left, 2, false);
-			if (ft_strchr(tmp, '>') != NULL)
-				printf("Minishell: syntax error near unexpected token `>'\n");
-			return (free(tmp), NULL);
-		}
-	}
-	return (free(tmp), redirect_right_ici(buff, str, start, lst_data));
+		if (!printf_error(ptr_right, ptr_left))
+			return (NULL);
+	return (redirect_right_ici(buff, str, start, lst_data));
 }

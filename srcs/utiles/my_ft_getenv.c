@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 10:24:24 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 15:28:07 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/07 18:26:04 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_getenv(char	**tab_env, char *str_chrch)
 		i++;
 	}
 	if (tab_env[i])
-		str_return = tab_env[i] + ft_strlen(str_chrch) + 1;
+		str_return = ft_strdup(tab_env[i] + ft_strlen(str_chrch) + 1);
 	else
 		str_return = ft_strdup(c);
 	return (str_return);

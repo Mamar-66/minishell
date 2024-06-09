@@ -12,7 +12,7 @@
 
 #include "../../../includes/minishell.h"
 
-static	char	*val_var(char *str, int *ptr, t_data *lst_data)
+static	char	*val_varr(char *str, int *ptr, t_data *lst_data)
 {
 	char	*str_return;
 	char	*var;
@@ -58,7 +58,7 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 		if (str[i] == '$' && str[i + 1] != '\n'
 			&& str[i + 1] != ' ' && str[i + 1])
 		{
-			var = val_var(str + i + 1, &i, lst_data);
+			var = val_varr(str + i + 1, &i, lst_data);
 			if (var)
 				str_return = ft_strjoin(str_return, var);
 			if (var)

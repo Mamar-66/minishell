@@ -76,29 +76,28 @@ char	*deletes(char *str, char *env, int a)
 	return (res);
 }
 
-void	ft_unset(char *str, t_data *env)
+void	ft_unset(char *str, t_data *env, char *st)
 {
 	int		i;
 	int		j;
 	int		a;
+	char	*t;
 	char	**argv;
 
-	argv = ft_split(str, ' ');
-	j = 0;
-	while (argv[j])
-	{
-		i = 0;
-		while (env->tenv[i])
-		{
-			if (ft_stcmp(argv[j], env->tenv[i], ft_strlen(argv[j])) == 0)
-				delete(i, env);
-			i++;
-		}
-		a = 0;
-		if (env->t)
-			env->t = deletes(argv[j], env->t, a);
-		j++;
-	}
+	(void)str;
+	t = NULL;
+	st = dollars_parsing(st, env);
+	st = parsing_export(ft_strdup(st), env);
+	j = -1;
+	argv = ft_calloc(sizeof(char *), 500);
+	argv[j + 1] = recover_word(st, j + 2, false);
+	while (argv[++j])
+		argv[j + 1] = recover_word(st, j + 2, false);
+	j = -1;
+	while (argv[++j])
+		ft_unsetbi(argv[j], env);
+	a = 0;
+	i = 0;
 	changeenv(env->tenv, env);
 	if (env->is_pipe)
 		write_in_stdin("", true, env);

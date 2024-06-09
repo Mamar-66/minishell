@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 10:09:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 17:07:48 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/08 16:00:02 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static	char	*if_space_end_wedspace(char *str_return, char *str,
 	return (ft_str_return);
 }
 
-static	char	*gest_symbole_plus(char *buff, char *str
+static char	*gest_symbole_plus(char *buff, char *str
 	, int *start, t_data *lst_data)
 {
 	char	*buff_return;

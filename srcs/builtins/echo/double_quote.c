@@ -6,13 +6,13 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 12:11:45 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 15:19:19 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/08 15:27:01 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static	char	*val_var(char *str, int *ptr, t_data *lst_data)
+char	*val_var(char *str, int *ptr, t_data *lst_data)
 {
 	char	*str_return;
 	char	*var;
@@ -55,7 +55,8 @@ static char	*gest_global_var(char *str, t_data *lst_data)
 	{
 		c[0] = str[i];
 		if (str[i] == '$' && str[i + 1] != '\n'
-			&& str[i + 1] != ' ' && str[i + 1] != '"')
+			&& str[i + 1] != ' ' && str[i + 1] != '"'
+			&& str[i + 1] > 32 && str[i + 1] < 127)
 		{
 			var = val_var(str + i + 1, &i, lst_data);
 			if (var)

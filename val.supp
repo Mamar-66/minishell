@@ -11,3 +11,28 @@
 	...
 	obj:/usr/bin/ls
 }
+
+{
+   grep-mem-leak
+   Memcheck:Leak
+   fun:malloc
+   fun:some_function
+   obj:/usr/bin/grep
+}
+
+{
+   ignore-grep-leak
+   Memcheck:Leak
+   fun:malloc
+   obj:/lib/x86_64-linux-gnu/libc-2.31.so
+}
+
+{
+   sleep_leak
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   obj:/usr/lib/libc.so.*
+   fun:sleep
+   ...
+}

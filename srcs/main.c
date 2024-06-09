@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 18:33:30 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/09 22:53:51 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,22 @@ static	void	ft_manager_suite_suite(char **tab_arm_pipe,
 
 	i = -1;
 	dup_tab = ft_realloc_tab(tab_arm_pipe, 1, false);
-	while (tab_arm_pipe && tab_arm_pipe[++i])
+	while (tab_arm_pipe && tab_arm_pipe[++i] && lst_data->status_for_pipe != 2)
 	{
-		dup2(lst_data->fd_saved_std_out, STDOUT_FILENO);
+		if (!dup_tab[i + 1] && !ft_strchr(dup_tab[i], '>'))
+			dup2(lst_data->fd_saved_std_out, STDOUT_FILENO);
 		lst_data->pour_toi_simon = 0;
 		tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
 		if (!tab_arm_pipe[i])
 			break ;
-		if (i > 0 && tab_arm_pipe[i + 1] && !ft_strchr(dup_tab[i], '>'))
+		if ((i > 0 && tab_arm_pipe[i + 1]) && !ft_strchr(dup_tab[i], '>'))
 			lst_data->is_pipe = true;
 		else if (i > 0 || ft_strchr(dup_tab[i], '>'))
 			lst_data->is_pipe = false;
 		lst_data->i = i;
 		pour_norminette(readlin_recover, tab_arm_pipe, dup_tab, lst_data);
 	}
+	lst_data->status_for_pipe = 0;
 	my_free_tab(dup_tab);
 }
 
@@ -105,6 +107,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	lst_data.status = 0;
+	lst_data.status_for_pipe = 0;
 	lst_data.here_doc_parssing = false;
 	lst_data.mod_lectur_for_read_final = false;
 	lst_data.fd_saved_std_out = dup(STDOUT_FILENO);

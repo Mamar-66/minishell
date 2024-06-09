@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 07:52:31 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 18:35:32 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/09 23:11:53 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ static int	ex_child(char **tab_ex, t_data *lst_data,
 	if (ft_strncmp(tab_ex[0], "bash", 5) == 0)
 		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
 	else if (ft_strchr(tab_ex[0], '/'))
-		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
-	else if (lst_data->here_doc)
 		dup2(pipe_fd[1], lst_data->fd_saved_std_out);
 	else
 		dup2(pipe_fd[1], STDOUT_FILENO);
@@ -47,6 +45,7 @@ static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
 	}
 	close(pipe_fd[0]);
 	waitpid(child_pid, &statu, 0);
+	lst_data->status_for_pipe = statu;
 	exit_status = WEXITSTATUS(statu);
 	lst_data->status = exit_status;
 	return (true);

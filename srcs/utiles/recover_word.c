@@ -78,7 +78,7 @@ char	*first_word(char *str, int *start, bool mod)
 		j -= 2;
 		i -= 1;
 	}
-	return_word = malloc(sizeof(char) * j + 1);
+	return_word = ft_calloc(sizeof(char), j + 3);
 	if (!return_word)
 		return (NULL);
 	ft_strlcpy(return_word, (str + (i - j)), j + 1);

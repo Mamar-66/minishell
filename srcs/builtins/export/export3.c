@@ -17,11 +17,14 @@ int	findn(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str)
 	{
-		if (str[i] == '=')
-			return (i);
-		i++;
+		while (str[i])
+		{
+			if (str[i] == '=')
+				return (i);
+			i++;
+		}
 	}
 	return (0);
 }

@@ -23,9 +23,7 @@ char	*quote(char *str, t_data *lst_data)
 	else
 		return_str = NULL;
 	if (!return_str && str[0] == '\'')
-	{
 		printf("error argument simple quote <%s>\n", str);
-	}
 	else if (!return_str && str[0] == '"')
 		printf("error argument double quote <%s>\n", str);
 	if (lst_data->here_doc_parssing)

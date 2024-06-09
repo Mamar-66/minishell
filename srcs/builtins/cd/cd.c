@@ -95,7 +95,7 @@ static void	change_directory(const char *path, t_data *env, char **argv)
 		fre(argv);
 		if (env->is_pipe)
 			write_in_stdin("", true, env);
-		printf("No file or directory\n");
+		printf("cd: %s: No such file or directory\n", path);
 		return ;
 	}
 	fre(argv);
@@ -116,7 +116,7 @@ void	ft_cd(char *str, t_data *env)
 		env->status = 1;
 		if (env->is_pipe)
 			write_in_stdin("", true, env);
-		printf("mishelle: cd: too many arguments\n");
+		printf("mishell: cd: too many arguments\n");
 		return ;
 	}
 	if (!argv[1] || !ft_strncmp(str, "~", 2))
@@ -124,11 +124,7 @@ void	ft_cd(char *str, t_data *env)
 		path = getenv("HOME");
 		if (!path)
 		{
-			fre(argv);
-			env->status = 1;
-			if (env->is_pipe)
-				write_in_stdin("", true, env);
-			printf("mishelle: cd: HOME not set\n");
+			cd_ero(argv, env);
 			return ;
 		}
 	}

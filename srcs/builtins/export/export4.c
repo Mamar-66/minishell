@@ -25,7 +25,7 @@ char	*ft_stjoin(char *temp, char *line)
 	}
 	if (!temp || !line)
 		return (NULL);
-	str = ft_calloc(sizeof(char), ((ft_strlen(temp) + ft_strlen(line)) + 3));
+	str = ft_calloc(sizeof(char), ((ft_strlen(temp) + ft_strlen(line)) + 10));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
@@ -80,7 +80,7 @@ void	ft_exportt(char *argv, t_data *env)
 	i = 0;
 	while (j == 0)
 	{
-		str = verif(argv + 6 + i);
+		str = verif(argv + i);
 		if (str[0] != '\0')
 			ft_unsetbis(str, env);
 		if (str[0] == 'a')

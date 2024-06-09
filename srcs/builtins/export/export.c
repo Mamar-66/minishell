@@ -88,8 +88,9 @@ char	**plus(char **temp, t_data *env)
 	}
 	j = -1;
 	while (temp[++j])
+	{
 		trier[i + j] = encore(env->tenv, temp[j]);
-	fre(temp);
+	}
 	return (trier);
 }
 
@@ -108,35 +109,32 @@ char	**trie(char **trier)
 	return (trier);
 }
 
-void	ft_export(char *argv, t_data *env)
+void	ft_export(char *argv, t_data *env, char *str)
 {
 	char	**trier;
 	char	**temp;
+	char	*t;
 	int		i;
 
-	env->t = ft_stjoin(env->t, argv + 6);
-	temp = ft_split(env->t, ' ');
-	nodouble(env->t, env);
-	ft_exportt(argv, env);
-	i = 0;
-	while (temp[i])
-	{
-		metacarac(temp[i], env);
-		i++;
-	}
+	t = NULL;
+	str = dollars_parsing(str + 6, env);
+	str = parsing_export(str, env);
+	if (v(argv + 6) != 0)
+		ft_export_strjoin(env, str);
+	free(str);
+	env->t = modify_string(env->t);
+	temp = ft_calloc(sizeof(char *), (ft_export_count(t, env, 0) + 5));
+	temp = ft_export_temp(t, env, temp, 0);
+	i = -1;
+	nodouble(temp, env);
+	while (temp[++i])
+		export_metacarac(temp, i, t, env);
 	trier = plus(temp, env);
 	changeenv(trier, env);
+	nodouble(temp, env);
 	if (v(argv + 6) == 0)
-	{	
-		temp = trie(trier);
-		temp = ajoute(temp);
-		print(temp, env);
-		fre(trier);
-	}
+		trie_print_ajoute(temp, trier, env);
 	else
-	{
-		if (env->is_pipe)
-			write_in_stdin("", true, env);
-		fre(trier);
-	}
+		is_pipe_export(env, trier, temp);
+	fre(temp);
 }

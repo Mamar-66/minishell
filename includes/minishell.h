@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 17:07:59 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/09 23:20:51 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,41 @@ typedef struct s_lst_pipex
 	char	**tab_path;
 }	t_lst_pipex;
 
+typedef struct s_exp
+{
+	int		length;
+	char	*result;
+	bool	inside_quotes;
+	char	quote_char;
+	int		j;
+	int		i;
+	bool	last_was_space;
+	char	current;
+}	t_exp;
+
+typedef struct s_pars
+{
+	char		**result;
+	char		*section;
+	int			index;
+	int			in_quotes;
+	char		quote_char;
+	const char	*start;
+	size_t		str_len;
+	size_t		len;
+}	t_pars;
+
 typedef struct s_data
 {
 	int			i;
+	int			dolar;
 	int			pour_toi_simon;
 	char		**env;
 	char		**tenv;
 	char		*t;
 	char		**temp;
 	int			status;
+	int			status_for_pipe;
 	int			fd_saved_std_out;
 	int			fd_saved_std_in;
 	int			fd_here_doc;
@@ -78,7 +104,7 @@ char	*double_quote(char *str, t_data *lst_data);
 */
 void	ft_pwd(t_data *lst_data);
 void	ft_env(char *str, t_data *en);
-void	ft_export(char *argv, t_data *env);
+void	ft_export(char *argv, t_data *env, char *str);
 int		good(char **trier);
 char	**trie2(char **trier, char **temp, int i);
 char	**ajoute(char **argv);
@@ -88,18 +114,25 @@ int		v(char *str);
 void	ft_cd(char *str, t_data *env);
 void	fre(char **argv);
 char	*ft_cdd(char *str, char **argv, t_data *env);
-void	ft_unset(char *str, t_data *env);
+void	ft_unset(char *str, t_data *env, char *st);
 void	ft_exportt(char *argv, t_data *env);
 char	*verif(char *a);
 char	*veriff(char *a, char *b, size_t i);
 char	*ft_stoin(char *temp, char *line);
 void	ft_exit(char *str, t_data *env);
 void	ft_unsetbis(char *str, t_data *env);
+void	ft_unsetbisbis(char *str, t_data *env, char *t);
+char	*changeles(char *str, char c);
+char	*deletesbis(char *str, char *env, int j, t_data *en);
+char	*deletes_for_no_mess(char *str, char *env, int j, t_data *en);
+void	deletebis(int i, t_data *env);
 int		findn(char *str);
 int		ft_stcmp(const char *s1, const char *s2, size_t n);
-void	metacarac(char *str, t_data *env);
+int		ft_scmp(char *s1, char *s2, size_t n);
+int		ft_scmp_bis(const char *s1, const char *s2, size_t n);
+void	metacarac(char *str, t_data *env, char *t);
 void	changeenv(char **av, t_data *ev);
-void	nodouble(char *str, t_data *env);
+void	nodouble(char **av, t_data *env);
 void	changes(char *pwd, char *oldpwd, t_data *env);
 char	**decale(char **argv, int i);
 int		notgood(char *str, t_data *env);
@@ -113,7 +146,35 @@ char	*anothersuite(char *b);
 int		nodif(char *str, char *s);
 char	**trie(char **trier);
 char	**plus(char **temp, t_data *env);
+int		no_quote(char *str);
 void	ft_error_and_status(t_data *en, char *str);
+char	*dollars_parsing(char *str, t_data *env);
+char	*parsing_export(char *nat, t_data *env);
+char	*modify_string(const char *input);
+char	**parse_string(char *str);
+int		double_single(char *s1, char *s2, int n);
+int		single_double(char *s1, char *s2, int n);
+int		single_single(char *s1, char *s2, int n);
+char	*dollars_parsing_suite(char *str, int z, t_data *env);
+int		dolar(char *str);
+char	*flemme_bis(char **argv, int i, int j, int c);
+char	*flemme(char **argv, int i, int j, int c);
+char	**ft_export_temp(char *t, t_data *env, char **temp, int j);
+int		ft_export_count(char *t, t_data *env, int j);
+void	is_pipe_export(t_data *env, char **trier, char **temp);
+void	trie_print_ajoute(char **temp, char **trier, t_data *env);
+void	export_metacarac(char **temp, int i, char *t, t_data *env);
+void	ft_export_strjoin(t_data *env, char *str);
+char	*create_suite(int j, char *temp, int a, char *t);
+void	process_space(t_exp *exp);
+void	initialise(t_exp *exp, const char *input);
+void	handles_quotes(char current, bool *inside_quotes, char *quote_char);
+int		ft_isspace(int c);
+void	initialise_pars(t_pars *p, const char *str);
+void	parse_string_suite(t_pars *p, char **str);
+void	cd_ero(char **argv, t_data *env);
+void	parse_string_s(t_pars *p, char **str);
+void	ft_unsetbi(char *str, t_data *env);
 /*
 			get_next_line
 */
@@ -127,9 +188,11 @@ char	*return_pwd(void);
 			parsing
 */
 char	*parsing(char *str, t_data *lst_data);
+char	*val_var(char *str, int *ptr, t_data *lst_data);
 // redirect
 bool	here_doc_switch_stdin(t_data *lst_data, char *here_doc_end);
 char	*redirect(char *buff, char *str, int *start, t_data *lst_data);
+bool	printf_error(char *ptr_right, char *ptr_left);
 char	*redirect_right(char *str, int *start, t_data *lst_data);
 char	*double_redirect_right(char *str, int *start, t_data *lst_data);
 char	*redirect_left(char *str, int *start, t_data *lst_data);
@@ -171,7 +234,7 @@ char	*inverse_split(char **tab);
 char	*inverse_split_export(char **tab);
 
 void	affiche_in_terminal(t_data *lst_data,
-	char *readline_recover, char **tab_arm_pipe);
+			char *readline_recover, char **tab_arm_pipe);
 bool	av_ex(char *cmd);
 char	**split_for_ex_pipe(char *str);
 

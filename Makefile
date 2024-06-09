@@ -30,6 +30,15 @@ SRC	=	main.c \
 		builtins/export/export6.c \
 		builtins/export/export7.c \
 		builtins/export/export8.c \
+		builtins/export/export9.c \
+		builtins/export/export10.c \
+		builtins/export/export11.c \
+		builtins/export/export12.c \
+		builtins/export/export13.c \
+		builtins/export/export14.c \
+		builtins/export/export15.c \
+		builtins/export/export16.c \
+		builtins/export/export17.c \
 		builtins/cd/cd.c \
 		builtins/cd/cd2.c \
 		builtins/unset.c \
@@ -42,6 +51,7 @@ SRC	=	main.c \
 \
 		parsing/parsing.c \
 		parsing/redirect/redirect.c \
+		parsing/redirect/redirect_suite.c \
 		parsing/redirect/redirect_right.c \
 		parsing/redirect/redirect_left.c \
 		parsing/redirect/double_redirect_left.c \

@@ -23,14 +23,18 @@ void	changeenv(char **av, t_data *ev)
 	while (av[i])
 		i++;
 	ev->env = ft_calloc(sizeof(char *), i + 3);
-	i = 0;
+	i = -1;
 	a = 0;
-	while (av[i + a])
+	while (av[++i + a])
 	{
 		if (findn(av[i + a]) != 0)
 		{
-			ev->env[i] = ft_strdup(av[i + a]);
-			i++;
+			if (av[i + a][0] == '"')
+				ev->env[i] = ft_strdup(av[i + a] + 1);
+			if (av[i + a][0] == '"')
+				ft_strlcpy(ev->env[i], ev->env[i], ft_strlen(ev->env[i]) - 1);
+			else
+				ev->env[i] = ft_strdup(av[i + a]);
 		}
 		else
 			a++;
@@ -59,19 +63,21 @@ int	ftn(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '=' && str[i])
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (i);
 		i++;
+	}
 	return (i);
 }
 
-void	nodouble(char *str, t_data *env)
+void	nodouble(char **av, t_data *env)
 {
-	char	**av;
 	int		i;
 	int		j;
 
 	j = 0;
-	av = ft_split(str, ' ');
 	while (av[j])
 	{
 		i = 1;
@@ -79,7 +85,8 @@ void	nodouble(char *str, t_data *env)
 		{
 			if (notgood(av[j + i], env) == 0)
 				i = i + 1 - 1;
-			else if (ft_stcmp(av[j], av[i + j], ftn(av[j])) == 0)
+			else if (ft_scmp(av[j], av[i + j], ftn(av[j])) == 0
+				|| ft_scmp_bis(av[j], av[i + j], ftn(av[j])) == 0)
 			{
 				if (findn(av[j + i]) == 0)
 					extensiontwo(av, env, i, j);
@@ -90,7 +97,6 @@ void	nodouble(char *str, t_data *env)
 		}
 		j++;
 	}
-	fre(av);
 }
 
 char	**decale(char **argv, int i)

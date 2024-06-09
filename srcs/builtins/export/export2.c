@@ -23,7 +23,8 @@ int	good(char **trier)
 		j = 0;
 		if (trier[i][j] > trier[i + 1][j])
 			return (1);
-		while (trier[i][j] == trier[i + 1][j] && trier[i + 1])
+		while (trier[i + 1] && trier[i][j] && trier[i][j + 1]
+		&& trier[i][j] == trier[i + 1][j])
 		{
 			j++;
 			if (trier[i][j] > trier[i + 1][j])
@@ -94,7 +95,8 @@ char	**trie2(char **trier, char **temp, int i)
 			trier[i] = trier[i + 1];
 			trier[i + 1] = temp[0];
 		}
-		while (trier[i][j] == trier[i + 1][j] && trier[i + 1])
+		while (trier[i + 1] && trier[i][j] && trier[i + 1][j]
+		&& trier[i][j] == trier[i + 1][j])
 		{
 			j++;
 			if (trier[i][j] > trier[i + 1][j])

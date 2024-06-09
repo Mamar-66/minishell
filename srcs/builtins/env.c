@@ -37,32 +37,32 @@ static int	certif(char **argv, t_data *env)
 	}
 }
 
-void	ft_exportation(char *argv, t_data *env)
+void	ft_exportation(char *argv, t_data *env, int k)
 {
 	char	**trier;
 	char	**temp;
+	char	*t;
 	int		i;
+	int		j;
 
-	env->t = ft_stjoin(env->t, argv + 6);
-	temp = ft_split(env->t, ' ');
-	nodouble(env->t, env);
-	ft_exportt(argv, env);
-	i = 0;
-	while (temp[i])
+	t = NULL;
+	while (--k != 0)
 	{
-		metacarac(temp[i], env);
-		i++;
+		env->t = modify_string(env->t);
+		j = 0;
+		temp = ft_calloc(sizeof(char *), (ft_export_count(t, env, j) + 5));
+		temp = ft_export_temp(t, env, temp, j);
+		i = -1;
+		nodouble(temp, env);
+		while (temp[++i])
+			export_metacarac(temp, i, t, env);
+		trier = plus(temp, env);
+		changeenv(trier, env);
+		if (v(argv + 6) == 0)
+			fre(trier);
+		else
+			is_pipe_export(env, trier, temp);
 	}
-	trier = plus(temp, env);
-	changeenv(trier, env);
-	if (v(argv + 6) == 0)
-	{	
-		temp = trie(trier);
-		temp = ajoute(temp);
-		fre(trier);
-	}
-	else
-		fre(trier);
 }
 
 void	ft_env(char *str, t_data *en)
@@ -79,7 +79,7 @@ void	ft_env(char *str, t_data *en)
 		return ;
 	}
 	i = -1;
-	ft_exportation("export", en);
+	ft_exportation("export", en, 2);
 	if (en->env)
 	{
 		if (!en->is_pipe)

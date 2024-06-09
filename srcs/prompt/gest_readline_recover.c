@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 15:29:37 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/08 15:51:50 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static	void	write_error(char *cmd, t_data *lst_data)
 	if (ft_strchr(text, '/'))
 	{
 		write(fd, text, ft_strlen(text));
-		write(fd, " : Is a directory\n", ft_strlen(": Is a directory\n"));
+		write(fd, " : Is a directory\n", 18);
 	}
 	else if (!ft_strchr(text, 127))
 	{
@@ -66,13 +66,13 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data,
 	if (ft_strncmp(cmd, "env", 4) == 0)
 		ft_env(str, lst_data);
 	else if (ft_strncmp(cmd, "export", 7) == 0)
-		ft_export(str, lst_data);
+		ft_export(str, lst_data, ft_strdup(str_reel));
 	else if (ft_strncmp(cmd, "cd", 3) == 0)
 		ft_cd(str, lst_data);
 	else if ((ft_strncmp(cmd, "echo", 5) == 0 && ft_strlen(cmd1) <= 6))
 		ft_echo(str, lst_data);
 	else if (ft_strncmp(cmd, "unset", 6) == 0)
-		ft_unset(str + 5, lst_data);
+		ft_unset(str + 5, lst_data, ft_strdup(str_reel));
 	else if (ft_strncmp(cmd, "exit", 5) == 0)
 		suiteexit(cmd, str, lst_data, tab_arm_pipe);
 	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0 && ft_strlen(cmd1) <= 5)
