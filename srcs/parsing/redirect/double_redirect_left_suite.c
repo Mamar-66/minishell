@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:10:59 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 14:48:25 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/11 15:08:13 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static char	*first_run(char *here_doc_end, t_data *lst_data)
 
 static	char	*run(char *text, char *here_doc_end, t_data *lst_data)
 {
-	char	*buff;
 	char	*text_here_doc;
 	char	*tmp;
 
@@ -62,11 +61,10 @@ static	char	*run(char *text, char *here_doc_end, t_data *lst_data)
 	free(text);
 	while (1 && text_here_doc)
 	{
-		tmp = NULL;
-		buff = readline("here_doc > ");
-		if (!verif_read(buff, here_doc_end))
+		tmp = readline("here_doc > ");
+		if (!verif_read(tmp, here_doc_end))
 			break ;
-		tmp = parsing(ft_strdup(buff), lst_data);
+		tmp = parsing(ft_strdup(tmp), lst_data);
 		if (!tmp)
 			tmp = ft_strdup("\n");
 		if (text_here_doc && !ft_strncmp(text_here_doc, "-1", INT_MAX))
@@ -78,7 +76,7 @@ static	char	*run(char *text, char *here_doc_end, t_data *lst_data)
 	}
 	if (tmp)
 		free(tmp);
-	return (free(buff), text_here_doc);
+	return (text_here_doc);
 }
 
 static	char	*continu_here_doc_switch_stdin(t_data *lst_data,
@@ -87,6 +85,7 @@ static	char	*continu_here_doc_switch_stdin(t_data *lst_data,
 	char	*text_here_doc;
 
 	g_global_numsignal = -10;
+	dup2(lst_data->fd_saved_std_in, STDIN_FILENO);
 	text_here_doc = first_run(here_doc_end, lst_data);
 	if (!text_here_doc)
 		return (ft_strdup(""));
@@ -108,6 +107,7 @@ bool	here_doc_switch_stdin(t_data *lst_data, char *here_doc_end)
 		return (false);
 	}
 	lst_data->here_doc = true;
+	lst_data->here_doc_vrai = true;
 	text_here_doc = continu_here_doc_switch_stdin(lst_data, here_doc_end);
 	if (g_global_numsignal != 130)
 		write(pipe_fd[1], text_here_doc, ft_strlen(text_here_doc));

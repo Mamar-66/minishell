@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 14:03:05 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/08 15:10:04 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/10 16:32:56 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static	bool	verif_fin_pipe(char	*str)
 	i = 0;
 	if (!str)
 		return (true);
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '	')
 		i++;
 	if ((str[i] > 32 && str[i] <= 127) || str[i] == '\0')
 		return (true);
@@ -98,7 +98,7 @@ static	int	count_pipe_reel(char *str)
 	return (cpm_pipe);
 }
 
-char	**split_for_ex_pipe(char *str)
+char	**split_for_ex_pipe(char *str, t_data *lst_data)
 {
 	char	**tab_return;
 	int		i;
@@ -111,6 +111,7 @@ char	**split_for_ex_pipe(char *str)
 		return (free(str), NULL);
 	if (!verif_fin_pipe(tab_return[i]))
 	{
+		lst_data->status = 2;
 		printf("Minishell: syntax error near unexpected token `|'\n");
 		return (my_free_tab(tab_return), free(str), NULL);
 	}

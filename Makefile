@@ -39,8 +39,10 @@ SRC	=	main.c \
 		builtins/export/export15.c \
 		builtins/export/export16.c \
 		builtins/export/export17.c \
+		builtins/export/export18.c \
 		builtins/cd/cd.c \
 		builtins/cd/cd2.c \
+		builtins/cd/cd3.c \
 		builtins/unset.c \
 		builtins/exit.c \
 		\
@@ -60,6 +62,7 @@ SRC	=	main.c \
 		parsing/redirect/ft_redirect_for_father.c \
 \
 		pipex/ft_pipex.c \
+		pipex/suite_pipex.c \
 \
 		prompt/get_prompt.c \
 		prompt/gest_readline_recover.c \
@@ -69,6 +72,7 @@ SRC	=	main.c \
 		utiles/my_fonction_free/free_tab.c \
 		utiles/initialisenv.c \
 		utiles/my_ft_getenv.c \
+		utiles/exit_bis.c \
 		utiles/split_for_ex/split_for_ex.c \
 \
 		get_next_line/get_next_line.c \

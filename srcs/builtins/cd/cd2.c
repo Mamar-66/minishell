@@ -47,19 +47,13 @@ char	*ft_cdd(char *str, char **argv, t_data *env)
 	char	*path;
 	int		i;
 
+	path = NULL;
 	if (!ft_strncmp(str, "-", 2))
 	{
 		i = -1;
 		while (env->tenv[++i])
 		{
-			if (ft_strncmp(env->tenv[i], "OLDPWD=", 7) == 0)
-			{
-				path = env->tenv[i] + 7;
-				if (!env->is_pipe)
-					printf("%s\n", path);
-				else
-					write_in_stdin(path, false, env);
-			}
+			path = oldpwd_cd(env, i, str, path);
 		}
 		if (!path)
 			cd_erro(argv, env);
@@ -71,11 +65,28 @@ char	*ft_cdd(char *str, char **argv, t_data *env)
 	return (path);
 }
 
-void	cd_ero(char **argv, t_data *env)
+void	cd_ero(char **argv, t_data *env, char *str)
 {
+	free(str);
 	fre(argv);
 	env->status = 1;
 	if (env->is_pipe)
 		write_in_stdin("", true, env);
 	printf("mishell: cd: HOME not set\n");
+}
+
+char	**ft_cd_temp(char *st, char **temp, int j)
+{
+	temp[j] = recover_word(st, 1 + j, false);
+	if (no_quote(temp[j]) == 5)
+		temp[j] = changeles(temp[j], '\'');
+	else if (no_quote(temp[j]) == 0)
+		temp[j] = changeles(temp[j], '"');
+	if (temp[j])
+	{
+		j++;
+		temp[j] = recover_word(st, 1 + j, false);
+	}
+	free(st);
+	return (temp);
 }

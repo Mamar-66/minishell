@@ -22,37 +22,32 @@ void	deletebis(int i, t_data *env)
 	}
 }
 
-char	*deletesbis(char *str, char *env, int j, t_data *en)
+char	*deletesbis(char *str, char *e, int j, t_data *en)
 {
 	int		a;
 	int		z;
 	size_t	i;
 	char	*res;
 
-	res = ft_calloc(sizeof(char), ft_strlen(env) + 2);
-	j = 0;
+	res = ft_calloc(sizeof(char), ft_strlen(e) + 2);
 	a = 0;
 	z = 0;
-	while (env[j])
+	while (e[j])
 	{
 		i = 0;
-		if (j != 0 && env[j - 1] == ' ')
-			while (str[i] == env[j + i] && str[i] && env[j + i])
+		if (j != 0 && e[j - 1] == ' ')
+			while (str[i] == e[j + i] && str[i] && e[j + i])
 				i++;
 		else if (j == 0)
-			while (str[i] == env[j + i] && str[i] && env[j + i])
+			while (str[i] == e[j + i] && str[i] && e[j + i])
 				i++;
-		if (i == ft_strlen(str) && (env[i + j] == ' ' || env[i + j] == '\0') && z == 0)
-		{
-			ft_error_and_status(en, str);
-			z++;
-		}
-		if (i == ft_strlen(str) && (env[i + j] == ' ' || env[i + j] == '\0'))
+		if (i == ft(str) && (e[i + j] == ' ' || e[i + j] == '\0') && z == 0)
+			ft_error_and_status(en, str, &z);
+		if (i == ft_strlen(str) && (e[i + j] == ' ' || e[i + j] == '\0'))
 			j = j + i;
-		res[a++] = env[j++];
+		res[a++] = e[j++];
 	}
-	free(env);
-	free(en->t);
+	just_free(e, en);
 	return (res);
 }
 
@@ -108,7 +103,7 @@ void	metacarac(char *str, t_data *env, char *t)
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != '=')
+	while (str[i] && str[i] != '=' && str[0] != 127)
 	{
 		if ((str[i] >= 32 && str[i] <= 47) || (str[i] >= 58
 				&& str[i] <= 64 && str[i] != '=') || (str[i] >= 91
@@ -122,7 +117,8 @@ void	metacarac(char *str, t_data *env, char *t)
 	}
 	i = 0;
 	if (str[i] && (!(str[i] <= 90 && str[i] >= 65)
-			&& !(str[i] <= 122 && str[i] >= 97) && str[i] != '_'))
+			&& !(str[i] <= 122 && str[i] >= 97) && str[i] != '_'
+			&& str[i] != 127))
 	{
 		ft_unsetbisbis(str, env, t);
 	}

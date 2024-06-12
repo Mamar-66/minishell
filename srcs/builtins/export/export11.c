@@ -12,7 +12,7 @@
 
 #include "../../../includes/minishell.h"
 
-char	*modify_string(const char *input)
+char	*modify_string(const char *input, char *str)
 {
 	t_exp	*exp;
 	char	*temp;
@@ -30,6 +30,7 @@ char	*modify_string(const char *input)
 	temp = ft_strdup(exp->result);
 	free(exp->result);
 	free(exp);
+	free(str);
 	free((char *)input);
 	return (temp);
 }

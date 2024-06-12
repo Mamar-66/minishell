@@ -84,7 +84,7 @@ static void	update_pwd(char *oldpwd, char *pwd, t_data *env)
 	return ;
 }
 
-static void	change_directory(const char *path, t_data *env, char **argv)
+static void	change_directory(char *path, t_data *env, char **argv)
 {
 	char	pwd[512];
 	char	oldpwd[512];
@@ -92,43 +92,45 @@ static void	change_directory(const char *path, t_data *env, char **argv)
 	if (!path || !getcwd(oldpwd, 512) || chdir(path) || !getcwd(pwd, 512))
 	{
 		env->status = 1;
+		printf("cd: %s: No such file or directory\n", path);
+		free(path);
 		fre(argv);
 		if (env->is_pipe)
 			write_in_stdin("", true, env);
-		printf("cd: %s: No such file or directory\n", path);
 		return ;
 	}
 	fre(argv);
+	free(path);
 	update_pwd(oldpwd, pwd, env);
 	if (env->is_pipe)
 		write_in_stdin("", true, env);
 }
 
-void	ft_cd(char *str, t_data *env)
+void	ft_cd(t_data *env, char *st)
 {
 	char	*path;
 	char	**argv;
 
-	argv = ft_split(str, ' ');
-	if (env->pour_toi_simon >= 3 && argv[1] && argv[2])
+	st = dollars_parsing_bis(no_space(st), env);
+	argv = ft_calloc(sizeof(char *), 3);
+	argv = ft_cd_temp(st, argv, 0);
+	if (argv[0] && argv[1] && argv[1][0] != 0)
 	{
-		fre(argv);
-		env->status = 1;
-		if (env->is_pipe)
-			write_in_stdin("", true, env);
-		printf("mishell: cd: too many arguments\n");
+		less_line(argv, env);
 		return ;
 	}
-	if (!argv[1] || !ft_strncmp(str, "~", 2))
+	if (!argv[0] || !ft_stcmp(argv[0], "~", 2) || !ft_stcmp(argv[0], "--", 3))
 	{
-		path = getenv("HOME");
-		if (!path)
+		path = ft_getenv(env->env, "HOME");
+		if (!path || path[0] == 127)
 		{
-			cd_ero(argv, env);
+			cd_ero(argv, env, path);
 			return ;
 		}
 	}
 	else
-		path = ft_cdd(str + 3, argv, env);
+		path = ft_cdd(ft_strdup(argv[0]), argv, env);
+	if (!path)
+		return ;
 	change_directory(path, env, argv);
 }

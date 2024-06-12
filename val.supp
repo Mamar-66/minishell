@@ -13,6 +13,13 @@
 }
 
 {
+	cat-mem-Leak
+	Memcheck:Leak
+	...
+	obj:/usr/bin/cat
+}
+
+{
    grep-mem-leak
    Memcheck:Leak
    fun:malloc
@@ -21,10 +28,10 @@
 }
 
 {
-   ignore-grep-leak
+   grep_mem_leak
    Memcheck:Leak
-   fun:malloc
-   obj:/lib/x86_64-linux-gnu/libc-2.31.so
+   ...
+   obj:/usr/bin/grep
 }
 
 {

@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 07:52:31 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/09 23:11:53 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/12 15:07:50 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static	bool	ex_father(t_data *lst_data, int *pipe_fd, int child_pid)
 	lst_data->status_for_pipe = statu;
 	exit_status = WEXITSTATUS(statu);
 	lst_data->status = exit_status;
+	unlink(" ");
 	return (true);
 }
 

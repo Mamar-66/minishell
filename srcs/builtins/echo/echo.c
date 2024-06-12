@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:15 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 14:40:45 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/11 17:59:51 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	ft_echo(char *str, t_data *lst_data)
 			if (!verif_n(opt))
 				printf("\n");
 		}
-		else
-			write_in_stdin(str + j, verif_n(opt), lst_data);
+		write_in_stdin(str + j, verif_n(opt), lst_data);
 	}
 	free(opt);
 }

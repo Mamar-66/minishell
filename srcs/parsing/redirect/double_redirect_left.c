@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 10:07:14 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 14:53:45 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/11 14:24:06 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*double_redirect_left(char *str, int *start, t_data *lst_data)
 	lst_data->here_doc_parssing = true;
 	str_return = redirect_double_left_suite(str, &i_fd[0]);
 	text_end_here_doc = verif_name_file(str + ++i_fd[0], lst_data);
+	if (!text_end_here_doc)
+		return (free(str_return), NULL);
 	text_end_here_doc = ft_realloc(text_end_here_doc,
 			ft_strlen(text_end_here_doc) + 1);
 	text_end_here_doc[ft_strlen(text_end_here_doc)] = '\n';

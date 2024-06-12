@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:59:42 by omfelk            #+#    #+#             */
-/*   Updated: 2024/05/16 16:06:18 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/11 14:21:52 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ static	char	*verif_name_file_suite(char *str, t_data *lst_data)
 	return (str_return);
 }
 
+static	void	printf_errror(t_data *lst_data)
+{
+	if (lst_data->here_doc_parssing)
+		printf("minishell: syntax error here_doc end not definited\n");
+	else
+		printf("minishell: syntax error file name not definited\n");
+}
+
 char	*verif_name_file(char *str, t_data *lst_data)
 {
 	int		i;
@@ -67,7 +75,7 @@ char	*verif_name_file(char *str, t_data *lst_data)
 		file_name = ft_strdup("");
 	else
 	{
-		printf("minishell: syntax error file name not definited\n");
+		printf_errror(lst_data);
 		return (NULL);
 	}
 	while (str[i] && str[i] > 32 && str[i] < 127)

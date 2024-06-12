@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:07:58 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/09 22:53:51 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/12 15:42:06 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static	void	pour_norminette(char *readlin_recover, char **tab_arm_pipe
 	char	**tab_ex;
 
 	tab_ex = ft_calloc(sizeof(char *), 4);
+	lst_data->exit_f.tab_ex = tab_ex;
+	lst_data->exit_f.str_reel = dup_tab;
 	if (!tab_ex)
 		return ;
 	if (!built_or_cmd_for_father(tab_arm_pipe[lst_data->i],
-			lst_data, tab_arm_pipe, dup_tab[lst_data->i]))
+			lst_data, tab_arm_pipe))
 	{
 		tab_ex[0] = ft_strdup(tab_arm_pipe[lst_data->i]);
 		tab_ex[1] = ft_strdup(readlin_recover);
@@ -53,7 +55,10 @@ static	void	ft_manager_suite_suite(char **tab_arm_pipe,
 		lst_data->pour_toi_simon = 0;
 		tab_arm_pipe[i] = parsing(tab_arm_pipe[i], lst_data);
 		if (!tab_arm_pipe[i])
+		{
+			tab_arm_pipe[i] = ft_strdup("");
 			break ;
+		}
 		if ((i > 0 && tab_arm_pipe[i + 1]) && !ft_strchr(dup_tab[i], '>'))
 			lst_data->is_pipe = true;
 		else if (i > 0 || ft_strchr(dup_tab[i], '>'))
@@ -71,7 +76,7 @@ static	void	ft_manager_plus(char *readlin_recover, t_data *lst_data)
 
 	if (readlin_recover)
 	{
-		tab_arm_pipe = split_for_ex_pipe(ft_strdup(readlin_recover));
+		tab_arm_pipe = split_for_ex_pipe(ft_strdup(readlin_recover), lst_data);
 		if (!tab_arm_pipe)
 			return ;
 		if (tab_arm_pipe[0] && tab_arm_pipe[1])

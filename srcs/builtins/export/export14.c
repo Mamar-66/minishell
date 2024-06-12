@@ -14,17 +14,14 @@
 
 char	*dollars_parsing_suite(char *str, int z, t_data *env)
 {
-	int	i;
-	int	a;
+	int		i;
+	int		a;
 	char	*t;
 	char	*temp;
 
 	while (dolar(str) == 0)
 	{
-		printf("%s\n", str);
-		t = ft_calloc(sizeof(char), ft_strlen(str) + 1000);
-		if (dolar(str + z) != 0)
-			free(t);
+		t = ft_calloc(sizeof(char), ft_strlen(str) + 100);
 		i = 0;
 		a = 0;
 		while (str[i + a] != '$')
@@ -32,18 +29,14 @@ char	*dollars_parsing_suite(char *str, int z, t_data *env)
 			t[i] = str[i + a];
 			i++;
 			if (str[i + a] == '$')
-			{
 				z = i + a;
-				printf("%d\n", z);
-				break ;
-			}
 		}
-		env->dolar = 0;
 		t = ft_strjoin_two_free(t, val_var(str + z + 1, &z, env));
+		temp = str;
 		str = ft_strjoin(t, str + z + 1);
-		temp = ft_strjoin(str, "");
-		str = ft_strdup(temp);
-		free(temp);
+		if (dolar(str) != 0 && env->dolar == 0)
+			free(temp);
+		env->dolar = 0;
 	}
 	return (str);
 }
@@ -96,16 +89,13 @@ char	*flemme_bis(char **argv, int i, int j, int c)
 
 char	**ft_export_temp(char *t, t_data *env, char **temp, int j)
 {
-	t = recover_word(env->t, 1 + j, false);
+	(void)t;
 	temp[j] = recover_word(env->t, 1 + j, false);
-	while (t)
+	while (temp[j])
 	{
-		free(t);
 		j++;
-		t = recover_word(env->t, 1 + j, false);
 		temp[j] = recover_word(env->t, 1 + j, false);
 	}
-	free(t);
 	return (temp);
 }
 

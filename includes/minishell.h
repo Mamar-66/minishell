@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:36:20 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/09 23:20:51 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/12 14:58:28 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-extern	int	g_global_numsignal;
+extern int	g_global_numsignal;
 
 typedef struct s_lst_pipex
 {
@@ -56,6 +56,13 @@ typedef struct s_pars
 	size_t		len;
 }	t_pars;
 
+typedef struct s_exit_free
+{
+	char	*cmd1;
+	char	**str_reel;
+	char	**tab_ex;
+}	t_exit_free;
+
 typedef struct s_data
 {
 	int			i;
@@ -72,10 +79,12 @@ typedef struct s_data
 	int			fd_here_doc;
 	int			numsignal;
 	bool		here_doc;
+	bool		here_doc_vrai;
 	bool		here_doc_parssing;
 	bool		mod_lectur_for_read_final;
 	bool		is_pipe;
 	t_lst_pipex	lst_pipex;
+	t_exit_free	exit_f;
 }	t_data;
 /*
 	add_signal/add_signal.c
@@ -111,7 +120,7 @@ char	**ajoute(char **argv);
 void	print(char **temp, t_data *en);
 char	*ft_stjoin(char *temp, char *line);
 int		v(char *str);
-void	ft_cd(char *str, t_data *env);
+void	ft_cd(t_data *env, char *st);
 void	fre(char **argv);
 char	*ft_cdd(char *str, char **argv, t_data *env);
 void	ft_unset(char *str, t_data *env, char *st);
@@ -119,11 +128,11 @@ void	ft_exportt(char *argv, t_data *env);
 char	*verif(char *a);
 char	*veriff(char *a, char *b, size_t i);
 char	*ft_stoin(char *temp, char *line);
-void	ft_exit(char *str, t_data *env);
+void	ft_exit(t_data *env, char **str_reel);
 void	ft_unsetbis(char *str, t_data *env);
 void	ft_unsetbisbis(char *str, t_data *env, char *t);
 char	*changeles(char *str, char c);
-char	*deletesbis(char *str, char *env, int j, t_data *en);
+char	*deletesbis(char *str, char *e, int j, t_data *en);
 char	*deletes_for_no_mess(char *str, char *env, int j, t_data *en);
 void	deletebis(int i, t_data *env);
 int		findn(char *str);
@@ -147,10 +156,10 @@ int		nodif(char *str, char *s);
 char	**trie(char **trier);
 char	**plus(char **temp, t_data *env);
 int		no_quote(char *str);
-void	ft_error_and_status(t_data *en, char *str);
+void	ft_error_and_status(t_data *en, char *str, int *z);
 char	*dollars_parsing(char *str, t_data *env);
 char	*parsing_export(char *nat, t_data *env);
-char	*modify_string(const char *input);
+char	*modify_string(const char *input, char *str);
 char	**parse_string(char *str);
 int		double_single(char *s1, char *s2, int n);
 int		single_double(char *s1, char *s2, int n);
@@ -172,9 +181,23 @@ void	handles_quotes(char current, bool *inside_quotes, char *quote_char);
 int		ft_isspace(int c);
 void	initialise_pars(t_pars *p, const char *str);
 void	parse_string_suite(t_pars *p, char **str);
-void	cd_ero(char **argv, t_data *env);
+void	cd_ero(char **argv, t_data *env, char *str);
 void	parse_string_s(t_pars *p, char **str);
 void	ft_unsetbi(char *str, t_data *env);
+char	*deletes_for_no_mess_bis(char *str, char *env, int j, t_data *en);
+char	**ft_cd_temp(char *st, char **temp, int j);
+void	less_line(char **argv, t_data *env);
+void	just_free(char *env, t_data *en);
+size_t	ft(char *str);
+int		ft_line(int i, char *str, char *env, int j);
+int		only_space(char *str);
+char	*dollars_parsing_bis(char *str, t_data *env);
+int		check_dollar_position(const char *input);
+char	*no_space(char *str);
+void	ft_exit_bis(t_data *env, char **str_reel);
+char	*oldpwd_cd(t_data *env, int i, char *str, char *path);
+
+char	**cmd_with_option(char *str, char *path_ok, t_data *lst_data);
 /*
 			get_next_line
 */
@@ -224,7 +247,7 @@ void	ft_free_que_argv(char **argv);
 bool	ft_pipex(char *cmd, t_data *lst_data);
 
 bool	built_or_cmd_for_father(char *str, t_data *lst_data,
-			char **tab_arm_pipe, char *str_reel);
+			char **tab_arm_pipe);
 
 char	*pour_toi_omar(char *str);
 void	ft_change_numsignal(t_data *lst_data);
@@ -236,6 +259,6 @@ char	*inverse_split_export(char **tab);
 void	affiche_in_terminal(t_data *lst_data,
 			char *readline_recover, char **tab_arm_pipe);
 bool	av_ex(char *cmd);
-char	**split_for_ex_pipe(char *str);
+char	**split_for_ex_pipe(char *str, t_data *lst_data);
 
 #endif

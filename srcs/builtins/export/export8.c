@@ -21,8 +21,9 @@ char	*anothersuite(char *b)
 	return (b);
 }
 
-void	ft_error_and_status(t_data *en, char *str)
+void	ft_error_and_status(t_data *en, char *str, int *z)
 {
+	(*z)++;
 	en->status = 1;
 	printf("minishell: export: `%s\': not a valid identifier\n", str);
 }

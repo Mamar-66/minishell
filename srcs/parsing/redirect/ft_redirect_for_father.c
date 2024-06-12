@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:02:19 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/04 16:55:48 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/11 12:01:53 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	write_in_stdin(char *str, bool if_retourne_line,
 	int	pipe_fd[2];
 
 	lst_data->here_doc = true;
+	lst_data->here_doc_vrai = true;
 	if (pipe(pipe_fd) == -1)
 	{
 		printf("error pipe heredoc \n");

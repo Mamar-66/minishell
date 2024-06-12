@@ -42,27 +42,35 @@ void	ft_exportation(char *argv, t_data *env, int k)
 	char	**trier;
 	char	**temp;
 	char	*t;
-	int		i;
 	int		j;
 
 	t = NULL;
 	while (--k != 0)
 	{
-		env->t = modify_string(env->t);
 		j = 0;
-		temp = ft_calloc(sizeof(char *), (ft_export_count(t, env, j) + 5));
-		temp = ft_export_temp(t, env, temp, j);
-		i = -1;
+		if (env->t)
+		{
+			temp = ft_calloc(sizeof(char *), (ft_export_count(t, env, j) + 2));
+			temp = ft_export_temp(t, env, temp, j);
+		}
+		else
+			temp = ft_calloc(sizeof(char *), 2);
 		nodouble(temp, env);
-		while (temp[++i])
-			export_metacarac(temp, i, t, env);
 		trier = plus(temp, env);
 		changeenv(trier, env);
+		nodouble(temp, env);
 		if (v(argv + 6) == 0)
 			fre(trier);
-		else
-			is_pipe_export(env, trier, temp);
+		fre(temp);
 	}
+}
+
+void	env_suite(t_data *en, int i)
+{
+	if (!en->exit_f.str_reel[1])
+		ft_exportation("export", en, 3);
+	while (en->env[++i])
+		printf("%s\n", en->env[i]);
 }
 
 void	ft_env(char *str, t_data *en)
@@ -79,12 +87,10 @@ void	ft_env(char *str, t_data *en)
 		return ;
 	}
 	i = -1;
-	ft_exportation("export", en, 2);
 	if (en->env)
 	{
 		if (!en->is_pipe)
-			while (en->env[++i])
-				printf("%s\n", en->env[i]);
+			env_suite(en, i);
 		else
 		{
 			rev = inverse_split(en->env);

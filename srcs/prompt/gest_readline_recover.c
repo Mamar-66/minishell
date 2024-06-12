@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 16:01:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/08 15:51:50 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/12 14:52:59 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static	void	write_error(char *cmd, t_data *lst_data)
 
 	fd = open("/dev/tty", O_WRONLY);
 	text = parsing(ft_strdup(cmd), lst_data);
-	if (ft_strchr(text, '/'))
+	if (text && ft_strchr(text, '/'))
 	{
 		write(fd, text, ft_strlen(text));
 		write(fd, " : Is a directory\n", 18);
 	}
-	else if (!ft_strchr(text, 127))
+	else if (text && !ft_strchr(text, 127))
 	{
 		write(fd, text, ft_strlen(text));
 		write(fd, " \x1b[31m: command not found\x1b[0m\n",
@@ -44,17 +44,21 @@ static	void	write_error(char *cmd, t_data *lst_data)
 
 static void	suiteexit(char *cmd, char *str, t_data *env, char **argv)
 {
-	char	*temp;
-
-	temp = NULL;
-	temp = ft_strdup(str + 4);
+	(void)str;
+	if (env->exit_f.str_reel[1])
+	{
+		ft_exit_bis(env, env->exit_f.str_reel);
+		return ;
+	}
 	fre(argv);
+	fre(env->exit_f.tab_ex);
+	free(env->exit_f.cmd1);
 	free(cmd);
-	ft_exit(temp, env);
+	ft_exit(env, env->exit_f.str_reel);
 }
 
 bool	built_or_cmd_for_father(char *str, t_data *lst_data,
-			char **tab_arm_pipe, char *str_reel)
+			char **tab_arm_pipe)
 {
 	char	*cmd;
 	char	*cmd1;
@@ -62,18 +66,19 @@ bool	built_or_cmd_for_father(char *str, t_data *lst_data,
 	lst_data->status = 0;
 	lst_data->mod_lectur_for_read_final = false;
 	cmd = recover_word(str, 1, false);
-	cmd1 = recover_word(str_reel, 1, false);
-	if (ft_strncmp(cmd, "env", 4) == 0)
+	cmd1 = recover_word(lst_data->exit_f.str_reel[lst_data->i], 1, false);
+	lst_data->exit_f.cmd1 = cmd1;
+	if (ft_strncmp(cmd, "env", 4) == 0 && ft_strlen(cmd1) <= 4)
 		ft_env(str, lst_data);
-	else if (ft_strncmp(cmd, "export", 7) == 0)
-		ft_export(str, lst_data, ft_strdup(str_reel));
-	else if (ft_strncmp(cmd, "cd", 3) == 0)
-		ft_cd(str, lst_data);
+	else if (ft_strncmp(cmd, "export", 7) == 0 && ft_strlen(cmd1) <= 7)
+		ft_export(str, lst_data, lst_data->exit_f.str_reel[lst_data->i]);
+	else if (ft_strncmp(cmd, "cd", 3) == 0 && ft_strlen(cmd1) <= 3)
+		ft_cd(lst_data, lst_data->exit_f.str_reel[lst_data->i]);
 	else if ((ft_strncmp(cmd, "echo", 5) == 0 && ft_strlen(cmd1) <= 6))
 		ft_echo(str, lst_data);
-	else if (ft_strncmp(cmd, "unset", 6) == 0)
-		ft_unset(str + 5, lst_data, ft_strdup(str_reel));
-	else if (ft_strncmp(cmd, "exit", 5) == 0)
+	else if (ft_strncmp(cmd, "unset", 6) == 0 && ft_strlen(cmd1) <= 6)
+		ft_unset(str + 5, lst_data, lst_data->exit_f.str_reel[lst_data->i]);
+	else if (ft_strncmp(cmd, "exit", 5) == 0 && ft_strlen(cmd1) <= 5)
 		suiteexit(cmd, str, lst_data, tab_arm_pipe);
 	else if (ft_strncmp_ign_del(cmd, "pwd", 4) == 0 && ft_strlen(cmd1) <= 5)
 		ft_pwd(lst_data);

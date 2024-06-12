@@ -62,7 +62,7 @@ int	v(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (str[i] == ' ')
+		if (str[i] == ' ' || str[i] == 127)
 			i++;
 		else
 			return (1);

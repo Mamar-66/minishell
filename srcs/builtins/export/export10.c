@@ -115,7 +115,7 @@ char	*parsing_export(char *nat, t_data *env)
 	t = parse_string(nat);
 	t = notdouble_quote(t);
 	t = replace_quote(t);
-	fin = ft_strdup("");
+	fin = ft_calloc(sizeof(char), 1);
 	while (t[z])
 	{
 		fin = ft_strjoin(fin, t[z]);
@@ -125,7 +125,6 @@ char	*parsing_export(char *nat, t_data *env)
 	fre(t);
 	if (env->dolar == 0)
 	{
-		printf("s\n");
 		free(nat);
 	}
 	return (fin);

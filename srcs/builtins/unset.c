@@ -84,15 +84,13 @@ void	ft_unset(char *str, t_data *env, char *st)
 	char	*t;
 	char	**argv;
 
-	(void)str;
+	(void)st;
 	t = NULL;
-	st = dollars_parsing(st, env);
-	st = parsing_export(ft_strdup(st), env);
 	j = -1;
-	argv = ft_calloc(sizeof(char *), 500);
-	argv[j + 1] = recover_word(st, j + 2, false);
+	argv = ft_calloc(sizeof(char *), 30);
+	argv[j + 1] = recover_word(str, j + 2, false);
 	while (argv[++j])
-		argv[j + 1] = recover_word(st, j + 2, false);
+		argv[j + 1] = recover_word(str, j + 2, false);
 	j = -1;
 	while (argv[++j])
 		ft_unsetbi(argv[j], env);

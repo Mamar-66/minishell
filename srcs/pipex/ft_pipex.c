@@ -6,40 +6,11 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 12:22:41 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/06 18:26:52 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/06/12 14:57:51 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static	char	**cmd_with_option(char *str, char *path_ok, t_data *lst_data)
-{
-	char	**tab_return;
-	char	*buff;
-	int		i;
-	int		j;
-
-	i = 2;
-	j = 1;
-	tab_return = ft_calloc(sizeof(char *), 2);
-	tab_return[0] = ft_strdup(path_ok);
-	buff = recover_word(str, i++, false);
-	while (buff)
-	{
-		tab_return = ft_realloc_tab(tab_return, 2, true);
-		tab_return[j++] = ft_strdup(buff);
-		free(buff);
-		buff = recover_word(str, i++, false);
-	}
-	if (lst_data->here_doc && ft_strncmp(str, "mkdir", 5)
-		&& ft_strncmp(str, "ls", 2))
-	{
-		tab_return = ft_realloc_tab(tab_return, 2, true);
-		tab_return[j++] = ft_strdup("/proc/self/fd/0");
-	}
-	tab_return[j] = NULL;
-	return (tab_return);
-}
 
 static char	*checked_access(char **tab_path, char *cmd)
 {

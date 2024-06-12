@@ -55,7 +55,8 @@ int	print3(char **temp, int i)
 	a = 0;
 	if (ft_strncmp(temp[i], "_=\"/home", 7) == 0)
 		return (i);
-	printf("declare -x %s\"\n", temp[i]);
+	if (temp[i][0] != 127)
+		printf("declare -x %s\"\n", temp[i]);
 	j = i;
 	if (temp[i + 1])
 	{
@@ -76,7 +77,8 @@ int	print2(char **temp, int i)
 	int	a;
 
 	a = 0;
-	printf("declare -x %s\n", temp[i]);
+	if (temp[i][0] != 127)
+		printf("declare -x %s\n", temp[i]);
 	j = i;
 	if (temp[i + 1])
 	{

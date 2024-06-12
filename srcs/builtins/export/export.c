@@ -6,7 +6,7 @@
 /*   By: omfelk <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:56:32 by omfelk            #+#    #+#             */
-/*   Updated: 2024/06/05 12:18:08 by omfelk           ###   ########.fr       */
+/*   Updated: 2024/03/26 15:56:34 by omfelk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,11 @@ void	ft_export(char *argv, t_data *env, char *str)
 	int		i;
 
 	t = NULL;
-	str = dollars_parsing(str + 6, env);
+	str = dollars_parsing(no_space(str), env);
 	str = parsing_export(str, env);
 	if (v(argv + 6) != 0)
 		ft_export_strjoin(env, str);
-	free(str);
-	env->t = modify_string(env->t);
+	env->t = modify_string(env->t, str);
 	temp = ft_calloc(sizeof(char *), (ft_export_count(t, env, 0) + 5));
 	temp = ft_export_temp(t, env, temp, 0);
 	i = -1;
